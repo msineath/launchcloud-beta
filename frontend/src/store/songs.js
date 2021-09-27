@@ -15,7 +15,6 @@ export const getSongs = () => async dispatch => {
     };
 };
 
-
 const initialState = {};
 
 const songsReducer = (state=initialState, action) => {
