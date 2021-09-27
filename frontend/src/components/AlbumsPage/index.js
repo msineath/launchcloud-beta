@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getAlbums } from '../../../store/albums';
+import { getAlbums } from '../../store/albums';
 
 export default function AlbumsPage() {
     const dispatch = useDispatch();

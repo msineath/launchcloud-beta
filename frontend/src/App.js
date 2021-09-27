@@ -6,7 +6,7 @@ import Navigation from './components/Navigation/';
 import HomePage from './components/HomePage';
 import LoginFormPage from './components/LoginFormPage';
 import SignupPage from './components/SignupFormPage';
-import AlbumsPage from './components/HomePage/AlbumsPage';
+import AlbumsPage from './components/AlbumsPage';
 import IndividualAlbumPage from './components/IndividualAlbumPage';
 
 function App() {
