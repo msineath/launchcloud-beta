@@ -9,7 +9,7 @@ import SignupPage from './components/SignupFormPage';
 import AlbumsPage from './components/AlbumsPage';
 import SongsPage from './components/SongsPage';
 import IndividualAlbumPage from './components/IndividualAlbumPage';
-
+import IndividualSongPage from './components/IndividualSongPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +41,9 @@ function App() {
         </Route>
         <Route path='/albums/:albumId' exact>
           <IndividualAlbumPage />
+        </Route>
+        <Route path='/songs/:songId' exact>
+          <IndividualSongPage />
         </Route>
       </Switch>
     )}

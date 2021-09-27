@@ -1,7 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {NavLink, Redirect, useHistory} from 'react-router-dom';
-import {addOneSong, getSongs} from '../../store/songs';
+import {NavLink} from 'react-router-dom';
+import {getSongs} from '../../store/songs';
 import './SongsPage.css';
 
 export default function SongsPage() {
@@ -16,7 +16,7 @@ export default function SongsPage() {
 
     return (
         <>
-            <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg'/>
+            <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg' alt='background'/>
             <h1>Songs Page</h1>
             <div className='songsDisplay'>
                 <ul className='songs'>
