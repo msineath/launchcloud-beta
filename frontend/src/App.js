@@ -2,11 +2,12 @@ import {Route, Switch} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {restoreThunk} from './store/session';
+import Navigation from './components/Navigation/';
 import HomePage from './components/HomePage';
 import LoginFormPage from './components/LoginFormPage';
 import SignupPage from './components/SignupFormPage';
 import AlbumsPage from './components/HomePage/AlbumsPage';
-import Navigation from './components/Navigation/';
+import IndividualAlbumPage from './components/IndividualAlbumPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,14 +25,17 @@ function App() {
         <Route path='/' exact>
           <HomePage />
         </Route>
-        <Route path='/login'>
+        <Route path='/login' exact>
           <LoginFormPage />
         </Route>
-        <Route path='/signup'>
+        <Route path='/signup' exact>
           <SignupPage />
         </Route>
-        <Route path='/albums'>
+        <Route path='/albums' exact>
           <AlbumsPage />
+        </Route>
+        <Route path='/albums/:albumId' exact>
+          <IndividualAlbumPage />
         </Route>
       </Switch>
     )}
