@@ -5,6 +5,7 @@ import {restoreThunk} from './store/session';
 import HomePage from './components/HomePage';
 import LoginFormPage from './components/LoginFormPage';
 import SignupPage from './components/SignupFormPage';
+import AlbumsPage from './components/HomePage/AlbumsPage';
 import Navigation from './components/Navigation/';
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path='/signup'>
           <SignupPage />
+        </Route>
+        <Route path='/albums'>
+          <AlbumsPage />
         </Route>
       </Switch>
     )}
