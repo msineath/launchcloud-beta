@@ -2,7 +2,8 @@ import {Route, Switch} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {restoreThunk} from './store/session';
-import LoginFormPage from './components/loginFormPage';
+import HomePage from './components/HomePage';
+import LoginFormPage from './components/LoginFormPage';
 import SignupPage from './components/SignupFormPage';
 import Navigation from './components/Navigation/';
 
@@ -19,6 +20,9 @@ function App() {
     <Navigation loggedIn={loggedIn} />
     {loggedIn && (
       <Switch>
+        <Route path='/' exact>
+          <HomePage />
+        </Route>
         <Route path='/login'>
           <LoginFormPage />
         </Route>
