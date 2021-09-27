@@ -3,7 +3,8 @@ import {csrfFetch} from './csrf';
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 
 const loadSongs = songs => {
-    return {type: LOAD_SONGS, songs};
+    return {type: LOAD_SONGS,
+            payload: songs};
 };
 
 export const getSongs = () => async dispatch => {
@@ -21,7 +22,7 @@ const songsReducer = (state=initialState, action) => {
  switch (action.type) {
         case LOAD_SONGS: {
             const fetchRes = {};
-            const songsArr = Array.from(action.songs['songs']);
+            const songsArr = Array.from(action.payload['songs']);
             songsArr.map(song => fetchRes[song.id] = song);
             return fetchRes;
         };
