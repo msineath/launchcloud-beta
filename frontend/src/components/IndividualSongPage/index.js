@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import {getSongs} from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import './IndividualSongPage.css';
@@ -34,7 +34,9 @@ export default function IndividualSongPage() {
                 </li>
                 <li>
                     Album:
-                    {albums[song?.albumId]?.name}    
+                    {<Link to={`/albums/${song?.albumId}`}>
+                        {albums[song?.albumId]?.name}    
+                    </Link>}
                 </li>
                 <li>
                     Genre:
