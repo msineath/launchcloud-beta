@@ -3,7 +3,8 @@ import {csrfFetch} from './csrf';
 const LOAD_ALBUMS = 'albums/LOAD_ALBUMS';
 
 const loadAlbums = albums => {
-    return {type: LOAD_ALBUMS, albums};
+    return {type: LOAD_ALBUMS,
+            payload: albums};
 };
 
 export const getAlbums = () => async dispatch => {
@@ -16,16 +17,15 @@ export const getAlbums = () => async dispatch => {
     }
 }
 
-const initialState = {albums: []};
+const initialState = {albums: {}};
 
 const albumsReducer = (state=initialState, action) => {
  switch (action.type) {
      case LOAD_ALBUMS: {
-        const fetchRes = {};
-        const albumsArr = Array.from(action.albums['albums']);
-
-        albumsArr.map(album => fetchRes[album.id] = album);
-        return fetchRes;
+        const newState = {};
+        const albumsArray = action.payload;
+        albumsArray.map(album => newState[album.id] = album);
+        return newState;
      }
      default:
         return state;
