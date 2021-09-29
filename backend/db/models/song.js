@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
   Song.associate = function(models) {
     Song.belongsTo(models.Album, { foreignKey: 'albumId' });
 
-    const SongCommentColumnMapping = {
-      through: 'SongComment', 
+    const SongCreditColumnMapping = {
+      through: 'SongCredit', 
       otherKey: 'userId',
       foreignKey: 'songId'
     };
