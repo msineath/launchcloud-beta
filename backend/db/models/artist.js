@@ -4,7 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING
   }, {});
   Artist.associate = function(models) {
-    // associations can be defined here
+    const SongCreditColumnMapping = {
+      through: 'SongCredit',
+      otherKey: 'songId',
+      foreignKey: 'artistId'
+    };
+    
+    Artist.belongsToMany(models.Song, SongCreditColumnMapping);
   };
   return Artist;
 };
