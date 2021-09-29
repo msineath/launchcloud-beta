@@ -37,7 +37,7 @@ export default function SongsPage() {
             setGenre("");
             setReleaseDate("");
             setAudioTrackUrl(null);
-            history.push(`/songs/${newestSong['newSong'].id}`)
+            history.push(`/songs/${newestSong.id}`)
         }
     };
 

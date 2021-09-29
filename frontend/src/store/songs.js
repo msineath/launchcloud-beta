@@ -10,9 +10,8 @@ const loadSongs = songs => {
 };
 
 const addSong = song => {
-    const newSong = song.newSong
     return {type: ADD_SONG,
-            payload: newSong};
+            payload: song};
 };
 
 const deleteSong = songId => {
@@ -83,6 +82,11 @@ const songsReducer = (state=initialState, action) => {
             let newState = {...state, [action.payload.id]: action.payload};
             return newState;
         };
+        case DELETE_SONG: {
+         const newState = {...state};
+         delete newState[action.payload.id];
+         return newState;   
+        }
         default:
             return state;
     };

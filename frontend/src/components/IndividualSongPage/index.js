@@ -1,14 +1,16 @@
-import {useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux';
-import {useParams, Link} from 'react-router-dom';
-import {getSongs} from '../../store/songs';
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { getSongs, removeSong } from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import './IndividualSongPage.css';
 
 export default function IndividualSongPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const {songId} = useParams();
     
+    const sessionUser = useSelector((state => state.session.user));
     const song = useSelector(state => state.songs[songId]);
     const albums = useSelector(state => state.albums);
     
@@ -17,10 +19,27 @@ export default function IndividualSongPage() {
         dispatch(getAlbums());
     }, [dispatch])
     
-    let date = (function () {
+    const date = (function () {
         const i = song?.releaseDate.indexOf('T');
         return song?.releaseDate.slice(0, i);
     })();
+
+    const creatorOptions = (buttonText, onClickFunction, newId) => {
+        
+        if(sessionUser.id === song?.uploaderId) {
+
+            return(
+                <button id={newId} onClick={onClickFunction}>{buttonText}</button>
+                )
+        };
+        return;
+    };
+    
+    const deleteFromDb = event => {
+        event.preventDefault();
+        dispatch(removeSong(Number(songId)))
+        history.push('/songs')
+    }
 
     return (
         <>
@@ -46,7 +65,9 @@ export default function IndividualSongPage() {
                     Release Date:
                     {date}
                 </li>
+                {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
             </ul>
+
             </div>
             <div className='song'>
                 {song?.audioTrackUrl ?

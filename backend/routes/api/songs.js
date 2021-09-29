@@ -20,7 +20,7 @@ router.post('/add',singleMulterUpload('audioTrackUrl'), asyncHandler(async (req,
 router.delete('/:id/delete', asyncHandler (async (req, res) => {
     const song = await Song.findByPk(Number(req.params.id));
     await song.destroy();
-    return  res.json({song})
+    return  res.json(song)
 }));
 
 module.exports = router;
