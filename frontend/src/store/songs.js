@@ -3,6 +3,7 @@ import {csrfFetch} from './csrf';
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_SONG = 'songs/ADD_SONG';
 const DELETE_SONG = 'songs/DELETE_SONG';
+const UPDATE_SONG = 'songs/UPDATE_SONG';
 
 const loadSongs = songs => {
     return {type: LOAD_SONGS,
@@ -17,6 +18,11 @@ const addSong = song => {
 const deleteSong = songId => {
     return {type: DELETE_SONG,
             payload: songId}
+};
+
+const updateSong = song => {
+    return {type: UPDATE_SONG,
+            payload: song};
 };
 
 export const getSongs = () => async dispatch => {
@@ -68,6 +74,20 @@ export const removeSong = id => async dispatch => {
     };
 };
 
+export const updateOneSong = (id, updatedData) => async dispatch => {
+    const res = await csrfFetch(`/api/songs/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(updatedData)
+    });
+
+    if(res.ok) {
+        const newData = await res.json();
+        dispatch(updateSong(newData));
+        return newData;
+    };
+};
+
 const initialState = {songs: {}};
 
 const songsReducer = (state=initialState, action) => {
@@ -86,7 +106,13 @@ const songsReducer = (state=initialState, action) => {
          const newState = {...state};
          delete newState[action.payload.id];
          return newState;   
-        }
+        };
+        case UPDATE_SONG: {
+            const newState = {...state};
+            let target = newState[action.payload.id];
+            target = action.payload;
+            return newState;
+        };
         default:
             return state;
     };
