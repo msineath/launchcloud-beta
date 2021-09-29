@@ -7,12 +7,12 @@ export default function ArtistsPage() {
     const dispatch = useDispatch();
     
     const artists = useSelector(state => {return state.artists});
+    const artistsArr = Object.values(artists)
 
     useEffect (() => {
         dispatch(getArtists())
     }, [dispatch]);
 
-    const artistsArr=Object.values(artists)
 
     return (
         <>
@@ -21,7 +21,7 @@ export default function ArtistsPage() {
                 <ul className='artists'>
                     {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR ALBUM THAT IS A CLICKABLE LINK */}
                     {
-                        artistsArr.map((artist, i) => 
+                        artistsArr?.map((artist, i) => 
                             <li key={`album.${i}`}>
                                 <Link to={`/artists/${artist.id}`}>
                                     {artist.name}
