@@ -6,7 +6,8 @@ const {singlePublicFileUpload, singleMulterUpload} = require('../../awS3');
 
 router.get('/', asyncHandler(async (req, res) => {
     const songs = await Song.findAll();
-    return res.json({songs});
+    
+    return res.json(songs);
 }));
 
 router.post('/add',singleMulterUpload('audioTrackUrl'), asyncHandler(async (req, res) => {

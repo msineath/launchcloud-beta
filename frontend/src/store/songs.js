@@ -2,15 +2,22 @@ import {csrfFetch} from './csrf';
 
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_SONG = 'songs/ADD_SONG';
+const DELETE_SONG = 'songs/DELETE_SONG';
 
 const loadSongs = songs => {
-    return {type: LOAD_SONGS, songs};
+    return {type: LOAD_SONGS,
+            payload: songs};
 };
 
 const addSong = song => {
     const newSong = song.newSong
     return {type: ADD_SONG,
             payload: newSong};
+};
+
+const deleteSong = songId => {
+    return {type: DELETE_SONG,
+            payload: songId}
 };
 
 export const getSongs = () => async dispatch => {
@@ -48,23 +55,37 @@ export const addOneSong = songData => async dispatch => {
     };
 };
 
+export const removeSong = id => async dispatch => {
+    const res = await csrfFetch(`/api/songs/${id}/delete`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    
+    if(res.ok) {
+        let song = await res.json();
+        dispatch(deleteSong(song));
+    };
+};
 
-const initialState = {songs: []};
+const initialState = {songs: {}};
 
 const songsReducer = (state=initialState, action) => {
- switch (action.type) {
+    switch (action.type) {
         case LOAD_SONGS: {
-            const fetchRes = {};
-            const songsArr = Array.from(action.songs['songs']);
-            songsArr.map(song => fetchRes[song.id] = song);
-            return fetchRes;
+            const  newState = {};
+            const songsArray = action.payload;
+            songsArray.map(song => newState[song.id] = song);
+            return newState;
         };
         case ADD_SONG: {
-            return {...state, [action.payload.id]: action.payload};
+            let newState = {...state, [action.payload.id]: action.payload};
+            return newState;
         };
         default:
             return state;
- };
+    };
 };
 
 export default songsReducer;
