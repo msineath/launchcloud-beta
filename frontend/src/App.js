@@ -2,9 +2,14 @@ import {Route, Switch} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {restoreThunk} from './store/session';
-import LoginFormPage from './components/loginFormPage';
-import SignupPage from './components/SignupFormPage';
 import Navigation from './components/Navigation/';
+import HomePage from './components/HomePage';
+import LoginFormPage from './components/LoginFormPage';
+import SignupPage from './components/SignupFormPage';
+import AlbumsPage from './components/AlbumsPage';
+import SongsPage from './components/SongsPage';
+import IndividualAlbumPage from './components/IndividualAlbumPage';
+import IndividualSongPage from './components/IndividualSongPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,11 +24,26 @@ function App() {
     <Navigation loggedIn={loggedIn} />
     {loggedIn && (
       <Switch>
-        <Route path='/login'>
+        <Route path='/' exact>
+          <HomePage />
+        </Route>
+        <Route path='/login' exact>
           <LoginFormPage />
         </Route>
-        <Route path='/signup'>
+        <Route path='/signup' exact>
           <SignupPage />
+        </Route>
+        <Route path='/albums' exact>
+          <AlbumsPage />
+        </Route>
+        <Route path='/songs' exact>
+          <SongsPage />
+        </Route>
+        <Route path='/albums/:albumId' exact>
+          <IndividualAlbumPage />
+        </Route>
+        <Route path='/songs/:songId' exact>
+          <IndividualSongPage />
         </Route>
       </Switch>
     )}
