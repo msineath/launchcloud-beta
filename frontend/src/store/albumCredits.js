@@ -1,15 +1,14 @@
-import albumsReducer from "./albums";
 import { csrfFetch } from "./csrf";
 
-const LOAD_ALBUM_CREDITS = 'albumcredits/LOAD_ALBUM_CREDITS';
+const LOAD_ALBUM_CREDITS = 'albumCredits/LOAD_ALBUM_CREDITS';
 
 const loadAlbumCredits = credits => {
     return {type: LOAD_ALBUM_CREDITS,
             payload: credits};
 };
 
-const getAlbumCredits = () => async dispatch => {
-    const res = await fetch('/api/albumCredits');
+export const getAlbumCredits = () => async dispatch => {
+    const res = await csrfFetch('/api/albumCredits');
     if(res.ok) {
         const list = await res.json();
         dispatch(loadAlbumCredits(list));

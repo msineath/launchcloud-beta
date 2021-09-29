@@ -4,6 +4,7 @@ import {NavLink, Redirect} from 'react-router-dom';
 import {getAlbums} from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
+import { getAlbumCredits } from '../../store/albumCredits';
 
 import './HomePage.css';
 import backgroundImage from './background-image.jpg';
@@ -16,6 +17,7 @@ export default function HomePage() {
         dispatch(getAlbums())
         dispatch(getSongs())
         dispatch(getArtists())
+        dispatch(getAlbumCredits())
     }, [dispatch]);
     
     if(!sessionUser) return (

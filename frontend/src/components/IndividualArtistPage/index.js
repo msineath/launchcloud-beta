@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import { getArtists } from '../../store/artists';
 import { getSongs } from '../../store/songs';
-
+import { getAlbumCredits } from '../../store/albumCredits';
 export default function IndividualArtistPage() {
 
     const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export default function IndividualArtistPage() {
 
     useEffect(() => {
         dispatch(getArtists());
+        dispatch(getAlbumCredits())
     }, [dispatch]);
 
     return (
