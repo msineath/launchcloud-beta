@@ -1,4 +1,4 @@
-import {csrfFetch} from './csrf';
+import { csrfFetch } from './csrf';
 
 const LOAD_SONGS = 'songs/LOAD_SONGS';
 const ADD_SONG = 'songs/ADD_SONG';
@@ -109,8 +109,7 @@ const songsReducer = (state=initialState, action) => {
         };
         case UPDATE_SONG: {
             const newState = {...state};
-            let target = newState[action.payload.id];
-            target = action.payload;
+            newState[action.payload.id] = action.payload;
             return newState;
         };
         default:
