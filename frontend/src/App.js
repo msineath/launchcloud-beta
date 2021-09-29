@@ -11,7 +11,7 @@ import SongsPage from './components/SongsPage';
 import ArtistsPage from './components/ArtistsPage';
 import IndividualAlbumPage from './components/IndividualAlbumPage';
 import IndividualSongPage from './components/IndividualSongPage';
-
+import IndividualArtistPage from './components/IndividualArtistPage';
 function App() {
   const dispatch = useDispatch();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -48,6 +48,9 @@ function App() {
         </Route>
         <Route path='/songs/:songId' exact>
           <IndividualSongPage />
+        </Route>
+        <Route path='/artists/:artistId' exact>
+          <IndividualArtistPage />
         </Route>
       </Switch>
     )}
