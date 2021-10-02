@@ -3,6 +3,10 @@ const sessionRouter = require('./session');
 const usersRouter = require('./users');
 const albumsRouter = require('./albums');
 const songsRouter = require('./songs');
+const artistsRouter = require('./artists');
+const albumCreditsRouter = require('./albumCredits');
+const songCreditsRouter = require('./songCredits');
+
 const asyncHandler = require('express-async-handler');
 const {setTokenCookie, restoreUser, requireAuth} = require('../../utils/auth');
 const {User} = require('../../db/models');
@@ -11,6 +15,9 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/albums', albumsRouter);
 router.use('/songs', songsRouter);
+router.use('/artists', artistsRouter);
+router.use('/albumCredits', albumCreditsRouter);
+router.use('/songCredits', songCreditsRouter);
 
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
 //     const user = await User.findOne({where: {username: 'John Doe'}});

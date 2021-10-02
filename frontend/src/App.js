@@ -8,9 +8,10 @@ import LoginFormPage from './components/LoginFormPage';
 import SignupPage from './components/SignupFormPage';
 import AlbumsPage from './components/AlbumsPage';
 import SongsPage from './components/SongsPage';
+import ArtistsPage from './components/ArtistsPage';
 import IndividualAlbumPage from './components/IndividualAlbumPage';
 import IndividualSongPage from './components/IndividualSongPage';
-
+import IndividualArtistPage from './components/IndividualArtistPage';
 function App() {
   const dispatch = useDispatch();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -39,11 +40,17 @@ function App() {
         <Route path='/songs' exact>
           <SongsPage />
         </Route>
+        <Route path='/artists' exact>
+          <ArtistsPage />
+        </Route>
         <Route path='/albums/:albumId' exact>
           <IndividualAlbumPage />
         </Route>
         <Route path='/songs/:songId' exact>
           <IndividualSongPage />
+        </Route>
+        <Route path='/artists/:artistId' exact>
+          <IndividualArtistPage />
         </Route>
       </Switch>
     )}
