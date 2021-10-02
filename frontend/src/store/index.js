@@ -5,13 +5,15 @@ import albumsReducer from './albums';
 import songsReducer from './songs';
 import artistsReducer from './artists';
 import albumCreditsReducer from './albumCredits';
+import songCreditsReducer from './songCredits';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     albums: albumsReducer,
     songs: songsReducer,
     artists: artistsReducer,
-    albumCredits: albumCreditsReducer
+    albumCredits: albumCreditsReducer,
+    songCredits: songCreditsReducer
 });
 
 let enhancer;

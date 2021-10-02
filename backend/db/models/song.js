@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
     const SongCreditColumnMapping = {
       through: 'SongCredit', 
-      otherKey: 'userId',
+      otherKey: 'artistId',
       foreignKey: 'songId'
     };
 

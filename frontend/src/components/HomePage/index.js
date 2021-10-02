@@ -5,6 +5,7 @@ import {getAlbums} from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
+import { getSongCredits } from '../../store/songCredits';
 
 import './HomePage.css';
 import backgroundImage from './background-image.jpg';
@@ -18,6 +19,7 @@ export default function HomePage() {
         dispatch(getSongs())
         dispatch(getArtists())
         dispatch(getAlbumCredits())
+        dispatch(getSongCredits())
     }, [dispatch]);
     
     if(!sessionUser) return (

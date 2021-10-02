@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { getSongs, removeSong, updateOneSong } from '../../store/songs';
+import { getArtists } from '../../store/artists';
 import { getAlbums } from '../../store/albums';
+import { getSongCredits } from '../../store/songCredits';
 import './IndividualSongPage.css';
 
 export default function IndividualSongPage() {
@@ -11,8 +13,18 @@ export default function IndividualSongPage() {
     const {songId} = useParams();
     
     const sessionUser = useSelector((state => state.session.user));
+    
     const song = useSelector(state => state.songs[songId]);
     const albums = useSelector(state => state.albums);
+    
+    const artists = useSelector(state => state.artists);
+    const artistsArray = Object.values(artists);
+
+    const songCredits = useSelector(state => state.songCredits);
+    const songCreditsArray = Object.values(songCredits);
+
+    const selectedSongCredits = songCreditsArray.filter(credit => credit.songId === song.id);
+    const allCreditNames = selectedSongCredits.map(credit => Object.values(artistsArray).find(artist =>  credit.artistId === artist.id));
 
     const [visible, setVisible] = useState(false);
     const [targetKey, setTargetKey] = useState(null);
@@ -22,6 +34,8 @@ export default function IndividualSongPage() {
     useEffect(() => {
         dispatch(getSongs());
         dispatch(getAlbums());
+        dispatch(getArtists());
+        dispatch(getSongCredits());
     }, [dispatch])
     
     const date = (function () {
@@ -48,9 +62,6 @@ export default function IndividualSongPage() {
 
     const updateSongData = () => {
         dispatch(updateOneSong(songId, {targetKey, areaText}));
-        // dispatch(getSongs());
-        // dispatch(getAlbums());
-        // dispatch(getArtists());
     };
 
     return (
@@ -59,16 +70,30 @@ export default function IndividualSongPage() {
             <h1>Song's Page</h1>
             <div>
             <ul>
-                <li>
+                <li key='title'>
                     Title: 
                     {song?.title}
                     {creatorOptions('Edit', (e) => {
                     setVisible(true)
                     setTargetKey(e.target.id)
                     setButtonText('Edit Song Title')
-                }, 'title')}
+                    }, 'title')}
                 </li>
-                <li>
+                <li key='artist(s)'>
+                    Artist(s):
+                    <ul>
+                        {allCreditNames.map((credit, index) => {
+                            return(
+                                <li key={`song-credit.${index}`}>
+                                    <Link to={`/artists/${credit?.id}`}>
+                                        {credit.name}
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </li>
+                <li key='album'>
                     Album:
                     {<Link to={`/albums/${song?.albumId}`}>
                         {albums[song?.albumId]?.name}    
@@ -79,7 +104,7 @@ export default function IndividualSongPage() {
                         setButtonText('Edit Album Name')
                     }, 'albumId')}
                 </li>
-                <li>
+                <li key='genre'>
                     Genre:
                     {song?.genre}
                     {creatorOptions('Edit', (e) => {
@@ -88,7 +113,7 @@ export default function IndividualSongPage() {
                         setButtonText('Edit Song Genre')
                     }, 'genre')}   
                 </li>
-                <li>
+                <li key='release-date'>
                     Release Date:
                     {date}
                     {creatorOptions('Edit', (e) => {

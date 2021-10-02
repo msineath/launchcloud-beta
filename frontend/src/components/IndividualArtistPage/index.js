@@ -5,6 +5,7 @@ import { getAlbums } from '../../store/albums';
 import { getArtists } from '../../store/artists';
 import { getSongs } from '../../store/songs';
 import { getAlbumCredits } from '../../store/albumCredits';
+import { getSongCredits } from '../../store/songCredits';
 
 export default function IndividualArtistPage() {
 
@@ -15,18 +16,27 @@ export default function IndividualArtistPage() {
 
     const albumCredits = useSelector(state => state.albumCredits);
     const albumCreditsArray = Object.values(albumCredits);
-    const artistAlbumCredits = albumCreditsArray.filter(credit => credit.artistId === Number(artistId))
+    const artistAlbumCredits = albumCreditsArray.filter(credit => credit.artistId === Number(artistId));
     
     const albums = useSelector(state => state.albums);
     const albumsArray = Object.values(albums);
+    const artistAlbums = artistAlbumCredits.map(credit => albumsArray.filter(album => credit.albumId === album.id)).flat();
     
-    const artistAlbums = artistAlbumCredits.map(credit => albumsArray.filter(album => credit.albumId === album.id));
+    const songCredits = useSelector(state => state.songCredits);
+    const songCreditsArray = Object.values(songCredits);
+    const artistSongCredits = songCreditsArray.filter(credit => credit.artistId === Number(artistId));
+    
+    const songs = useSelector(state => state.songs);
+    const songsArray = Object.values(songs);
+
+    const artistSongs = artistSongCredits.map(credit => songsArray.filter(song => credit.songId === song.id)).flat();
 
     useEffect(() => {
         dispatch(getArtists());
-        dispatch(getAlbumCredits())
-        dispatch(getAlbums())
-        dispatch(getSongs())
+        dispatch(getAlbums());
+        dispatch(getSongs());
+        dispatch(getAlbumCredits());
+        dispatch(getSongCredits());
     }, [dispatch]);
 
     return (
@@ -37,17 +47,32 @@ export default function IndividualArtistPage() {
                     Artist: {artist?.name}
                 </li>
                 <li>
-                    Albums {artist?.name} has been on:
+                    {artist?.name}'s albums:
                     <ul>
-                        {artistAlbums.map((album, index) =>{
+                        {artistAlbums.map((album, index) => {
                             return(
                                 <li key={`album.${index}`}>
-                                    {<Link to={`/albums/${album[index]?.id}`}>
-                                        {album[index]?.name}    
+                                    {<Link to={`/albums/${album.id}`}>
+                                        {album.name}    
                                     </Link>}
                                 </li>)}             
                             )
-                        } 
+                        }
+
+                    </ul>
+                </li>
+                <li>
+                    songs featuring {artist?.name}
+                    <ul>
+                        {artistSongs.map((song, index) => {                            
+                            return(
+                                <li key={`song.${index}`}>
+                                    {<Link to={`/songs/${song.id}`}>
+                                        {song.title}    
+                                    </Link>}
+                                </li>
+                            )
+                        })}
                     </ul>
                 </li>
             </ul>
