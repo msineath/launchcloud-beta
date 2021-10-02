@@ -14,8 +14,11 @@ module.exports = {
       songId: {
         type: Sequelize.INTEGER
       },
-      comment: {
-        type: Sequelize.STRING
+      liked: {
+        type: Sequelize.BOOLEAN
+      },
+      disliked: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
