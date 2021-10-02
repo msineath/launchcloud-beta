@@ -10,70 +10,66 @@ router.get('/', asyncHandler(async (req, res) => {
 
 router.patch('/:albumId', asyncHandler(async (req, res) => {
     const { userId, targetKey } = req.body;
-    const id = Number(req.params.albumId);
+    const albumId = Number(req.params.albumId);
     const like = await AlbumLike.findOne(
         {
             where: 
             {
-                albumId: id,
+                albumId,
                 userId
             }
         }
     );
-    
-    if(like.length < 1) {
+
+    if(!like) {
         
         const newLikeStats = {
             userId,
-            albumId : id
+            albumId
         };
-
+        
         if(targetKey === 'liked') {
-            newLikeStats['like'] = true;
-            newLikeStats['unlike'] = false;
+            newLikeStats['liked'] = true;
+            newLikeStats['disliked'] = false;
         } else {
             newLikeStats['liked'] = false;
             newLikeStats['disliked'] = true;
         };
-
+        
         const newLike = await AlbumLike.create(newLikeStats)
-        return res.json(newLike);
-
-     } else {
+        return res.json( newLike);
+        
+    } else {
         if(targetKey === 'dislike') {
             const updatedInfo = await AlbumLike.update(
-                {
-                    liked: false,
-                    disliked: true
+                {['liked']: false, ['disliked']: true},
+                {where:{
+                    userId,
+                    albumId
                 },
-                {
-                    where:
-                        {
-                            userId,
-                            albumId: id
-                        }
-                }
+                returning: true
+            }
             );
-
-            return res.json(updatedInfo);
-
+            
+            return res.json(updatedInfo[1][0]);
+            
         } else {
-
+            
             const updatedInfo = await AlbumLike.update(
                 {
-                    liked: true,
-                    disliked: false
+                    ['liked']: true,
+                    ['disliked']: false
                 },
                 {
                     where:
-                        {
-                            userId,
-                            albumId: id                         
-                        }
+                    {
+                        userId,
+                        albumId                       
+                    },
+                    returning: true
                 }
-            );
-
-            return res.json(updatedInfo);
+                );
+            return res.json(updatedInfo[1][0]);
         }
      }
 }));

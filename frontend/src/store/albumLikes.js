@@ -50,6 +50,7 @@ const albumLikesReducer = (state=initialState, action) => {
         case UPDATE_ALBUM_LIKES: {
             const newState = {...state};
             newState[action.payload.id] = action.payload
+            return newState;
         }
         default:
             return state;

@@ -35,7 +35,13 @@ export default function IndividualAlbumPage() {
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.albumId === Number(albumId));
+    const sessionUserLiked = selectedAlbumLikes.find(like => like.userId === sessionUser.id)
 
+    const likeToggle = event => {
+        const targetKey = event.target.innerText;
+        dispatch(createUpdate(Number(albumId), sessionUser.id, targetKey));
+    };
+    
     useEffect(() => {
         dispatch(getAlbums());
         dispatch(getSongs());
@@ -44,12 +50,6 @@ export default function IndividualAlbumPage() {
         dispatch(getAlbumLikes());
     }, [dispatch]);
 
-    
-    const likeToggle = event => {
-        const targetKey = event.target.innerText;
-        console.log(targetKey)
-        dispatch(createUpdate(Number(albumId), sessionUser.id, targetKey));
-    };
 
     return (
         <>
@@ -81,7 +81,7 @@ export default function IndividualAlbumPage() {
                                 return(
                                     <li key={`artist-on-album.${index}`}>
                                         <Link to={`/artists/${artist?.id}`}>
-                                            {artist.name}
+                                            {artist?.name}
                                         </Link>
                                     </li>
                                 )

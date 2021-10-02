@@ -9,6 +9,7 @@ import { getSongCredits } from '../../store/songCredits';
 
 import './HomePage.css';
 import backgroundImage from './background-image.jpg';
+import { getAlbumLikes } from '../../store/albumLikes';
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function HomePage() {
         dispatch(getArtists())
         dispatch(getAlbumCredits())
         dispatch(getSongCredits())
+        dispatch(getAlbumLikes())
     }, [dispatch]);
     
     if(!sessionUser) return (
