@@ -5,7 +5,7 @@ import { getAlbums } from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
-import { getAlbumLikes } from '../../store/albumLikes';
+import { getAlbumLikes, createUpdate } from '../../store/albumLikes';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -35,7 +35,6 @@ export default function IndividualAlbumPage() {
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.albumId === Number(albumId));
-    console.log(selectedAlbumLikes)
 
     useEffect(() => {
         dispatch(getAlbums());
@@ -46,15 +45,10 @@ export default function IndividualAlbumPage() {
     }, [dispatch]);
 
     
-    const like = async (e) => {
-        e.preventDefault();
-        dispatch(changeLikeStatus(Number(albumId)));
+    const like = event => {
+        const targetKey = event.target.innerText;
+        dispatch(createUpdate(Number(albumId), sessionUser.id, targetKey));
     };
-    
-    const disLike = async (e) => {
-        e.preventDefault();
-        dispatch(changeLikeStatus(Number(albumId)));
-    }
 
     return (
         <>
@@ -82,7 +76,7 @@ export default function IndividualAlbumPage() {
                     <li>
                         Artists On Album:
                         <ul>
-                            {allCreditNames.map((artist, index) => {
+                            {allCreditNames?.map((artist, index) => {
                                 return(
                                     <li key={`artist-on-album.${index}`}>
                                         <Link to={`/artists/${artist?.id}`}>
@@ -96,7 +90,7 @@ export default function IndividualAlbumPage() {
                 :null}
                 <li>
                     Like {selectedAlbum[0]?.name}?
-                        <button>like</button>
+                        <button onClick={like}>like</button>
                         <button>dislike</button>
                 </li>
             </ul>
