@@ -11,7 +11,6 @@ router.get('/', asyncHandler(async (req, res) => {
 router.patch('/:albumId', asyncHandler(async (req, res) => {
     const { userId, targetKey } = req.body;
     const id = Number(req.params.albumId);
-    
     const like = await AlbumLike.findOne(
         {
             where: 
@@ -41,7 +40,7 @@ router.patch('/:albumId', asyncHandler(async (req, res) => {
         return res.json(newLike);
 
      } else {
-        if(targetKey === 'disliked') {
+        if(targetKey === 'dislike') {
             const updatedInfo = await AlbumLike.update(
                 {
                     liked: false,
@@ -73,6 +72,7 @@ router.patch('/:albumId', asyncHandler(async (req, res) => {
                         }
                 }
             );
+
             return res.json(updatedInfo);
         }
      }

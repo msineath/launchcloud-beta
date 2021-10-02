@@ -45,8 +45,9 @@ export default function IndividualAlbumPage() {
     }, [dispatch]);
 
     
-    const like = event => {
+    const likeToggle = event => {
         const targetKey = event.target.innerText;
+        console.log(targetKey)
         dispatch(createUpdate(Number(albumId), sessionUser.id, targetKey));
     };
 
@@ -90,8 +91,8 @@ export default function IndividualAlbumPage() {
                 :null}
                 <li>
                     Like {selectedAlbum[0]?.name}?
-                        <button onClick={like}>like</button>
-                        <button>dislike</button>
+                        <button onClick={likeToggle}>like</button>
+                        <button onClick={likeToggle}>dislike</button>
                 </li>
             </ul>
         </>
