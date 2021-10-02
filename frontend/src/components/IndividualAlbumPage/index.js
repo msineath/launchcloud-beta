@@ -35,6 +35,7 @@ export default function IndividualAlbumPage() {
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.albumId === Number(albumId));
+    console.log(selectedAlbumLikes)
 
     useEffect(() => {
         dispatch(getAlbums());
@@ -43,6 +44,17 @@ export default function IndividualAlbumPage() {
         dispatch(getAlbumCredits());
         dispatch(getAlbumLikes());
     }, [dispatch]);
+
+    
+    const like = async (e) => {
+        e.preventDefault();
+        dispatch(changeLikeStatus(Number(albumId)));
+    };
+    
+    const disLike = async (e) => {
+        e.preventDefault();
+        dispatch(changeLikeStatus(Number(albumId)));
+    }
 
     return (
         <>
@@ -83,7 +95,7 @@ export default function IndividualAlbumPage() {
                     </li>
                 :null}
                 <li>
-                    Like {selectedAlbum[0].name}?
+                    Like {selectedAlbum[0]?.name}?
                         <button>like</button>
                         <button>dislike</button>
                 </li>
