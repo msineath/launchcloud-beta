@@ -11,7 +11,6 @@ import { getSongLikes } from '../../store/songLikes';
 
 import './HomePage.css';
 import backgroundImage from './background-image.jpg';
-import { getAlbumLikes } from '../../store/albumLikes';
 
 export default function HomePage() {
     const dispatch = useDispatch();

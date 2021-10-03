@@ -5,7 +5,7 @@ import { getSongs, removeSong, updateOneSong } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbums } from '../../store/albums';
 import { getSongCredits } from '../../store/songCredits';
-import { getSongLikes } from '../../store/songLikes';
+import { getSongLikes, SongLikeCreateUpdate } from '../../store/songLikes';
 import './IndividualSongPage.css';
 
 export default function IndividualSongPage() {
@@ -64,6 +64,11 @@ export default function IndividualSongPage() {
 
     const updateSongData = () => {
         dispatch(updateOneSong(songId, {targetKey, areaText}));
+    };
+
+    const likeToggle = event => {
+        const targetKey = event.target.innerText;
+        dispatch(SongLikeCreateUpdate(Number(songId), sessionUser.id, targetKey));
     };
 
     return (
@@ -126,8 +131,8 @@ export default function IndividualSongPage() {
                 </li>
                 <li>
                     Like {song?.title}?
-                    <button>like</button>
-                    <button>dislike</button>
+                    <button onClick={likeToggle}>like</button>
+                    <button onClick={likeToggle}>dislike</button>
                 </li>
                 {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
             </ul>

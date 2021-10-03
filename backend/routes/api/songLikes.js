@@ -28,7 +28,7 @@ router.patch('/:songId', asyncHandler(async (req, res) => {
             songId
         };
         
-        if(targetKey === 'liked') {
+        if(targetKey === 'like') {
             newLikeStats['liked'] = true;
             newLikeStats['disliked'] = false;
         } else {
