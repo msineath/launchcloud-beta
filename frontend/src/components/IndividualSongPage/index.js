@@ -5,6 +5,7 @@ import { getSongs, removeSong, updateOneSong } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbums } from '../../store/albums';
 import { getSongCredits } from '../../store/songCredits';
+import { getSongLikes } from '../../store/songLikes';
 import './IndividualSongPage.css';
 
 export default function IndividualSongPage() {
@@ -30,12 +31,13 @@ export default function IndividualSongPage() {
     const [targetKey, setTargetKey] = useState(null);
     const [buttonText, setButtonText] = useState(null);
     const [areaText, setAreaText] = useState(null);
-    
+
     useEffect(() => {
         dispatch(getSongs());
         dispatch(getAlbums());
         dispatch(getArtists());
         dispatch(getSongCredits());
+        dispatch(getSongLikes());
     }, [dispatch])
     
     const date = (function () {
@@ -121,6 +123,11 @@ export default function IndividualSongPage() {
                         setTargetKey(e.target.id)
                         setButtonText('Edit Release Date')
                     }, 'releaseDate')}
+                </li>
+                <li>
+                    Like {song?.title}?
+                    <button>like</button>
+                    <button>dislike</button>
                 </li>
                 {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
             </ul>
