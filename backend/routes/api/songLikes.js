@@ -8,4 +8,70 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(likes);
 }));
 
+router.patch('/:songId', asyncHandler(async (req, res) => {
+    const { userId, targetKey } = req.body;
+    const songId = Number(req.params.songId);
+    const like = await SongLike.findOne(
+        {
+            where: 
+            {
+                songId,
+                userId
+            }
+        }
+    );
+
+    if(!like) {
+        
+        const newLikeStats = {
+            userId,
+            songId
+        };
+        
+        if(targetKey === 'liked') {
+            newLikeStats['liked'] = true;
+            newLikeStats['disliked'] = false;
+        } else {
+            newLikeStats['liked'] = false;
+            newLikeStats['disliked'] = true;
+        };
+        
+        const newLike = await SongLike.create(newLikeStats)
+        return res.json( newLike);
+        
+    } else {
+        if(targetKey === 'dislike') {
+            const updatedInfo = await SongLike.update(
+                {['liked']: false, ['disliked']: true},
+                {where:{
+                    userId,
+                    songId
+                },
+                returning: true
+            }
+            );
+            
+            return res.json(updatedInfo[1][0]);
+            
+        } else {
+            
+            const updatedInfo = await SongLike.update(
+                {
+                    ['liked']: true,
+                    ['disliked']: false
+                },
+                {
+                    where:
+                    {
+                        userId,
+                        songId                       
+                    },
+                    returning: true
+                }
+                );
+            return res.json(updatedInfo[1][0]);
+        }
+     }
+}));
+
 module.exports = router;
