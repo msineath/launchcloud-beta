@@ -5,7 +5,7 @@ import { getAlbums } from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
-import { getAlbumLikes, createUpdate } from '../../store/albumLikes';
+import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export default function IndividualAlbumPage() {
 
     const likeToggle = event => {
         const targetKey = event.target.innerText;
-        dispatch(createUpdate(Number(albumId), sessionUser.id, targetKey));
+        dispatch(AlbumLikeCreateUpdate(Number(albumId), sessionUser.id, targetKey));
     };
     
     useEffect(() => {

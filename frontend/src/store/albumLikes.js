@@ -21,7 +21,7 @@ export const getAlbumLikes = () => async dispatch => {
     }
 };
 
-export const createUpdate = (albumId, userId, targetKey) => async dispatch => {
+export const AlbumLikeCreateUpdate = (albumId, userId, targetKey) => async dispatch => {
     const res = await csrfFetch(`/api/albumLikes/${albumId}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},

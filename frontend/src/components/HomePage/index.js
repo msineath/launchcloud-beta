@@ -6,10 +6,11 @@ import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getSongCredits } from '../../store/songCredits';
+import { getAlbumLikes } from '../../store/albumLikes';
+import { getSongLikes } from '../../store/songLikes';
 
 import './HomePage.css';
 import backgroundImage from './background-image.jpg';
-import { getAlbumLikes } from '../../store/albumLikes';
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function HomePage() {
         dispatch(getAlbumCredits())
         dispatch(getSongCredits())
         dispatch(getAlbumLikes())
+        dispatch(getSongLikes())
     }, [dispatch]);
     
     if(!sessionUser) return (
