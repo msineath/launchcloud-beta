@@ -12,6 +12,8 @@ import ArtistsPage from './components/ArtistsPage';
 import IndividualAlbumPage from './components/IndividualAlbumPage';
 import IndividualSongPage from './components/IndividualSongPage';
 import IndividualArtistPage from './components/IndividualArtistPage';
+import ProfilePage from './components/ProfilePage';
+
 function App() {
   const dispatch = useDispatch();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -51,6 +53,9 @@ function App() {
         </Route>
         <Route path='/artists/:artistId' exact>
           <IndividualArtistPage />
+        </Route>
+        <Route path='/profile/:userId' exact>
+          <ProfilePage />
         </Route>
       </Switch>
     )}
