@@ -26,6 +26,15 @@ export default function ProfilePage() {
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.userId === Number(userId));
     const selectedAlbumLikeNames = selectedAlbumLikes.map (like => albumsArray.filter(album => like.albumId === album.id)).flat();
+    
+    const songLikes = useSelector(state => state.songLikes);
+    console.log(songLikes)
+    const songLikesArray = Object.values(songLikes);
+    console.log(songLikesArray)
+    const selectedSongLikes = songLikesArray.filter(like => like.userId === Number(userId));
+    console.log(selectedSongLikes)
+    const selectedSongLikeNames = selectedSongLikes.map (like => songsArray.filter(song => like.songId === song.id)).flat();
+    console.log(selectedSongLikeNames)
 
     useEffect(() => {
         dispatch(getSongs())
@@ -46,6 +55,12 @@ export default function ProfilePage() {
             {selectedAlbumLikeNames.map(album => 
                 <ul>
                     <li><Link to={`/albums/${album.id}`}>{album.name}</Link></li>
+                </ul>   
+            )}
+            <li>Songs {user.username} Likes</li>
+            {selectedSongLikeNames.map(song => 
+                <ul>
+                    <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
                 </ul>   
             )}
         </ul>
