@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
-import { getSongs } from '../../store/songs';
+import { Link, useHistory } from 'react-router-dom';
+import { addOneSong, getSongs } from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import { getSongLikes } from '../../store/songLikes';
 import { getAlbumLikes } from '../../store/albumLikes';
@@ -12,6 +12,8 @@ export default function ProfilePage() {
     
     const dispatch = useDispatch();
     const {userId} = useParams();
+    const history = useHistory();
+
 
     const user = useSelector(state => state.session.user);
 
@@ -28,13 +30,35 @@ export default function ProfilePage() {
     const selectedAlbumLikeNames = selectedAlbumLikes.map (like => albumsArray.filter(album => like.albumId === album.id)).flat();
     
     const songLikes = useSelector(state => state.songLikes);
-    console.log(songLikes)
     const songLikesArray = Object.values(songLikes);
-    console.log(songLikesArray)
+
     const selectedSongLikes = songLikesArray.filter(like => like.userId === Number(userId));
-    console.log(selectedSongLikes)
     const selectedSongLikeNames = selectedSongLikes.map (like => songsArray.filter(song => like.songId === song.id)).flat();
-    console.log(selectedSongLikeNames)
+
+    const [title, setTitle] = useState('');
+    const [albumId, setAlbumId] = useState('');
+    const [uploaderId, setUploaderId] = useState(user.id);
+    const [genre, setGenre] = useState('');
+    const [releaseDate, setReleaseDate] = useState('');
+    const [audioTrackUrl, setAudioTrackUrl] = useState(null);
+    const [errors, setErrors] = useState([]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let newErrors = [];
+        let newestSong = await dispatch(addOneSong({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl}))
+        if(newestSong["errors"]) {
+            setErrors(newestSong["errors"]);
+        } else {
+            setTitle("");
+            setAlbumId("");
+            setUploaderId("");
+            setGenre("");
+            setReleaseDate("");
+            setAudioTrackUrl(null);
+            history.push(`/songs/${newestSong.id}`)
+        }
+    };
 
     useEffect(() => {
         dispatch(getSongs())
@@ -42,6 +66,11 @@ export default function ProfilePage() {
         dispatch(getSongLikes())
         dispatch(getAlbumLikes())
     }, [dispatch]);
+
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setAudioTrackUrl(file);
+    };
 
     return(
         <ul>
@@ -63,6 +92,49 @@ export default function ProfilePage() {
                     <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
                 </ul>   
             )}
+            <li>
+                Upload A New Song
+            </li>
+            <ul>
+                <li>
+                    <form className='newSongForm' onSubmit={handleSubmit}>
+                        <label>
+                            <input
+                                type='text'
+                                placeholder="title"
+                                value={title}
+                                onChange={event => setTitle(event.target.value)} />
+                        </label>
+                        <label>
+                            <input
+                                type='text'
+                                placeholder="album"
+                                value={albumId}
+                                onChange={event => setAlbumId(event.target.value)} />
+                        </label>
+                        <label>
+                            <input
+                                type='genre'
+                                placeholder="genre"
+                                value={genre}
+                                onChange={event => setGenre(event.target.value)} />
+                        </label>
+                        <label>
+                            <input
+                                type='text'
+                                placeholder="release date"
+                                value={releaseDate}
+                                onChange={event => setReleaseDate(event.target.value)} />
+                        </label>
+                        <label>
+                            <input
+                                type='file'
+                                onChange={updateFile} />
+                        </label>
+                        <button type='submit'>Add Song</button>
+                    </form>
+                </li>
+            </ul>
         </ul>
     )
 };

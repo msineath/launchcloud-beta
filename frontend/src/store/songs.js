@@ -51,10 +51,13 @@ export const addOneSong = songData => async dispatch => {
         body: formData
     });
 
+    
+    const newSong = await res.json();
+    console.log('%%%%%%%%%%%%%%%%%', newSong)
+
     if(res.ok) {
-        const newSong = await res.json();
         dispatch(addSong(newSong));
-        return newSong;
+        return newSong['newSong'];
     } else {
         return {"errors": "something went wrong, please try again..."};
     };
