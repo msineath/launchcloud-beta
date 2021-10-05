@@ -56,7 +56,7 @@ export const addOneSong = songData => async dispatch => {
     console.log('%%%%%%%%%%%%%%%%%', newSong)
 
     if(res.ok) {
-        dispatch(addSong(newSong));
+        dispatch(addSong(newSong['newSong']));
         return newSong['newSong'];
     } else {
         return {"errors": "something went wrong, please try again..."};
