@@ -6,6 +6,7 @@ import { addOneSong, getSongs } from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import { getSongLikes } from '../../store/songLikes';
 import { getAlbumLikes } from '../../store/albumLikes';
+import { getAlbumComments } from '../../store/albumComments';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
@@ -34,6 +35,22 @@ export default function ProfilePage() {
 
     const selectedSongLikes = songLikesArray.filter(like => like.userId === Number(userId));
     const selectedSongLikeNames = selectedSongLikes.map (like => songsArray.filter(song => like.songId === song.id)).flat();
+
+    const albumComments = useSelector(state => state.albumComments);
+    const albumCommentsArray = Object.values(albumComments);
+    const userAlbumComments = albumCommentsArray.filter(comment => comment.userId === Number(userId));
+    
+    const refinedUserComments = [];
+    for (let i = 0; i < userAlbumComments.length; i++) {
+        console.log('userAlbumComments[i] : ', userAlbumComments[i])
+        if (!refinedUserComments.includes(userAlbumComments[i].albumId)) {
+            console.log('test')
+            refinedUserComments.push(userAlbumComments[i].albumId);
+        };
+    };
+
+    console.log(userAlbumComments)
+    console.log('4554t3453425254243', refinedUserComments)
 
     const [title, setTitle] = useState('');
     const [albumId, setAlbumId] = useState('');
@@ -65,6 +82,7 @@ export default function ProfilePage() {
         dispatch(getAlbums())
         dispatch(getSongLikes())
         dispatch(getAlbumLikes())
+        dispatch(getAlbumComments())
     }, [dispatch]);
 
     const updateFile = (e) => {
@@ -92,6 +110,19 @@ export default function ProfilePage() {
                     <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
                 </ul>   
             )}
+            {refinedUserComments ?
+                <li>
+                    Albums {user.username} has Commented on: 
+                    {refinedUserComments.map(albumId => {
+                        const selected = albumsArray.find(album => album.id === albumId);
+                        return(
+                            <ul>
+                                <li><Link to={`/albums/${selected.id}`}>{selected.name}</Link></li>
+                            </ul>
+                        )
+                    })}
+                </li>
+            :null}
             <li>
                 Upload A New Song
             </li>
