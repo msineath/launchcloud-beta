@@ -1,10 +1,16 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_ALBUM_COMMENTS = 'albumcomments/LOAD_ALBUM_COMMENTS';
+const ADD_ALBUM_COMMENT = 'albumComments/ADD_ALBUM_COMMENTS';
 
 const loadAlbumComments = comments => {
     return {type: LOAD_ALBUM_COMMENTS,
             payload: comments};
+};
+
+const addAlbumComment = comment => {
+    return {type: ADD_ALBUM_COMMENT,
+            payload: comment};
 };
 
 export const getAlbumComments = () => async dispatch => {
@@ -15,6 +21,14 @@ export const getAlbumComments = () => async dispatch => {
     }
 };
 
+export const addNewAlbumComment = (id) => async dispatch => {
+    const res = await csrfFetch(`api/albumComments/add${id}`);
+    if(res.ok) {
+        const comment = await res.json();
+        dispatch(addAlbumComment(comment));
+    };
+};
+
 const initialState = {};
 
 const albumCommentsReducer = (state=initialState, action) => {
@@ -23,6 +37,11 @@ const albumCommentsReducer = (state=initialState, action) => {
             const newState = {};
             const albumCommentsArr = Array.from(action.payload);
             albumCommentsArr.map(comment => newState[comment.id] = comment);
+            return newState;
+        }
+        case ADD_ALBUM_COMMENT: {
+            const newState = {...state};
+            newState[action.payload.id] = action.payload;
             return newState;
         }
         default:
