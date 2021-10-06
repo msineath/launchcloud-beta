@@ -8,4 +8,11 @@ router.get('/', asyncHandler(async (req, res) => {
     return res.json(comments);
 }));
 
+router.post('/add/:albumId', asyncHandler(async (req, res) => {
+    const {commentText, userId} = req.body;
+    const albumId = req.params.albumId;
+    const newComment = await AlbumComment.create({albumId, comment: commentText, userId});
+    return res.json(newComment);
+}))
+
 module.exports = router;

@@ -6,7 +6,7 @@ import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
-import { getAlbumComments } from '../../store/albumComments';
+import { getAlbumComments, addNewAlbumComment } from '../../store/albumComments';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -48,17 +48,18 @@ export default function IndividualAlbumPage() {
     const commentsArray = Object.values(comments);
     const commentsOnAlbum = commentsArray.filter(comment => comment.albumId === Number(albumId));
 
-    const [commentText, setCommentText] = useState(null);
+    const [commentText, setCommentText] = useState('');
 
     const likeToggle = event => {
         const targetKey = event.target.innerText;
         dispatch(AlbumLikeCreateUpdate(Number(albumId), sessionUser.id, targetKey));
     };
 
-    // const addComment = async event => {
-    //     event.preventDefault();
-    //     const newestComment = await dispatch(addAlbumComment(Number(albumId), commentText, sessionUser.id));
-    // };
+    const addComment = async event => {
+        event.preventDefault();
+        await dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
+        setCommentText('');
+    };
     
     useEffect(() => {
         dispatch(getAlbums());
@@ -126,7 +127,7 @@ export default function IndividualAlbumPage() {
                         })}
                     </ul>
                 :null}
-                <form /*onSubmit={addComment}*/>
+                <form onSubmit={addComment}>
                     <textarea
                         placeholder='Add YourComment Here'
                         value={commentText}
