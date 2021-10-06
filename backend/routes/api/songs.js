@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const {Song} = require('../../db/models');
+const {Song, SongCredit, albumCredit} = require('../../db/models');
 const {singlePublicFileUpload, singleMulterUpload} = require('../../awS3');
 
 router.get('/', asyncHandler(async (req, res) => {
@@ -14,7 +14,9 @@ router.post('/add',singleMulterUpload('audioTrackUrl'), asyncHandler(async (req,
     const {title, albumId, uploaderId, genre, releaseDate} = req.body;
     const audioTrackUrl = await singlePublicFileUpload(req.file);
     const newSong = await Song.upload({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl});
-    return res.json({newSong})
+    const newSongCredit = await SongCredit.create({['songId']: newSong.id, ['artistId']: uploaderId});
+    const newAlbumCredit = await albumCredit.create({['artistId']: uploaderId, ['albumId']: albumId})
+    return res.json({newSong, newSongCredit, newAlbumCredit})
 }));
 
 router.delete('/:id/delete', asyncHandler (async (req, res) => {

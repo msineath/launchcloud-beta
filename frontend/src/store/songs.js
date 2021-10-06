@@ -52,10 +52,8 @@ export const addOneSong = songData => async dispatch => {
     });
 
     
-    const newSong = await res.json();
-    console.log('%%%%%%%%%%%%%%%%%', newSong)
-
     if(res.ok) {
+        const newSong = await res.json();
         dispatch(addSong(newSong['newSong']));
         return newSong['newSong'];
     } else {
