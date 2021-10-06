@@ -16,7 +16,6 @@ export default function IndividualAlbumPage() {
     const albums = useSelector(state => state.albums);
     const albumsArray = Object.values(albums);
     const selectedAlbum = albumsArray.filter(album => album.id === Number(albumId));
-
     
     const songs = useSelector(state => state.songs);
     const songsArray = Object.values(songs);
@@ -35,7 +34,12 @@ export default function IndividualAlbumPage() {
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.albumId === Number(albumId));
-    const sessionUserLiked = selectedAlbumLikes.find(like => like.userId === sessionUser.id)
+    const sessionUserLiked = selectedAlbumLikes.find(like => like.userId === sessionUser.id);
+
+    const comments = useSelector(state => state.albumComments);
+    const commentsArray = Object.values(comments);
+    const commentsOnAlbum = commentsArray.filter(comment => comment.albumId === Number(albumId));
+    console.log('****', commentsOnAlbum)
 
     const likeToggle = event => {
         const targetKey = event.target.innerText;
@@ -94,6 +98,20 @@ export default function IndividualAlbumPage() {
                         <button onClick={likeToggle}>like</button>
                         <button onClick={likeToggle}>dislike</button>
                 </li>
+                <li>
+                    Comments Section for {selectedAlbum[0].name}
+                </li>
+                {commentsOnAlbum ?
+                    <ul>
+                        {commentsOnAlbum.map(comment => {
+                            return(
+                                <li>
+                                    {comment.comment}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                :null}
             </ul>
         </>
     )
