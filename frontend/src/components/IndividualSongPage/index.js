@@ -7,7 +7,7 @@ import { getAlbums } from '../../store/albums';
 import { getSongCredits } from '../../store/songCredits';
 import { getSongLikes, SongLikeCreateUpdate } from '../../store/songLikes';
 import './IndividualSongPage.css';
-import { getSongComments } from '../../store/songComments';
+import { getSongComments, addNewSongComment } from '../../store/songComments';
 
 export default function IndividualSongPage() {
     const dispatch = useDispatch();
@@ -31,6 +31,8 @@ export default function IndividualSongPage() {
     const comments = useSelector(state => state.songComments);
     const commentsArray = Object.values(comments);
     const commentsOnSong = commentsArray.filter(comment => comment.songId === Number(songId));
+    const [commentText, setCommentText] = useState('');
+
 
     const [visible, setVisible] = useState(false);
     const [targetKey, setTargetKey] = useState(null);
@@ -75,6 +77,12 @@ export default function IndividualSongPage() {
     const likeToggle = event => {
         const targetKey = event.target.innerText;
         dispatch(SongLikeCreateUpdate(Number(songId), sessionUser.id, targetKey));
+    };
+
+    const addComment = event => {
+        event.preventDefault();
+        dispatch(addNewSongComment(Number(songId), commentText, sessionUser.id));
+        setCommentText('');
     };
 
     return (
@@ -155,6 +163,16 @@ export default function IndividualSongPage() {
                         })}
                     </ul>
                 :null}
+                <form onSubmit={addComment}>
+                    <textarea
+                        placeholder='Add Your Comment Here'
+                        value={commentText}
+                        onChange={event => setCommentText(event.target.value)}>
+                    </textarea>
+                    <button type='submit'>
+                        Add A Comment
+                    </button>
+                </form>
             </ul>
             <div>
                 <textarea hidden={!visible} placeholder='test' onChange={(e) => setAreaText(e.target.value)}></textarea>
