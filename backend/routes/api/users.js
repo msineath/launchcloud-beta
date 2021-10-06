@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const {User} = require('../../db/models');
+const {User, Artist} = require('../../db/models');
 const {check} = require('express-validator');
 const {handleValidationErrors} = require('../../utils/validation');
 const {setTokenCookie, requireAuth} = require('../../utils/auth');
@@ -29,7 +29,7 @@ const validateSignup = [
 router.post('/', validateSignup, asyncHandler(async (req, res) => {
     const {email, password, username} = req.body;
     const user = await User.signup({email, username, password});
-
+    await Artist.create({['name']: username})
     await setTokenCookie(res, user);
 
     return res.json({user});
