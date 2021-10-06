@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
 
   Song.upload = async function({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl}) {
+    
     const titleChecker = await Song.findOne({where: {title}});
     
     if(titleChecker) albumChecker = await Song.findOne({where:{albumId}});
