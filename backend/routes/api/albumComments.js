@@ -13,6 +13,20 @@ router.post('/add/:albumId', asyncHandler(async (req, res) => {
     const albumId = req.params.albumId;
     const newComment = await AlbumComment.create({albumId, comment: commentText, userId});
     return res.json(newComment);
+}));
+
+router.patch('/add/:albumId', asyncHandler(async (req,res) => {
+    const {commentText, userId} = req.body;
+    const albumId = req.params.albumId;
+    const updatedComment = await AlbumComment.update({comment: commentText},
+        {where: {
+            albumId,
+            userId
+        },
+        returning:true
+        }
+    );
+    return res.json(updatedComment);
 }))
 
 module.exports = router;

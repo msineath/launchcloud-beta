@@ -48,7 +48,7 @@ router.patch('/:albumId', asyncHandler(async (req, res) => {
                     albumId
                 },
                 returning: true
-            }
+                }
             );
             
             return res.json(updatedInfo[1][0]);
