@@ -8,6 +8,7 @@ import { getAlbumCredits } from '../../store/albumCredits';
 import { getSongCredits } from '../../store/songCredits';
 import { getAlbumLikes } from '../../store/albumLikes';
 import { getSongLikes } from '../../store/songLikes';
+import { getAlbumComments } from '../../store/albumComments';
 
 import './HomePage.css';
 import backgroundImage from './background-image.jpg';
@@ -24,6 +25,7 @@ export default function HomePage() {
         dispatch(getSongCredits())
         dispatch(getAlbumLikes())
         dispatch(getSongLikes())
+        dispatch(getAlbumComments())
     }, [dispatch]);
     
     if(!sessionUser) return (
