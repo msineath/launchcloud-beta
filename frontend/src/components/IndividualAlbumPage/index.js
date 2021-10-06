@@ -6,6 +6,7 @@ import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
+import { getAlbumComments } from '../../store/albumComments';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -46,8 +47,6 @@ export default function IndividualAlbumPage() {
     const comments = useSelector(state => state.albumComments);
     const commentsArray = Object.values(comments);
     const commentsOnAlbum = commentsArray.filter(comment => comment.albumId === Number(albumId));
-    console.log('****', allCreditNames)
-    console.log('****++++++ ', refinedCreditNames)
 
     const likeToggle = event => {
         const targetKey = event.target.innerText;
@@ -60,6 +59,7 @@ export default function IndividualAlbumPage() {
         dispatch(getArtists());
         dispatch(getAlbumCredits());
         dispatch(getAlbumLikes());
+        dispatch(getAlbumComments());
     }, [dispatch]);
 
 
@@ -120,6 +120,7 @@ export default function IndividualAlbumPage() {
                         })}
                     </ul>
                 :null}
+
             </ul>
         </>
     )
