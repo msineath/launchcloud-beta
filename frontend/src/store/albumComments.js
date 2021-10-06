@@ -42,7 +42,7 @@ export const addNewAlbumComment = (albumId, commentText, userId) => async dispat
     };
 };
 
-export const updateComment = (id) => async dispatch => {
+export const updateComment = (id, commentText) => async dispatch => {
     const res = await csrfFetch(`/api/albumComments/edit/${id}`, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
@@ -52,8 +52,8 @@ export const updateComment = (id) => async dispatch => {
     });
 
     if(res.ok) {
-        const comment = res.json();
-        dispatch(editAlbumComment(comment));
+        const comment = await res.json();
+        dispatch(editAlbumComment(comment[1][0]));
     };
 };
 

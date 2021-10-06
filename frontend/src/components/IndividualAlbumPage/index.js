@@ -6,7 +6,7 @@ import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
-import { getAlbumComments, addNewAlbumComment } from '../../store/albumComments';
+import { getAlbumComments, addNewAlbumComment, updateComment } from '../../store/albumComments';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -55,11 +55,17 @@ export default function IndividualAlbumPage() {
         dispatch(AlbumLikeCreateUpdate(Number(albumId), sessionUser.id, targetKey));
     };
 
-    const addComment = async event => {
+    const addComment = event => {
         event.preventDefault();
-        await dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
+        dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
         setCommentText('');
     };
+
+    const editComment = event => {
+        event.preventDefault();
+        dispatch(updateComment(event.target.value, commentText));
+        setCommentText('');
+    }
     
     useEffect(() => {
         dispatch(getAlbums());
@@ -122,6 +128,19 @@ export default function IndividualAlbumPage() {
                             return(
                                 <li key={`comment.${index}`}>
                                     {comment.comment}
+                                    {sessionUser.id === comment.userId ? 
+                                        <>
+                                        <button
+                                            value={comment.id}
+                                            onClick={editComment}>
+                                            Edit Comment
+                                        </button>
+                                        <button
+                                            value={comment.id}>
+                                            Delete Comment
+                                        </button>
+                                        </>
+                                    :null}
                                 </li>
                             )
                         })}
