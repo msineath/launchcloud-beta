@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
@@ -48,10 +48,17 @@ export default function IndividualAlbumPage() {
     const commentsArray = Object.values(comments);
     const commentsOnAlbum = commentsArray.filter(comment => comment.albumId === Number(albumId));
 
+    const [commentText, setCommentText] = useState(null);
+
     const likeToggle = event => {
         const targetKey = event.target.innerText;
         dispatch(AlbumLikeCreateUpdate(Number(albumId), sessionUser.id, targetKey));
     };
+
+    // const addComment = async event => {
+    //     event.preventDefault();
+    //     const newestComment = await dispatch(addAlbumComment(Number(albumId), commentText, sessionUser.id));
+    // };
     
     useEffect(() => {
         dispatch(getAlbums());
@@ -61,7 +68,6 @@ export default function IndividualAlbumPage() {
         dispatch(getAlbumLikes());
         dispatch(getAlbumComments());
     }, [dispatch]);
-
 
     return (
         <>
@@ -111,16 +117,25 @@ export default function IndividualAlbumPage() {
                 </li>
                 {commentsOnAlbum ?
                     <ul>
-                        {commentsOnAlbum.map(comment => {
+                        {commentsOnAlbum.map((comment, index) => {
                             return(
-                                <li>
+                                <li key={`comment.${index}`}>
                                     {comment.comment}
                                 </li>
                             )
                         })}
                     </ul>
                 :null}
-
+                <form /*onSubmit={addComment}*/>
+                    <textarea
+                        placeholder='Add YourComment Here'
+                        value={commentText}
+                        onChange={event => setCommentText(event.target.value)}>
+                    </textarea>
+                    <button type='submit'>
+                        Add A Comment
+                    </button>
+                </form>
             </ul>
         </>
     )
