@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_ALBUM_COMMENTS = 'albumcomments/LOAD_ALBUM_COMMENTS';
 const ADD_ALBUM_COMMENT = 'albumComments/ADD_ALBUM_COMMENTS';
 const EDIT_ALBUM_COMMENT = 'albumComments/EDIT_ALBUM_COMMENT';
+const DELETE_ALBUM_COMMENT = 'albumComments/DELETE_ALBUM_COMMENT';
 
 const loadAlbumComments = comments => {
     return {type: LOAD_ALBUM_COMMENTS,
@@ -16,6 +17,11 @@ const addAlbumComment = comment => {
 
 const editAlbumComment = comment => {
     return {type: EDIT_ALBUM_COMMENT,
+            payload: comment};
+};
+
+const deleteAlbumComment = comment => {
+    return {type: DELETE_ALBUM_COMMENT,
             payload: comment};
 };
 
@@ -57,6 +63,17 @@ export const updateComment = (id, commentText) => async dispatch => {
     };
 };
 
+export const removeComment = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/albumComments/${id}`, {
+        method: 'DELETE',       
+    });
+    
+    if(res.ok) {
+        const comment = await res.json();
+        dispatch(deleteAlbumComment(comment));
+    };
+};
+
 const initialState = {};
 
 const albumCommentsReducer = (state=initialState, action) => {
@@ -75,6 +92,11 @@ const albumCommentsReducer = (state=initialState, action) => {
         case EDIT_ALBUM_COMMENT: {
             const newState = {...state};
             newState[action.payload.id] = action.payload;
+            return newState;
+        }
+        case DELETE_ALBUM_COMMENT: {
+            const newState = {...state};
+            delete newState[action.payload.id];
             return newState;
         }
         default:
