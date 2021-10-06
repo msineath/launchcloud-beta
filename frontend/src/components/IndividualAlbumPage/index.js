@@ -6,7 +6,7 @@ import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
-import { getAlbumComments, addNewAlbumComment, updateComment } from '../../store/albumComments';
+import { getAlbumComments, addNewAlbumComment, updateComment, removeComment } from '../../store/albumComments';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -65,7 +65,12 @@ export default function IndividualAlbumPage() {
         event.preventDefault();
         dispatch(updateComment(event.target.value, commentText));
         setCommentText('');
-    }
+    };
+
+    const commentDelete = event => {
+        event.preventDefault();
+        dispatch(removeComment(event.target.value));
+    };
     
     useEffect(() => {
         dispatch(getAlbums());
@@ -136,7 +141,8 @@ export default function IndividualAlbumPage() {
                                             Edit Comment
                                         </button>
                                         <button
-                                            value={comment.id}>
+                                            value={comment.id}
+                                            onClick={commentDelete}>
                                             Delete Comment
                                         </button>
                                         </>

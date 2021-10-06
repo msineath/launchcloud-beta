@@ -64,7 +64,7 @@ export const updateComment = (id, commentText) => async dispatch => {
 };
 
 export const removeComment = (id) => async dispatch => {
-    const res = await csrfFetch(`/api/albumComments/${id}`, {
+    const res = await csrfFetch(`/api/albumComments/delete/${id}`, {
         method: 'DELETE',       
     });
     
