@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_ALBUM_COMMENTS = 'albumcomments/LOAD_ALBUM_COMMENTS';
 const ADD_ALBUM_COMMENT = 'albumComments/ADD_ALBUM_COMMENTS';
+const EDIT_ALBUM_COMMENT = 'albumComments/EDIT_ALBUM_COMMENT';
 
 const loadAlbumComments = comments => {
     return {type: LOAD_ALBUM_COMMENTS,
@@ -10,6 +11,11 @@ const loadAlbumComments = comments => {
 
 const addAlbumComment = comment => {
     return {type: ADD_ALBUM_COMMENT,
+            payload: comment};
+};
+
+const editAlbumComment = comment => {
+    return {type: EDIT_ALBUM_COMMENT,
             payload: comment};
 };
 
@@ -36,6 +42,21 @@ export const addNewAlbumComment = (albumId, commentText, userId) => async dispat
     };
 };
 
+export const updateComment = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/albumComments/edit/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            commentText
+        })
+    });
+
+    if(res.ok) {
+        const comment = res.json();
+        dispatch(editAlbumComment(comment));
+    };
+};
+
 const initialState = {};
 
 const albumCommentsReducer = (state=initialState, action) => {
@@ -47,6 +68,11 @@ const albumCommentsReducer = (state=initialState, action) => {
             return newState;
         }
         case ADD_ALBUM_COMMENT: {
+            const newState = {...state};
+            newState[action.payload.id] = action.payload;
+            return newState;
+        }
+        case EDIT_ALBUM_COMMENT: {
             const newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;

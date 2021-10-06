@@ -15,15 +15,14 @@ router.post('/add/:albumId', asyncHandler(async (req, res) => {
     return res.json(newComment);
 }));
 
-router.patch('/add/:albumId', asyncHandler(async (req,res) => {
-    const {commentText, userId} = req.body;
-    const albumId = req.params.albumId;
+router.patch('/edit/:commentId', asyncHandler(async (req,res) => {
+    const {commentText} = req.body;
+    const id = req.params.commentId;
     const updatedComment = await AlbumComment.update({comment: commentText},
         {where: {
-            albumId,
-            userId
+            id 
         },
-        returning:true
+        returning: true
         }
     );
     return res.json(updatedComment);
