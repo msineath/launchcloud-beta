@@ -7,6 +7,7 @@ import { getAlbums } from '../../store/albums';
 import { getSongCredits } from '../../store/songCredits';
 import { getSongLikes, SongLikeCreateUpdate } from '../../store/songLikes';
 import './IndividualSongPage.css';
+import { getSongComments } from '../../store/songComments';
 
 export default function IndividualSongPage() {
     const dispatch = useDispatch();
@@ -27,6 +28,10 @@ export default function IndividualSongPage() {
     const selectedSongCredits = songCreditsArray.filter(credit => credit.songId === song.id);
     const allCreditNames = selectedSongCredits.map(credit => Object.values(artistsArray).find(artist =>  credit.artistId === artist.id));
 
+    const comments = useSelector(state => state.songComments);
+    const commentsArray = Object.values(comments);
+    const commentsOnSong = commentsArray.filter(comment => comment.songId === Number(songId));
+
     const [visible, setVisible] = useState(false);
     const [targetKey, setTargetKey] = useState(null);
     const [buttonText, setButtonText] = useState(null);
@@ -38,6 +43,7 @@ export default function IndividualSongPage() {
         dispatch(getArtists());
         dispatch(getSongCredits());
         dispatch(getSongLikes());
+        dispatch(getSongComments());
     }, [dispatch])
     
     const date = (function () {
@@ -135,6 +141,20 @@ export default function IndividualSongPage() {
                     <button onClick={likeToggle}>dislike</button>
                 </li>
                 {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
+                <li>
+                    Comments Section for {song.title}:
+                </li>
+                {commentsOnSong ?
+                    <ul>
+                        {commentsOnSong.map((comment, index) => {
+                            return(
+                                <li key={`comment.${index}`}>
+                                    {comment.comment}
+                                </li>
+                            )
+                        })}
+                    </ul>
+                :null}
             </ul>
             <div>
                 <textarea hidden={!visible} placeholder='test' onChange={(e) => setAreaText(e.target.value)}></textarea>
