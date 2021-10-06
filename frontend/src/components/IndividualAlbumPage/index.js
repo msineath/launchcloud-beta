@@ -30,6 +30,13 @@ export default function IndividualAlbumPage() {
     const albumCreditsArray = Object.values(albumCredits);
     const selectedAlbumCredits = albumCreditsArray.filter(credit => credit.albumId === Number(albumId));
     const allCreditNames = selectedAlbumCredits.map(credit => Object.values(artistsArray).find(artist =>  credit.artistId === artist.id));
+    
+    const refinedCreditNames = [];
+    for (let i = 0; i < allCreditNames.length; i++) {
+        if(!refinedCreditNames.includes(allCreditNames[i])) {
+            refinedCreditNames.push(allCreditNames[i])
+        }
+    }
 
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
@@ -39,7 +46,8 @@ export default function IndividualAlbumPage() {
     const comments = useSelector(state => state.albumComments);
     const commentsArray = Object.values(comments);
     const commentsOnAlbum = commentsArray.filter(comment => comment.albumId === Number(albumId));
-    console.log('****', commentsOnAlbum)
+    console.log('****', allCreditNames)
+    console.log('****++++++ ', refinedCreditNames)
 
     const likeToggle = event => {
         const targetKey = event.target.innerText;
@@ -77,11 +85,11 @@ export default function IndividualAlbumPage() {
                             </ul>
                         </li>
                 :null}
-                {allCreditNames ?
+                {refinedCreditNames ?
                     <li>
                         Artists On Album:
                         <ul>
-                            {allCreditNames?.map((artist, index) => {
+                            {refinedCreditNames?.map((artist, index) => {
                                 return(
                                     <li key={`artist-on-album.${index}`}>
                                         <Link to={`/artists/${artist?.id}`}>
@@ -99,7 +107,7 @@ export default function IndividualAlbumPage() {
                         <button onClick={likeToggle}>dislike</button>
                 </li>
                 <li>
-                    Comments Section for {selectedAlbum[0].name}
+                    Comments Section for {selectedAlbum[0]?.name}
                 </li>
                 {commentsOnAlbum ?
                     <ul>

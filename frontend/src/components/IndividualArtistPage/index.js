@@ -21,11 +21,18 @@ export default function IndividualArtistPage() {
     const albums = useSelector(state => state.albums);
     const albumsArray = Object.values(albums);
     const artistAlbums = artistAlbumCredits.map(credit => albumsArray.filter(album => credit.albumId === album.id)).flat();
-    
+
+    const refinedArtistAlbums = [];
+    for (let i = 0; i < artistAlbums.length; i++) {
+        if(!refinedArtistAlbums.includes(artistAlbums[i])) {
+            refinedArtistAlbums.push(artistAlbums[i])
+        }
+    }
+
     const songCredits = useSelector(state => state.songCredits);
     const songCreditsArray = Object.values(songCredits);
     const artistSongCredits = songCreditsArray.filter(credit => credit.artistId === Number(artistId));
-    
+
     const songs = useSelector(state => state.songs);
     const songsArray = Object.values(songs);
 
@@ -49,7 +56,7 @@ export default function IndividualArtistPage() {
                 <li>
                     {artist?.name}'s albums:
                     <ul>
-                        {artistAlbums.map((album, index) => {
+                        {refinedArtistAlbums.map((album, index) => {
                             return(
                                 <li key={`album.${index}`}>
                                     {<Link to={`/albums/${album.id}`}>
