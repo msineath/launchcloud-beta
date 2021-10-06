@@ -9,6 +9,7 @@ import songCreditsReducer from './songCredits';
 import albumLikesReducer from './albumLikes';
 import songLikesReducer from './songLikes';
 import albumCommentsReducer from './albumComments';
+import songCommentsReducer from './songComments';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     songCredits: songCreditsReducer,
     albumLikes: albumLikesReducer,
     songLikes: songLikesReducer,
-    albumComments: albumCommentsReducer
+    albumComments: albumCommentsReducer,
+    songComments: songCommentsReducer
 });
 
 let enhancer;
