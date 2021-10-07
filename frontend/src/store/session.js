@@ -10,6 +10,13 @@ const logoutUser = user => {
     return {type: LOGOUT_USER};
 };
 
+export const demoUserLogin = () => async dispatch => {
+    const res = await csrfFetch('/api/session/demo');
+    const readableRes = await res.json();
+    dispatch(loginUser(readableRes.user));
+    return res;
+};
+
 export const loginThunk = user => async dispatch => {
 
     const {credential, password} = user;

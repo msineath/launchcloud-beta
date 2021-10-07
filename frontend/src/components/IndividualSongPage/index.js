@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams, Link, useHistory, Redirect } from 'react-router-dom';
 import { getSongs, removeSong, updateOneSong } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbums } from '../../store/albums';
@@ -47,6 +47,10 @@ export default function IndividualSongPage() {
         dispatch(getSongLikes());
         dispatch(getSongComments());
     }, [dispatch])
+
+    if(!sessionUser) return (
+        <Redirect to='/login' />
+    );
     
     const date = (function () {
         const i = song?.releaseDate.indexOf('T');
@@ -55,7 +59,7 @@ export default function IndividualSongPage() {
 
     const creatorOptions = (buttonText, onClickFunction, newId) => {
         
-        if(sessionUser.id === song?.uploaderId) {
+        if(sessionUser?.id === song?.uploaderId) {
 
             return(
                 <button id={newId} onClick={onClickFunction}>{buttonText}</button>
@@ -169,7 +173,7 @@ export default function IndividualSongPage() {
                             return(
                                 <li key={`comment.${index}`}>
                                     {comment.comment}
-                                    {sessionUser.id === comment.userId ? 
+                                    {sessionUser?.id === comment.userId ? 
                                         <>
                                         <button
                                             value={comment.id}

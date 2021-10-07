@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { getSongs } from '../../store/songs';
 import './SongsPage.css';
 
 export default function SongsPage() {
     const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user);
     const songs = useSelector(state => state.songs);
     const songsArr = Object.values(songs)
     
     useEffect (() => {
         dispatch(getSongs())
     }, [dispatch]);
+
+    if(!sessionUser) return (
+        <Redirect to='/login' />
+    );
 
     return (
         <>

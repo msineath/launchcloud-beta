@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
@@ -80,6 +80,10 @@ export default function IndividualAlbumPage() {
         dispatch(getAlbumLikes());
         dispatch(getAlbumComments());
     }, [dispatch]);
+
+    if(!sessionUser) return (
+        <Redirect to='/login' />
+    );
 
     return (
         <>
