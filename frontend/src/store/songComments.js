@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_SONG_COMMENTS = 'songcomments/LOAD_SONG_COMMENTS';
 const ADD_SONG_COMMENT = 'songComments/ADD_SONG_COMMENTS';
+const EDIT_SONG_COMMENT = 'songComments/EDIT_SONG_COMMENT';
 
 
 const loadSongComments = comments => {
@@ -11,6 +12,11 @@ const loadSongComments = comments => {
 
 const addSongComment = comment => {
     return {type: ADD_SONG_COMMENT,
+            payload: comment};
+};
+
+const editSongComment = comment => {
+    return {type: EDIT_SONG_COMMENT,
             payload: comment};
 };
 
@@ -37,6 +43,21 @@ export const addNewSongComment = (songId, commentText, userId) => async dispatch
     };
 };
 
+export const updateComment = (id, commentText) => async dispatch => {
+    const res = await csrfFetch(`/api/songComments/edit/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            commentText
+        })
+    });
+
+    if(res.ok) {
+        const comment = await res.json();
+        dispatch(editSongComment(comment[1][0]));
+    };
+};
+
 const initialState = {};
 
 const songCommentsReducer = (state=initialState, action) => {
@@ -48,6 +69,11 @@ const songCommentsReducer = (state=initialState, action) => {
             return newState;
         }
         case ADD_SONG_COMMENT: {
+            const newState = {...state};
+            newState[action.payload.id] = action.payload;
+            return newState;
+        }
+        case EDIT_SONG_COMMENT: {
             const newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;
