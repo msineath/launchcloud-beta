@@ -15,4 +15,17 @@ router.post('/add/:songId', asyncHandler(async (req, res) => {
     return res.json(newComment);
 }));
 
+router.patch('/edit/:commentId', asyncHandler(async (req,res) => {
+    const {commentText} = req.body;
+    const id = req.params.commentId;
+    const updatedComment = await SongComment.update({comment: commentText},
+        {where: {
+            id 
+        },
+        returning: true
+        }
+    );
+    return res.json(updatedComment);
+}));
+
 module.exports = router;
