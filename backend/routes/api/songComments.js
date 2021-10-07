@@ -28,4 +28,11 @@ router.patch('/edit/:commentId', asyncHandler(async (req,res) => {
     return res.json(updatedComment);
 }));
 
+router.delete('/delete/:commentId', asyncHandler(async (req, res) => {
+    const id = req.params.commentId;
+    const comment = await SongComment.findByPk(id);
+    await comment.destroy();
+    return res.json(comment);
+}));
+
 module.exports = router;
