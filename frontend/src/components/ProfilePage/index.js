@@ -6,6 +6,8 @@ import { addOneSong, getSongs } from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import { getSongLikes } from '../../store/songLikes';
 import { getAlbumLikes } from '../../store/albumLikes';
+import { getAlbumComments } from '../../store/albumComments';
+import { getSongComments } from '../../store/songComments';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
@@ -34,6 +36,28 @@ export default function ProfilePage() {
 
     const selectedSongLikes = songLikesArray.filter(like => like.userId === Number(userId));
     const selectedSongLikeNames = selectedSongLikes.map (like => songsArray.filter(song => like.songId === song.id)).flat();
+
+    const albumComments = useSelector(state => state.albumComments);
+    const albumCommentsArray = Object.values(albumComments);
+    const userAlbumComments = albumCommentsArray.filter(comment => comment.userId === Number(userId));
+    
+    const refinedAlbumComments = [];
+    for (let i = 0; i < userAlbumComments.length; i++) {
+        if (!refinedAlbumComments.includes(userAlbumComments[i].albumId)) {
+            refinedAlbumComments.push(userAlbumComments[i].albumId);
+        };
+    };
+
+    const songComments = useSelector(state => state.songComments);
+    const songCommentsArray = Object.values(songComments);
+    const userSongComments = songCommentsArray.filter(comment => comment.userId === Number(userId));
+    
+    const refinedSongComments = [];
+    for (let i = 0; i < userSongComments.length; i++) {
+        if (!refinedSongComments.includes(userSongComments[i].songId)) {
+            refinedSongComments.push(userSongComments[i].songId);
+        };
+    };
 
     const [title, setTitle] = useState('');
     const [albumId, setAlbumId] = useState('');
@@ -65,6 +89,8 @@ export default function ProfilePage() {
         dispatch(getAlbums())
         dispatch(getSongLikes())
         dispatch(getAlbumLikes())
+        dispatch(getAlbumComments())
+        dispatch(getSongComments())
     }, [dispatch]);
 
     const updateFile = (e) => {
@@ -92,6 +118,32 @@ export default function ProfilePage() {
                     <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
                 </ul>   
             )}
+            {refinedAlbumComments ?
+                <li>
+                    Albums {user.username} has Commented on: 
+                    {refinedAlbumComments.map(albumId => {
+                        const selected = albumsArray.find(album => album.id === albumId);
+                        return(
+                            <ul>
+                                <li><Link to={`/albums/${selected.id}`}>{selected.name}</Link></li>
+                            </ul>
+                        )
+                    })}
+                </li>
+            :null}
+            {refinedSongComments ?
+                <li>
+                    Songs {user.username} has Commented on: 
+                    {refinedSongComments.map(songId => {
+                        const selected = songsArray.find(song => song.id === songId);
+                        return(
+                            <ul>
+                                <li><Link to={`/albums/${selected.id}`}>{selected.title}</Link></li>
+                            </ul>
+                        )
+                    })}
+                </li>
+            :null}
             <li>
                 Upload A New Song
             </li>
