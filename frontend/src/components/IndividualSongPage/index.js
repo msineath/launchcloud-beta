@@ -7,7 +7,7 @@ import { getAlbums } from '../../store/albums';
 import { getSongCredits } from '../../store/songCredits';
 import { getSongLikes, SongLikeCreateUpdate } from '../../store/songLikes';
 import './IndividualSongPage.css';
-import { getSongComments, addNewSongComment } from '../../store/songComments';
+import { getSongComments, addNewSongComment, updateComment } from '../../store/songComments';
 
 export default function IndividualSongPage() {
     const dispatch = useDispatch();
@@ -85,6 +85,12 @@ export default function IndividualSongPage() {
         setCommentText('');
     };
 
+    const editComment = event => {
+        event.preventDefault();
+        dispatch(updateComment(event.target.value, commentText));
+        setCommentText('');
+    };
+
     return (
         <>
         <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg' alt='background'/>
@@ -158,6 +164,13 @@ export default function IndividualSongPage() {
                             return(
                                 <li key={`comment.${index}`}>
                                     {comment.comment}
+                                    {sessionUser.id === comment.userId ? 
+                                        <button
+                                            value={comment.id}
+                                            onClick={editComment}>
+                                            Edit Comment
+                                        </button>
+                                    :null}
                                 </li>
                             )
                         })}
