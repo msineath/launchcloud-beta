@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Redirect } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import { getArtists } from '../../store/artists';
 import { getSongs } from '../../store/songs';
@@ -12,6 +12,7 @@ export default function IndividualArtistPage() {
     const dispatch = useDispatch();
     const { artistId } = useParams();
     
+    const sessionUser = useSelector(state => state.session.user);
     const artist = useSelector(state => state.artists[artistId]);
 
     const albumCredits = useSelector(state => state.albumCredits);
@@ -45,6 +46,10 @@ export default function IndividualArtistPage() {
         dispatch(getAlbumCredits());
         dispatch(getSongCredits());
     }, [dispatch]);
+
+    if(!sessionUser) return (
+        <Redirect to='/login' />
+    );
 
     return (
         <>

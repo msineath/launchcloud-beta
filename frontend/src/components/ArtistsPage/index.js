@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getArtists } from '../../store/artists';
 
 export default function ArtistsPage() {
     const dispatch = useDispatch();
     
+    const sessionUser = useSelector(state => state.session.user);
+
     const artists = useSelector(state => {return state.artists});
     const artistsArr = Object.values(artists)
 
@@ -13,6 +15,9 @@ export default function ArtistsPage() {
         dispatch(getArtists())
     }, [dispatch]);
 
+    if(!sessionUser) return (
+        <Redirect to='/login' />
+    );
 
     return (
         <>
