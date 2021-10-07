@@ -95,7 +95,7 @@ const songCommentsReducer = (state=initialState, action) => {
             newState[action.payload.id] = action.payload;
             return newState;
         }
-        case DELETE_ALBUM_COMMENT: {
+        case DELETE_SONG_COMMENT: {
             const newState = {...state};
             delete newState[action.payload.id];
             return newState;

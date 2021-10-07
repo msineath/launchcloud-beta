@@ -161,7 +161,7 @@ export default function IndividualSongPage() {
                 </li>
                 {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
                 <li>
-                    Comments Section for {song.title}:
+                    Comments Section for {song?.title}:
                 </li>
                 {commentsOnSong ?
                     <ul>
