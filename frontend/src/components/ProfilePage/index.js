@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import { addOneSong, getSongs } from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import { getSongLikes } from '../../store/songLikes';
@@ -17,7 +17,7 @@ export default function ProfilePage() {
     const history = useHistory();
 
 
-    const user = useSelector(state => state.session.user);
+    const sessionUser = useSelector(state => state.session.user);
 
     const songs = useSelector(state => state.songs);
     const songsArray = Object.values(songs);
@@ -61,7 +61,7 @@ export default function ProfilePage() {
 
     const [title, setTitle] = useState('');
     const [albumId, setAlbumId] = useState('');
-    const [uploaderId, setUploaderId] = useState(user.id);
+    const [uploaderId, setUploaderId] = useState(sessionUser.id);
     const [genre, setGenre] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
     const [audioTrackUrl, setAudioTrackUrl] = useState(null);
@@ -98,21 +98,25 @@ export default function ProfilePage() {
         if (file) setAudioTrackUrl(file);
     };
 
+    if(!sessionUser) return (
+        <Redirect to='/login' />
+    );
+
     return(
         <ul>
-            <li>Songs Uploaded By {user.username}</li>
+            <li>Songs Uploaded By {sessionUser.username}</li>
             {userUploaded.map(song => 
                 <ul>
                     <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
                 </ul>
             )}
-            <li>Albums {user.username} Likes</li>
+            <li>Albums {sessionUser.username} Likes</li>
             {selectedAlbumLikeNames.map(album => 
                 <ul>
                     <li><Link to={`/albums/${album.id}`}>{album.name}</Link></li>
                 </ul>   
             )}
-            <li>Songs {user.username} Likes</li>
+            <li>Songs {sessionUser.username} Likes</li>
             {selectedSongLikeNames.map(song => 
                 <ul>
                     <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
@@ -120,7 +124,7 @@ export default function ProfilePage() {
             )}
             {refinedAlbumComments ?
                 <li>
-                    Albums {user.username} has Commented on: 
+                    Albums {sessionUser.username} has Commented on: 
                     {refinedAlbumComments.map(albumId => {
                         const selected = albumsArray.find(album => album.id === albumId);
                         return(
@@ -133,7 +137,7 @@ export default function ProfilePage() {
             :null}
             {refinedSongComments ?
                 <li>
-                    Songs {user.username} has Commented on: 
+                    Songs {sessionUser.username} has Commented on: 
                     {refinedSongComments.map(songId => {
                         const selected = songsArray.find(song => song.id === songId);
                         return(
