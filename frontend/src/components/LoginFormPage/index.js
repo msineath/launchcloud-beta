@@ -26,8 +26,8 @@ export default function LoginFormPage() {
             });
     };
 
-    const demo = () => {
-        dispatch(demoUserLogin())
+    const demo = async () => {
+        await dispatch(demoUserLogin())
         history.push('/')
     }
     
