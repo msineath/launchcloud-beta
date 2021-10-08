@@ -58,7 +58,7 @@ export default function HomePage() {
                         Songs
                     </label>
                     <a href='/songs'>
-                    <img className='icon' src={musicNote} alt='music-notes' />
+                        <img className='icon' src={musicNote} alt='music-notes' />
                     </a>
                 </div>
                 <div className='cell'>

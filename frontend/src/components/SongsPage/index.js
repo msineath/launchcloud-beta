@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { getSongs } from '../../store/songs';
 import './SongsPage.css';
+import musicNote from '../HomePage/music-notes.png';
 
 export default function SongsPage() {
     const dispatch = useDispatch();
@@ -19,22 +20,27 @@ export default function SongsPage() {
     );
 
     return (
-        <>
-            {/* <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg' alt='background'/> */}
-            <h1>Songs Page</h1>
-            <div className='songsDisplay'>
-                <ul className='songs'>
+        <div className='frame'>
+            <h1 className='page-title'>
+                Songs Page
+            </h1>
+            {/* <div className='songsDisplay'> */}
+                <div className='songs'>
                     {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR SONG THAT IS A CLICKABLE LINK */}
                     {songsArr.map((song, i) => 
-                        <li key={i}>
-                            <NavLink to={`/songs/${song.id}`} className='songLink'>
-                                {song.title}
-                            </NavLink>
-                        </li>
+                        <div className='cell'>
+                            <a href={`/songs/${song.id}`}>
+                                <img className='song-icon' src={musicNote} alt='music-notes' />
+                                <label
+                                    className='song-choice'>
+                                    {song.title}
+                                </label>
+                            </a>
+                        </div>
                     )}
-                </ul>
-            </div>
+                </div>
+            {/* </div> */}
             
-        </>
+        </div>
         )
 };
