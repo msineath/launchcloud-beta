@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {loginThunk, demoUserLogin} from '../../store/session';
 import './LoginForm.css';
 import backgroundImage from './background-image.jpg'
@@ -14,6 +14,7 @@ export default function LoginFormPage() {
     const sessionUser = useSelector(state => state.session.user);
     
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const onSubmit = event => {
         event.preventDefault();
@@ -27,6 +28,7 @@ export default function LoginFormPage() {
 
     const demo = () => {
         dispatch(demoUserLogin())
+        history.push('/')
     }
     
     return(
@@ -68,7 +70,7 @@ export default function LoginFormPage() {
                     </div>
                 </form>
             </div>
-            <div class='demo-btn'>
+            <div className='demo-btn'>
                 <button onClick={demo}>Demo User</button>
             </div>
         </div>

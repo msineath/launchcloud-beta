@@ -20,7 +20,7 @@ export default function SongsPage() {
 
     return (
         <>
-            <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg' alt='background'/>
+            {/* <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg' alt='background'/> */}
             <h1>Songs Page</h1>
             <div className='songsDisplay'>
                 <ul className='songs'>
