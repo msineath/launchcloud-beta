@@ -28,43 +28,72 @@ export default function SignupForm() {
     };
 
     return(
-        <form onSubmit={onSubmit}>
+        <form className='signup-form' onSubmit={onSubmit}>
+            <h1 className='signup-message'>
+                Please Create An Account
+            </h1>
             <ul>
                 {errors.map( (error, i) => <li key={i}>{error}</li>)}
             </ul>
-            <label>Username
-                <input
-                    type='text'
-                    placeholder='Username'
-                    value={username}
-                    onChange={event => setUsername(event.target.value)}
-                    required />
-            </label>
-            <label>Email    
-                <input
-                    type='email'
-                    placeholder='Email'
-                    value={email}
-                    onChange={event => setEmail(event.target.value)}
-                    required />
-            </label>
-            <label>Password
-                <input
-                    type='password'
-                    placeholder='Password'
-                    value={password}
-                    onChange={event => setPassword(event.target.value)}
-                    required />
-            </label>
-            <label>Confirm Password                
-                <input
-                    type='password'
-                    placeholder='Confirm Password'
-                    value={confirmPw}
-                    onChange={event => setConfirmPw(event.target.value)}
-                    required />
-            </label>
-            <button type='submit'>Create an Account</button>
+            <div className='form-fields'>
+                <div className='left-signup-form-fields'>
+                    <div className='username-div'>
+                        <label>
+                            Username
+                        </label>
+                        <input
+                            type='text'
+                            placeholder='Username'
+                            value={username}
+                            onChange={event => setUsername(event.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className='email-div'>
+                        <label>
+                            Email    
+                        </label>
+                        <input
+                            type='email'
+                            placeholder='Email'
+                            value={email}
+                            onChange={event => setEmail(event.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
+                <div className='right-signup-form-fields'>
+                    <div className='password-div'>
+                        <label>
+                            Password
+                        </label>
+                        <input
+                            type='password'
+                            placeholder='Password'
+                            value={password}
+                            onChange={event => setPassword(event.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className='confirm-password-div'>
+                        <label>
+                            Confirm Password                
+                        </label>
+                        <input
+                            type='password'
+                            placeholder='Confirm Password'
+                            value={confirmPw}
+                            onChange={event => setConfirmPw(event.target.value)}
+                            required
+                        />
+                    </div>
+                </div>
+            </div>
+            <button
+                className='create-btn'
+                type='submit'>
+                Create an Account
+            </button>
         </form>
     );
 };

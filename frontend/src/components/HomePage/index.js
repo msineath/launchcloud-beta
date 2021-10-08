@@ -36,7 +36,7 @@ export default function HomePage() {
 
     return (
         <div>
-            <img src={backgroundImage} alt='background'/>
+            {/* <img src={backgroundImage} alt='background'/> */}
                 <h1>Welcome, {sessionUser.username}!</h1>
                 <ul className='pages'>
                     <li><NavLink to='/albums' className='pages'>Albums</NavLink></li>
