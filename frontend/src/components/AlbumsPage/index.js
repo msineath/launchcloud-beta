@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
+import recordImage from '../HomePage/record-image.png';
+import './AlbumsPage.css';
 
 export default function AlbumsPage() {
     const dispatch = useDispatch();
@@ -19,14 +21,27 @@ export default function AlbumsPage() {
     );
 
     return(
-        <div>
-            <h1>Albums Page</h1> 
-        {albums?
-            <ul>
-                {albumsArray.map((album, index) =>
-                <li key={`album.${index}`}><Link to={`/albums/${album.id}`}>{album.name}</Link></li>)}
-            </ul>
-        :null}
+        <div className='frame'>
+            <h1 className='page-title'>
+                Albums Page
+            </h1>
+            <div className='albums'>
+                {albums?
+                    <>
+                        {albumsArray.map((album, index) =>
+                        <div
+                            className='cell'>
+                            <a href={`/albums/${album.id}`}>
+                                <img className='album-icon' src={recordImage} alt='record-image' />
+                                <label
+                                    className='album-choice'>
+                                    {album.name}
+                                </label>
+                            </a>
+                        </div>)}
+                    </>
+                :null}
+            </div> 
         </div>
     )
 };
