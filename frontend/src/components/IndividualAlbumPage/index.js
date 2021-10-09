@@ -7,6 +7,9 @@ import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
 import { getAlbumComments, addNewAlbumComment, updateComment, removeComment } from '../../store/albumComments';
+import musicNotes from '../HomePage/music-notes.png';
+import musicians from '../HomePage/musicians.png';
+import './IndividualAlbumPage.css';
 
 export default function IndividualAlbumPage() {
     const dispatch = useDispatch();
@@ -57,12 +60,17 @@ export default function IndividualAlbumPage() {
 
     const addComment = event => {
         event.preventDefault();
-        dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
+        if(commentText.length > 0) {
+            dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
+        }
         setCommentText('');
     };
 
     const editComment = event => {
         event.preventDefault();
+        if(commentText.length === 0) {
+            dispatch(removeComment(event.target.value))
+        }
         dispatch(updateComment(event.target.value, commentText));
         setCommentText('');
     };
@@ -86,87 +94,110 @@ export default function IndividualAlbumPage() {
     );
 
     return (
-        <>
-        <h1>
-            {selectedAlbum[0]?.name}
-        </h1>
-            <ul>
+        <div className='frame' id='album-section'>
+            <div className='title-heading'>
+                <h1 className='album-name'>
+                    {selectedAlbum[0]?.name}
+                </h1>
+                <div>
+                    <button onClick={likeToggle}>like</button>
+                    <button onClick={likeToggle}>dislike</button>
+                </div>
+            </div>
+            <div className='class-list'>
                 {songsOnAlbum ?
-                        <li>
+                    <div className='tracklist'>
+                        <label className='album-info-label'>
                             Tracklist:
-                            <ul>
-                                {songsOnAlbum.map((song, index) => {
-                                    return(
-                                        <li key={`song-on-album${index}`}>
-                                            <Link to={`/songs/${song.id}`}>
-                                                {song.title}
-                                            </Link>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </li>
-                :null}
-                {refinedCreditNames ?
-                    <li>
-                        Artists On Album:
-                        <ul>
-                            {refinedCreditNames?.map((artist, index) => {
+                        </label>
+                        <div className='song-display'>
+                            {songsOnAlbum.map((song, index) => {
                                 return(
-                                    <li key={`artist-on-album.${index}`}>
-                                        <Link to={`/artists/${artist?.id}`}>
-                                            {artist?.name}
-                                        </Link>
-                                    </li>
+                                    <div
+                                        className='cell'>
+                                        <a href={`/songs/${song.id}`}>
+                                            <img className='song-icon' src={musicNotes} alt='song-image' />
+                                            <label
+                                                className='song-choice'>
+                                                {song.title}
+                                            </label>
+                                        </a>
+                                    </div>
                                 )
                             })}
-                        </ul>
-                    </li>
+                        </div>
+                    </div>
                 :null}
-                <li>
-                    Like {selectedAlbum[0]?.name}?
-                        <button onClick={likeToggle}>like</button>
-                        <button onClick={likeToggle}>dislike</button>
-                </li>
-                <li>
-                    Comments Section for {selectedAlbum[0]?.name}
-                </li>
+                <div className='comments-div'>
+                    <label className='comments-label'>
+                        Comments Section for {selectedAlbum[0]?.name}
+                    </label>
+                    <form className='album-comment' onSubmit={addComment}>
+                        <textarea
+                            className='album-comment-text'
+                            placeholder='Add Your Comment Here, Then Click Add or Edit'
+                            value={commentText}
+                            onChange={event => setCommentText(event.target.value)}>
+                        </textarea>
+                        <button type='submit'>
+                            Add A Comment
+                        </button>
+                    </form>
                 {commentsOnAlbum ?
-                    <ul>
+                    <ul className='comments-list'>
                         {commentsOnAlbum.map((comment, index) => {
                             return(
-                                <li key={`comment.${index}`}>
+                                <li className='comment' key={`comment.${index}`}>
                                     {comment.comment}
                                     {sessionUser.id === comment.userId ? 
-                                        <>
-                                        <button
-                                            value={comment.id}
-                                            onClick={editComment}>
-                                            Edit Comment
-                                        </button>
-                                        <button
-                                            value={comment.id}
-                                            onClick={commentDelete}>
-                                            Delete Comment
-                                        </button>
-                                        </>
+                                        <div className='edit-delete'>
+                                            <button
+                                                value={comment.id}
+                                                onClick={editComment}>
+                                                Edit Comment
+                                            </button>
+                                            <button
+                                                value={comment.id}
+                                                onClick={commentDelete}>
+                                                Delete Comment
+                                            </button>
+                                        </div>
                                     :null}
                                 </li>
                             )
                         })}
                     </ul>
                 :null}
-                <form onSubmit={addComment}>
-                    <textarea
-                        placeholder='Add YourComment Here'
-                        value={commentText}
-                        onChange={event => setCommentText(event.target.value)}>
-                    </textarea>
-                    <button type='submit'>
-                        Add A Comment
-                    </button>
-                </form>
-            </ul>
-        </>
+                </div>
+                {refinedCreditNames ?
+                    <div className='album-artists'>
+                        <label
+                            className='artists-info-label'>
+                            Artists On Album:
+                        </label>
+                        <div className='artists-display'>
+                            {refinedCreditNames?.map((artist, index) => {
+                                return(
+                                    <div
+                                        className='cell'>
+                                        <a href={`/artists/${artist?.id}`}>
+                                            <img className='musician-icon'
+                                            src={musicians}
+                                            alt='musicians' />
+                                            <label
+                                                className='musician-choice'>
+                                                {artist?.name}        
+                                            </label>    
+                                        </a>
+                                        
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                :null}
+            </div>
+            
+        </div>
     )
 };
