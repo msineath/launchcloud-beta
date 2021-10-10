@@ -91,6 +91,9 @@ export default function IndividualSongPage() {
 
     const editComment = event => {
         event.preventDefault();
+        if(commentText.length === 0) {
+            return;
+        }
         dispatch(updateComment(event.target.value, commentText));
         setCommentText('');
     };
@@ -101,120 +104,146 @@ export default function IndividualSongPage() {
     };
 
     return (
-        <>
-        {/* <img src='https://m.foolcdn.com/media/dubs/images/stock_chart_up_2.original.jpg' alt='background'/> */}
-            <h1>Song's Page</h1>
-            <div>
-            <ul>
-                <li key='title'>
-                    Title: 
-                    {song?.title}
-                    {creatorOptions('Edit', (e) => {
-                    setVisible(true)
-                    setTargetKey(e.target.id)
-                    setButtonText('Edit Song Title')
-                    }, 'title')}
-                </li>
-                <li key='artist(s)'>
-                    Artist(s):
-                    <ul>
-                        {allCreditNames.map((credit, index) => {
-                            return(
-                                <li key={`song-credit.${index}`}>
-                                    <Link to={`/artists/${credit?.id}`}>
-                                        {credit.name}
-                                    </Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </li>
-                <li key='album'>
-                    Album:
-                    {<Link to={`/albums/${song?.albumId}`}>
-                        {albums[song?.albumId]?.name}    
-                    </Link>}
-                    {creatorOptions('Edit', (e) => {
-                        setVisible(true)
-                        setTargetKey(e.target.id)
-                        setButtonText('Edit Album Name')
-                    }, 'albumId')}
-                </li>
-                <li key='genre'>
-                    Genre:
-                    {song?.genre}
-                    {creatorOptions('Edit', (e) => {
-                        setVisible(true)
-                        setTargetKey(e.target.id)
-                        setButtonText('Edit Song Genre')
-                    }, 'genre')}   
-                </li>
-                <li key='release-date'>
-                    Release Date:
-                    {date}
-                    {creatorOptions('Edit', (e) => {
-                        setVisible(true)
-                        setTargetKey(e.target.id)
-                        setButtonText('Edit Release Date')
-                    }, 'releaseDate')}
-                </li>
-                <li>
-                    Like {song?.title}?
+        <div className='frame'>
+            <div className='individual-song-header'>
+                <h1 className='song-title'>{song?.title}</h1>
+                <div className='like-buttons'>
                     <button onClick={likeToggle}>like</button>
                     <button onClick={likeToggle}>dislike</button>
-                </li>
-                {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
-                <li>
-                    Comments Section for {song?.title}:
-                </li>
-                {commentsOnSong ?
-                    <ul>
-                        {commentsOnSong.map((comment, index) => {
+                </div>
+            </div>
+            <div className='song-data-parent'>
+                <div className='individual-song-info'>
+                    <label className='data-tag'>
+                        Title:
+                    </label>
+                    <label>
+                        {song?.title}
+                        {creatorOptions('Edit', (e) => {
+                        setVisible(true)
+                        setTargetKey(e.target.id)
+                        setButtonText('Edit Song Title')
+                        }, 'title')}
+                    </label>
+                    <div className='list-of-artists'>
+                        <label className='data-tag'>
+                            Artist(s):
+                        </label>
+                        <label>
+                        {allCreditNames.map((credit, index) => {
                             return(
-                                <li key={`comment.${index}`}>
-                                    {comment.comment}
-                                    {sessionUser?.id === comment.userId ? 
-                                        <>
-                                        <button
-                                            value={comment.id}
-                                            onClick={editComment}>
-                                            Edit Comment
-                                        </button>
-                                        <button
-                                            value={comment.id}
-                                            onClick={commentDelete}>
-                                            Delete Comment
-                                        </button>
-                                        </>
-                                    :null}
-                                </li>
+                                // <label key={`song-credit.${index}`}>
+                                <Link to={`/artists/${credit?.id}`} className='artists-name'>
+                                    {credit?.name}
+                                </Link>
+                                // </label>
                             )
                         })}
-                    </ul>
-                :null}
-                <form onSubmit={addComment}>
-                    <textarea
-                        placeholder='Add Your Comment Here'
-                        value={commentText}
-                        onChange={event => setCommentText(event.target.value)}>
-                    </textarea>
-                    <button type='submit'>
-                        Add A Comment
-                    </button>
-                </form>
-            </ul>
-            <div>
-                <textarea hidden={!visible} placeholder='test' onChange={(e) => setAreaText(e.target.value)}></textarea>
-                <button id={targetKey} hidden={!visible} onClick={updateSongData}>{buttonText}</button>
+                        </label>
+                    </div>
+                    <div className='name-of-album'>
+                        <label className='data-tag'>
+                            Album:
+                        </label>
+                        <label>
+                            {
+                                <Link to={`/albums/${song?.albumId}`} id='album-link'>
+                                    {albums[song?.albumId]?.name}    
+                                </Link>
+                            }
+                            {creatorOptions('Edit', (e) => {
+                                setVisible(true)
+                                setTargetKey(e.target.id)
+                                setButtonText('Edit Album Name')
+                            }, 'albumId')}
+                        </label>
+                    </div>
+                    <div className='genre-info'>
+                        <label className='data-tag'>
+                            Genre:
+                        </label>
+                        <label>
+                            {song?.genre}
+                            {creatorOptions('Edit', (e) => {
+                                setVisible(true)
+                                setTargetKey(e.target.id)
+                                setButtonText('Edit Song Genre')
+                            }, 'genre')}   
+                        </label>
+                    </div>
+                    <div className='release-date-info'>
+                        <label className='data-tag'>
+                            Release Date:
+                        </label>
+                        <label>
+                            {date}
+                            {creatorOptions('Edit', (e) => {
+                                setVisible(true)
+                                setTargetKey(e.target.id)
+                                setButtonText('Edit Release Date')
+                            }, 'releaseDate')}
+                        </label>
+                    </div>
+                    <div className='edit-song-data'>
+                        <textarea hidden={!visible} placeholder='Update Info Here' onChange={(e) => setAreaText(e.target.value)}></textarea>
+                        <button id={targetKey} hidden={!visible} onClick={updateSongData}>{buttonText}</button>
+                    </div>
+                </div>
+                <div className='song'>
+                    {song?.audioTrackUrl ?
+                        <audio controls>
+                            <source src={song.audioTrackUrl}></source>
+                        </audio>
+                    : null}
+                    {creatorOptions('Delete', deleteFromDb, 'delete-btn')}
+                </div>
+                
             </div>
-            </div>
-            <div className='song'>
-                {song?.audioTrackUrl ?
-                    <audio controls>
-                        <source src={song.audioTrackUrl}></source>
-                    </audio>
-                : null}
-            </div>            
-        </>
+            <div className='song-comments'>    
+                    <form
+                        onSubmit={addComment}
+                        className='song-comment-box'>
+                            <textarea
+                                className='song-comment-textarea'
+                                placeholder='Add Your Comment Here, Then Click Add or Edit'
+                                value={commentText}
+                                onChange={event => setCommentText(event.target.value)}>
+                            </textarea>
+                            <button type='submit'>
+                                Add A Comment
+                            </button>
+                    </form>
+                    {commentsOnSong ?
+                        <div className='all-song-comments'>
+                            {commentsOnSong.map((comment, index) => {
+                                return(
+                                    <div className='comment-for-song'>
+                                        <li
+                                            key={`comment.${index}`}
+                                            className='comment'>
+                                            {comment.comment}
+                                            {sessionUser?.id === comment.userId ? 
+                                            <div
+                                            className='song-comment-btns'>
+                                                <button
+                                                    value={comment.id}
+                                                    onClick={editComment}>
+                                                    Edit Comment
+                                                </button>
+                                                <button
+                                                    value={comment.id}
+                                                    onClick={commentDelete}>
+                                                    Delete Comment
+                                                </button>
+                                            </div>
+                                                :null}
+                                        </li>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    :null}
+                </div>          
+        </div>
     )
 };

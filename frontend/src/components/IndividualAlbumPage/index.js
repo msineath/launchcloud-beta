@@ -69,7 +69,7 @@ export default function IndividualAlbumPage() {
     const editComment = event => {
         event.preventDefault();
         if(commentText.length === 0) {
-            dispatch(removeComment(event.target.value))
+            return;
         }
         dispatch(updateComment(event.target.value, commentText));
         setCommentText('');
@@ -114,9 +114,9 @@ export default function IndividualAlbumPage() {
                             {songsOnAlbum.map((song, index) => {
                                 return(
                                     <div
-                                        className='cell'>
+                                        className='song-cell'>
                                         <a href={`/songs/${song.id}`}>
-                                            <img className='song-icon' src={musicNotes} alt='song-image' />
+                                            <img className='song-icons' src={musicNotes} alt='song-image' />
                                             <label
                                                 className='song-choice'>
                                                 {song.title}
@@ -179,9 +179,9 @@ export default function IndividualAlbumPage() {
                             {refinedCreditNames?.map((artist, index) => {
                                 return(
                                     <div
-                                        className='cell'>
+                                        className='artist-cell'>
                                         <a href={`/artists/${artist?.id}`}>
-                                            <img className='musician-icon'
+                                            <img className='musician-icons'
                                             src={musicians}
                                             alt='musicians' />
                                             <label
