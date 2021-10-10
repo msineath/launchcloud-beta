@@ -16,9 +16,14 @@ export default function Navigation(loggedIn) {
         </>
     
     return(
-        <ul>
-            <NavLink to='/' exact>Home</NavLink>
-            {loggedIn && linkLocations}
-        </ul>
+        <>
+            <ul>
+                <NavLink to='/' exact>Home</NavLink>
+                <NavLink to='/artists' exact>Artists</NavLink>
+                <NavLink to='/albums' exact>Albums</NavLink>
+                <NavLink to='/songs' exact>Songs</NavLink>
+            </ul>
+                {loggedIn && linkLocations}
+        </>
     );
 };
