@@ -1,0 +1,106 @@
+.album-name {
+    color: white;
+}
+
+.title-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.class-list {
+    border: 1px solid white;
+    display: flex;
+    width: 100%;
+}
+
+.album-info-label,
+.artists-info-label,
+.comments-label {
+    margin: 2% auto;
+    font-size: 1.4em;
+}
+
+.tracklist {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 25%;
+}
+
+.album-artists {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.song-display,
+.artists-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    /* justify-content: space-evenly; */
+}
+
+#album-section {
+    margin-top: 8%;
+}
+
+.song-cell,
+.artist-cell {
+    width:25%;
+    display: flex;
+    justify-content: center;
+    padding:5%;
+}
+
+.song-icons,
+.musician-icons {
+    height: 95%;
+    width: 95%;
+}
+
+.musician-choice,
+.song-choice {
+    text-align: center;
+}
+
+.album-artists {
+    width: 25%;
+}
+
+.comments-div {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 60%;
+}
+
+.album-comment-text {
+    width: 100%;
+}
+
+.album-comment {
+    display: flex;
+    height: 15%;
+}
+
+.comment {
+    color: white;
+    overflow-wrap: break-word;
+    width: 40%;
+    margin-bottom: 2%;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding: 0;
+}

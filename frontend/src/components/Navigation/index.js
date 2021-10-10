@@ -1,24 +1,36 @@
 import { NavLink } from "react-router-dom";
-import {useSelector} from 'react-redux';
-import ProfileButton from './ProfileButton';
+import {useSelector, useDispatch} from 'react-redux';
+import {logoutThunk} from '../../store/session';
 import './Navigation.css';
 
 export default function Navigation(loggedIn) {
+
+    const dispatch = useDispatch();
     const loggedInUser = useSelector(state => state.session.user);
 
-    let linkLocations;
-
-    if(loggedInUser) linkLocations = <ProfileButton user={loggedInUser} />;
-    else linkLocations = 
-        <>
-        <NavLink to='/login'>Login</NavLink>
-        <NavLink to='/signup'>Create an Account</NavLink>
-        </>
+    const logout = event => {
+        event.preventDefault();
+        dispatch(logoutThunk());
+    };
     
     return(
-        <ul>
-            <NavLink to='/' exact>Home</NavLink>
-            {loggedIn && linkLocations}
-        </ul>
+        <>
+            <ul className='nav-links'>
+                <NavLink to='/' exact className='nav-link'>Home</NavLink>
+                {loggedInUser ?
+                    <>
+                        <NavLink to='/artists' exact className='nav-link'>Artists</NavLink>
+                        <NavLink to='/albums' exact className='nav-link'>Albums</NavLink>
+                        <NavLink to='/songs' exact className='nav-link'>Songs</NavLink>
+                        <button onClick={logout}>Logout</button>
+                    </>
+                :
+                    <>
+                        <NavLink to='/login' className='nav-link'>Login</NavLink>
+                        <NavLink to='/signup' className='nav-link'>Create an Account</NavLink>
+                    </>
+                }
+            </ul>
+        </>
     );
 };

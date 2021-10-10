@@ -12,7 +12,9 @@ import { getAlbumComments } from '../../store/albumComments';
 import { getSongComments } from '../../store/songComments';
 
 import './HomePage.css';
-import backgroundImage from './background-image.jpg';
+import recordImage from './record-image.png';
+import musicNote from './music-notes.png';
+import musician from './musicians.png';
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -36,13 +38,38 @@ export default function HomePage() {
 
     return (
         <div>
-            <img src={backgroundImage} alt='background'/>
-                <h1>Welcome, {sessionUser.username}!</h1>
-                <ul className='pages'>
-                    <li><NavLink to='/albums' className='pages'>Albums</NavLink></li>
-                    <li><NavLink to='/songs' className='pages'>Songs</NavLink></li>
-                    <li><NavLink to='/artists' className='pages'>Artists</NavLink></li>
-                </ul>
+            <h1 className='home-welcome'>
+                Welcome, {sessionUser.username}!
+            </h1>
+            <h2 className='instruction'>
+                Browse Our Selection By Category
+            </h2>
+            <div className='options'>
+                <div className='cell'>
+                    <label className='choice'>
+                        Musicians
+                    </label>
+                    <a href='/artists'>
+                        <img className='icon' src={musician} alt='musicians' />
+                    </a>
+                </div>
+                <div className='cell'>
+                    <label className='choice'>
+                        Songs
+                    </label>
+                    <a href='/songs'>
+                        <img className='icon' src={musicNote} alt='music-notes' />
+                    </a>
+                </div>
+                <div className='cell'>
+                    <label className='choice'>
+                        Albums
+                    </label>
+                    <a href='/albums'>
+                        <img className='icon' src={recordImage} alt='record' />
+                    </a>
+                </div>
+            </div>
         </div> 
     )
 };
