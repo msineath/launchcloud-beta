@@ -6,6 +6,9 @@ import { getArtists } from '../../store/artists';
 import { getSongs } from '../../store/songs';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getSongCredits } from '../../store/songCredits';
+import recordImage from '../HomePage/record-image.png';
+import musicNotes from '../HomePage/record-image.png';
+import './IndividualArtist.css'
 
 export default function IndividualArtistPage() {
 
@@ -52,42 +55,48 @@ export default function IndividualArtistPage() {
     );
 
     return (
-        <>
-            <h1>Artist's Page</h1>
-            <ul>
-                <li>
-                    Artist: {artist?.name}
-                </li>
-                <li>
-                    {artist?.name}'s albums:
-                    <ul>
+        <div className='frame'>
+            <h1 className='page-title'> {artist?.name}'s Page</h1>
+            <div className='artist-parent-div'>
+                <div className='artist-albums'>
+                    <label className='label-1'>
+                        {artist?.name}'s albums:
+                    </label>
                         {refinedArtistAlbums.map((album, index) => {
                             return(
-                                <li key={`album.${index}`}>
-                                    {<Link to={`/albums/${album.id}`}>
-                                        {album.name}    
-                                    </Link>}
-                                </li>)}             
+                                <div
+                                className='album-cell'>
+                                    <a href={`/albums/${album.id}`}>
+                                        <img className='icons' src={recordImage} alt='record-image' />
+                                        <label
+                                            className='album-choice'>
+                                            {album.name}
+                                        </label>
+                                    </a>
+                                </div>)}             
                             )
                         }
-
-                    </ul>
-                </li>
-                <li>
-                    songs featuring {artist?.name}
-                    <ul>
+                </div>
+                <div className='artist-songs'>
+                    <label className='label-2'>
+                        songs featuring {artist?.name}
+                    </label>
                         {artistSongs.map((song, index) => {                            
                             return(
-                                <li key={`song.${index}`}>
-                                    {<Link to={`/songs/${song.id}`}>
-                                        {song.title}    
-                                    </Link>}
-                                </li>
+                                <div
+                                className='song-cell'>
+                                    <a href={`/songs/${song.id}`}>
+                                        <img className='icons' src={musicNotes} alt='music-notes' />
+                                        <label
+                                            className='song-choice'>
+                                            {song.title}
+                                        </label>
+                                    </a>
+                                </div>
                             )
                         })}
-                    </ul>
-                </li>
-            </ul>
-        </>
+                </div>
+            </div>
+        </div>
     )
 };
