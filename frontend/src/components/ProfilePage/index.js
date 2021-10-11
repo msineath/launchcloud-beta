@@ -63,7 +63,7 @@ export default function ProfilePage() {
 
     const [title, setTitle] = useState('');
     const [albumId, setAlbumId] = useState('');
-    const [uploaderId, setUploaderId] = useState(sessionUser.id);
+    const [uploaderId, setUploaderId] = useState(sessionUser?.id);
     const [genre, setGenre] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
     const [audioTrackUrl, setAudioTrackUrl] = useState(null);
