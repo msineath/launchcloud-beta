@@ -8,6 +8,8 @@ import { getSongLikes } from '../../store/songLikes';
 import { getAlbumLikes } from '../../store/albumLikes';
 import { getAlbumComments } from '../../store/albumComments';
 import { getSongComments } from '../../store/songComments';
+import musicNotes from '../HomePage/music-notes.png'
+import record from '../HomePage/record-image.png'
 import './ProfilePage.css';
 
 export default function ProfilePage() {
@@ -103,94 +105,138 @@ export default function ProfilePage() {
     );
 
     return(
-        <ul>
-            <li>Songs Uploaded By {sessionUser.username}</li>
-            {userUploaded.map(song => 
-                <ul>
-                    <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
-                </ul>
-            )}
-            <li>Albums {sessionUser.username} Likes</li>
-            {selectedAlbumLikeNames.map(album => 
-                <ul>
-                    <li><Link to={`/albums/${album.id}`}>{album.name}</Link></li>
-                </ul>   
-            )}
-            <li>Songs {sessionUser.username} Likes</li>
-            {selectedSongLikeNames.map(song => 
-                <ul>
-                    <li><Link to={`/songs/${song.id}`}>{song.title}</Link></li>
-                </ul>   
-            )}
-            {refinedAlbumComments ?
-                <li>
-                    Albums {sessionUser.username} has Commented on: 
-                    {refinedAlbumComments.map(albumId => {
-                        const selected = albumsArray.find(album => album.id === albumId);
-                        return(
-                            <ul>
-                                <li><Link to={`/albums/${selected.id}`}>{selected.name}</Link></li>
-                            </ul>
-                        )
-                    })}
-                </li>
-            :null}
-            {refinedSongComments ?
-                <li>
-                    Songs {sessionUser.username} has Commented on: 
-                    {refinedSongComments.map(songId => {
-                        const selected = songsArray.find(song => song.id === songId);
-                        return(
-                            <ul>
-                                <li><Link to={`/albums/${selected.id}`}>{selected.title}</Link></li>
-                            </ul>
-                        )
-                    })}
-                </li>
-            :null}
-            <li>
-                Upload A New Song
-            </li>
-            <ul>
-                <li>
-                    <form className='newSongForm' onSubmit={handleSubmit}>
-                        <label>
+        <div className='frame'>
+            <h1 className='page-title'>{sessionUser.username}'s Profile</h1>
+            <div className='info-parent'>  
+                <div className='songs-uploaded'>
+                    <label className='profile-label'>Songs Uploaded By {sessionUser.username}</label>
+                        {userUploaded.map(song => 
+                            <div className='profile-cell'>
+                                <a href={`/songs/${song.id}`}>
+                                    <img className='profile-icons music-note-icon' src={musicNotes} alt='music-notes' />
+                                    <label
+                                        className='song-choice'>
+                                        {song.title}
+                                    </label>
+                                </a>
+                            </div>
+                        )}
+                </div>
+                <div className='albums-liked'>
+                    <label className='profile-label'>Albums {sessionUser.username} Likes</label>
+                        {selectedAlbumLikeNames.map(album => 
+                            <div className='profile-cell'>
+                                <a href={`/albums/${album.id}`}>
+                                    <img className='profile-icons' src={record} alt='record-image' />
+                                    <label
+                                        className='album-choice'>
+                                        {album.name}
+                                    </label>
+                                </a>
+                            </div>   
+                        )}
+                </div>
+                <div className='songs-liked'>
+                    <label className='profile-label'>Songs {sessionUser.username} Likes</label>
+                        {selectedSongLikeNames.map(song => 
+                            <div className='profile-cell'>
+                                <a href={`/songs/${song.id}`}>
+                                    <img className='profile-icons' src={musicNotes} alt='music-notes' />
+                                    <label
+                                        className='song-choice'>
+                                        {song.title}
+                                    </label>
+                                </a>
+                            </div>   
+                        )}
+                </div>
+                <div className='commented-albums'>    
+                    {refinedAlbumComments ?
+                        <>
+                            <label className='profile-label'>
+                                Albums {sessionUser.username} has Commented on: 
+                            </label>
+                            {refinedAlbumComments.map(albumId => {
+                                const selected = albumsArray.find(album => album.id === albumId);
+                                return(
+                                    <div className='profile-cell'>
+                                        <a href={`/albums/${selected.id}`}>
+                                            <img className='profile-icons' src={record} alt='record-image' />
+                                            <label
+                                                className='album-choice'>
+                                                {selected.name}
+                                            </label>
+                                        </a>
+                                    </div>
+                                )
+                            })}
+                        </>
+                    :null}
+                </div>
+                <div className='commented-songs'>
+                    {refinedSongComments ?
+                        <>
+                            <label className='profile-label'>
+                                Songs {sessionUser.username} has Commented on: 
+                            </label>
+                                {refinedSongComments.map(songId => {
+                                    const selected = songsArray.find(song => song.id === songId);
+                                    return(
+                                        <div className='profile-cell'>
+                                            <a href={`/songs/${selected.id}`}>
+                                                <img className='profile-icons' src={musicNotes} alt='music-notes' />
+                                                <label
+                                                    className='song-choice'>
+                                                    {selected.title}
+                                                </label>
+                                            </a>
+                                        </div>
+                                    )
+                                })}
+                        </>
+                    :null}
+                </div>
+            </div>
+            <div className='new-song-upload'>
+                <h1 className='page-title'>
+                    Upload A New Song
+                </h1>
+                    <form className='new-song-form' onSubmit={handleSubmit}>
                             <input
+                                className='new-info'
                                 type='text'
                                 placeholder="title"
                                 value={title}
                                 onChange={event => setTitle(event.target.value)} />
-                        </label>
-                        <label>
                             <input
+                                className='new-info'
                                 type='text'
                                 placeholder="album"
                                 value={albumId}
                                 onChange={event => setAlbumId(event.target.value)} />
-                        </label>
-                        <label>
                             <input
+                                className='new-info'
                                 type='genre'
                                 placeholder="genre"
                                 value={genre}
                                 onChange={event => setGenre(event.target.value)} />
-                        </label>
-                        <label>
                             <input
+                                className='new-info'
                                 type='text'
                                 placeholder="release date"
                                 value={releaseDate}
                                 onChange={event => setReleaseDate(event.target.value)} />
-                        </label>
-                        <label>
                             <input
+                                className='file-upload new-info'
                                 type='file'
                                 onChange={updateFile} />
-                        </label>
-                        <button type='submit'>Add Song</button>
+                        <button 
+                            type='submit'
+                            className='new-info'>
+                            Add Song
+                        </button>
                     </form>
-                </li>
-            </ul>
-        </ul>
+            </div>
+        </div>
     )
 };
