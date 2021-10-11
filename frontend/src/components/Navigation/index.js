@@ -22,6 +22,7 @@ export default function Navigation(loggedIn) {
                         <NavLink to='/artists' exact className='nav-link'>Artists</NavLink>
                         <NavLink to='/albums' exact className='nav-link'>Albums</NavLink>
                         <NavLink to='/songs' exact className='nav-link'>Songs</NavLink>
+                        <NavLink to={`/profile/${loggedInUser.id}`} exact className='nav-link'>Profile</NavLink>
                         <button onClick={logout}>Logout</button>
                     </>
                 :
