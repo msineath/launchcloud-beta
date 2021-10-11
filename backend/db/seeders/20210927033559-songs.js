@@ -17,7 +17,6 @@ module.exports = {
       {title: 'GTR', albumId: 10, uploaderId: 5, genre: 'PsyTrance', releaseDate: new Date(2020, 11, 24), audioTrackUrl: 'https://audiobucketofdoom.s3.amazonaws.com/1633922683049.mp3', createdAt: new Date(), updatedAt: new Date()},
       {title: 'Heathens', albumId: 11, uploaderId: 5, genre: 'PsyTrance', releaseDate: new Date(1997, 8, 16), audioTrackUrl: 'https://audiobucketofdoom.s3.amazonaws.com/1633922855356.mp3', createdAt: new Date(), updatedAt: new Date()},
       {title: 'Brothers', albumId: 12, uploaderId: 5, genre: 'PsyTrance', releaseDate: new Date(1998, 12, 15), audioTrackUrl: 'https://audiobucketofdoom.s3.amazonaws.com/1633923049615.mp3', createdAt: new Date(), updatedAt: new Date()},
-      {title: 'Total Anarchy', albumId: 13, uploaderId: 5, genre: 'PsyTrance', releaseDate: new Date(1998, 12, 15), audioTrackUrl: 'https://audiobucketofdoom.s3.amazonaws.com/1633923093773.mp3', createdAt: new Date(), updatedAt: new Date()},
       {title: 'Move Away', albumId: 13, uploaderId: 5, genre: 'PsyTrance', releaseDate: new Date(1998, 12, 15), audioTrackUrl: 'https://audiobucketofdoom.s3.amazonaws.com/1633923093773.mp3', createdAt: new Date(), updatedAt: new Date()},
       {title: 'Outer Space', albumId: 13, uploaderId: 5, genre: 'PsyTrance', releaseDate: new Date(1998, 12, 15), audioTrackUrl: 'https://audiobucketofdoom.s3.amazonaws.com/1633923132243.mp3', createdAt: new Date(), updatedAt: new Date()}
   ], {});
