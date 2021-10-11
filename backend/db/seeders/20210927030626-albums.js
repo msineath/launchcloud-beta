@@ -9,6 +9,7 @@ module.exports = {
       {name: "Rusko - Untitled", createdAt: new Date(), updatedAt: new Date()},
       {name: "Babylon: Volume 1", createdAt: new Date(), updatedAt: new Date()},
       {name: "Everyday", createdAt: new Date(), updatedAt: new Date()},
+      {name: "J Rabbit - Untitled", createdAt: new Date(), updatedAt: new Date()},
       {name: "Somewhere Around Barstow / Bopper Shuffle", createdAt: new Date(), updatedAt: new Date()},
       {name: "Too Much Sexy", createdAt: new Date(), updatedAt: new Date()},
       {name: "Storm", createdAt: new Date(), updatedAt: new Date()},
