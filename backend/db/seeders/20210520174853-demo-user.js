@@ -7,10 +7,10 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [
       {username: 'John Doe', email: 'erss@gmail.com', hashedPassword: bcrypt.hashSync('password')},
       // {username: 'John Doe@gmail.com', email: 'erss@gmail.com', hashedPassword: bcrypt.hashSync('password')},
-      {username: 'Arigato Demo', email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
-      {username: 'Flaming Opals', email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
-      {username: 'ThisIsOurBandName', email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
-      {username: "Party 'til I Die", email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
+      {username: 'Skrillex', email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
+      {username: 'Rusko', email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
+      {username: 'J Rabbit', email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
+      {username: "Skazi", email: faker.internet.email(), hashedPassword: bcrypt.hashSync(faker.internet.password())},
   ], {});
     /*
       Add altering commands here.

@@ -4,10 +4,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Artists', [
       {name: 'John Doe', createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Arigato Demo', createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Flaming Opals', createdAt: new Date(), updatedAt: new Date()},
-      {name: 'ThisIsOurBandName', createdAt: new Date(), updatedAt: new Date()},
-      {name: "Party 'til I Die", createdAt: new Date(), updatedAt: new Date()}  
+      {name: 'Skrillex', createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Rusko', createdAt: new Date(), updatedAt: new Date()},
+      {name: 'J Rabbit', createdAt: new Date(), updatedAt: new Date()},
+      {name: "Skazi", createdAt: new Date(), updatedAt: new Date()}  
     ], {});
   },
 
