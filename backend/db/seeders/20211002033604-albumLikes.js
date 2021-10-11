@@ -13,12 +13,12 @@ module.exports = {
       {userId: 4, albumId: 12, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
       {userId: 4, albumId: 13, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
       {userId: 5, albumId: 4, liked: false, disliked: true, createdAt: new Date(), updatedAt: new Date()},
-      {userId: 1, albumId: 5, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()}
-      {userId: 1, albumId: 11, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()}
-      {userId: 1, albumId: 12, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()}
-      {userId: 1, albumId: 10, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()}
-      {userId: 1, albumId: 6, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()}
-      {userId: 1, albumId: 2, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()}
+      {userId: 1, albumId: 5, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
+      {userId: 1, albumId: 11, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
+      {userId: 1, albumId: 12, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
+      {userId: 1, albumId: 10, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
+      {userId: 1, albumId: 6, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
+      {userId: 1, albumId: 2, liked: true, disliked: false, createdAt: new Date(), updatedAt: new Date()},
     ], {});
   },
 
