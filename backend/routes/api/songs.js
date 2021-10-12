@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require('express-async-handler');
-const {Song, SongCredit, albumCredit} = require('../../db/models');
+const {Song, Album, SongCredit, albumCredit} = require('../../db/models');
 const {singlePublicFileUpload, singleMulterUpload} = require('../../awS3');
 
 router.get('/', asyncHandler(async (req, res) => {
@@ -11,8 +11,18 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 router.post('/add',singleMulterUpload('audioTrackUrl'), asyncHandler(async (req, res) => {
-    const {title, albumId, uploaderId, genre, releaseDate} = req.body;
+    const {title, albumName, uploaderId, genre, releaseDate} = req.body;
     const audioTrackUrl = await singlePublicFileUpload(req.file);
+    
+    const albumChecker = await Album.findOne({where: {name: albumName}})
+    let albumId;
+    
+    if(!albumChecker) {
+        const newAlbum = await Album.create({name: albumName})
+        albumId = newAlbum.id
+    } else {
+        albumId = albumChecker.id
+    }
     const newSong = await Song.upload({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl});
     const newSongCredit = await SongCredit.create({['songId']: newSong.id, ['artistId']: uploaderId});
     const newAlbumCredit = await albumCredit.create({['artistId']: uploaderId, ['albumId']: albumId})

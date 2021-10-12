@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     //TODO: ADD ERROR IF ALREADY
     if(titleChecker && albumChecker) return;
 
-    return await Song.create({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl /*, waveformImageLocation*/});
+    return await Song.create({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl});
   }
   
   Song.associate = function(models) {

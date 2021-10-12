@@ -62,7 +62,7 @@ export default function ProfilePage() {
     };
 
     const [title, setTitle] = useState('');
-    const [albumId, setAlbumId] = useState('');
+    const [albumName, setAlbumName] = useState('');
     const [uploaderId, setUploaderId] = useState(sessionUser?.id);
     const [genre, setGenre] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
@@ -72,12 +72,12 @@ export default function ProfilePage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let newErrors = [];
-        let newestSong = await dispatch(addOneSong({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl}))
+        let newestSong = await dispatch(addOneSong({title, albumName, uploaderId, genre, releaseDate, audioTrackUrl}))
         if(newestSong["errors"]) {
             setErrors(newestSong["errors"]);
         } else {
             setTitle("");
-            setAlbumId("");
+            setAlbumName("");
             setUploaderId("");
             setGenre("");
             setReleaseDate("");
@@ -122,8 +122,8 @@ export default function ProfilePage() {
                                 className='new-info'
                                 type='text'
                                 placeholder="album"
-                                value={albumId}
-                                onChange={event => setAlbumId(event.target.value)} />
+                                value={albumName}
+                                onChange={event => setAlbumName(event.target.value)} />
                             <input
                                 className='new-info'
                                 type='genre'
