@@ -115,25 +115,25 @@ export default function ProfilePage() {
                             <input
                                 className='new-info'
                                 type='text'
-                                placeholder="title"
+                                placeholder="Title"
                                 value={title}
                                 onChange={event => setTitle(event.target.value)} />
                             <input
                                 className='new-info'
                                 type='text'
-                                placeholder="album"
+                                placeholder="Album"
                                 value={albumName}
                                 onChange={event => setAlbumName(event.target.value)} />
                             <input
                                 className='new-info'
                                 type='genre'
-                                placeholder="genre"
+                                placeholder="Genre"
                                 value={genre}
                                 onChange={event => setGenre(event.target.value)} />
                             <input
                                 className='new-info'
                                 type='text'
-                                placeholder="release date (Please Use Format mm/dd/yyyy)"
+                                placeholder="Release Date (mm/dd/yyyy)"
                                 value={releaseDate}
                                 onChange={event => setReleaseDate(event.target.value)} />
                             <input

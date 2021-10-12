@@ -200,6 +200,9 @@ export default function IndividualSongPage() {
                 
             </div>
             <div className='song-comments'>    
+                    <label className='comments-label'>
+                        Comments Section for {song?.title}
+                    </label>
                     <form
                         onSubmit={addComment}
                         className='song-comment-box'>
