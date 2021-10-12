@@ -35,10 +35,10 @@ export const getSongs = () => async dispatch => {
 };
 
 export const addOneSong = songData => async dispatch => {
-    const {title, albumId, uploaderId, genre, releaseDate, audioTrackUrl} = songData;
+    const {title, albumName, uploaderId, genre, releaseDate, audioTrackUrl} = songData;
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('albumId', albumId);
+    formData.append('albumName', albumName);
     formData.append('uploaderId', uploaderId);
     formData.append('genre', genre);
     formData.append('releaseDate', releaseDate);
