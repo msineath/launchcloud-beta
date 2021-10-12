@@ -133,7 +133,7 @@ export default function ProfilePage() {
                             <input
                                 className='new-info'
                                 type='text'
-                                placeholder="release date"
+                                placeholder="release date (Please Use Format mm/dd/yyyy)"
                                 value={releaseDate}
                                 onChange={event => setReleaseDate(event.target.value)} />
                             <input
