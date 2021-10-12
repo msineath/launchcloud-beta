@@ -45,7 +45,7 @@ export default function IndividualAlbumPage() {
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.albumId === Number(albumId));
-    const sessionUserLiked = selectedAlbumLikes.find(like => like.userId === sessionUser.id);
+    const sessionUserLiked = selectedAlbumLikes.find(like => like.userId === sessionUser?.id);
 
     const comments = useSelector(state => state.albumComments);
     const commentsArray = Object.values(comments);
