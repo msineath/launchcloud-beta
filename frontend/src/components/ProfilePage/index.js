@@ -62,8 +62,8 @@ export default function ProfilePage() {
     };
 
     const [title, setTitle] = useState('');
-    const [albumId, setAlbumId] = useState('');
-    const [uploaderId, setUploaderId] = useState(sessionUser.id);
+    const [albumName, setAlbumName] = useState('');
+    const [uploaderId, setUploaderId] = useState(sessionUser?.id);
     const [genre, setGenre] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
     const [audioTrackUrl, setAudioTrackUrl] = useState(null);
@@ -72,12 +72,12 @@ export default function ProfilePage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let newErrors = [];
-        let newestSong = await dispatch(addOneSong({title, albumId, uploaderId, genre, releaseDate, audioTrackUrl}))
+        let newestSong = await dispatch(addOneSong({title, albumName, uploaderId, genre, releaseDate, audioTrackUrl}))
         if(newestSong["errors"]) {
             setErrors(newestSong["errors"]);
         } else {
             setTitle("");
-            setAlbumId("");
+            setAlbumName("");
             setUploaderId("");
             setGenre("");
             setReleaseDate("");
@@ -107,6 +107,46 @@ export default function ProfilePage() {
     return(
         <div className='frame'>
             <h1 className='page-title'>{sessionUser.username}'s Profile</h1>
+            <div className='new-song-upload'>
+                <h1 className='page-title'>
+                    Upload A New Song
+                </h1>
+                    <form className='new-song-form' onSubmit={handleSubmit}>
+                            <input
+                                className='new-info'
+                                type='text'
+                                placeholder="title"
+                                value={title}
+                                onChange={event => setTitle(event.target.value)} />
+                            <input
+                                className='new-info'
+                                type='text'
+                                placeholder="album"
+                                value={albumName}
+                                onChange={event => setAlbumName(event.target.value)} />
+                            <input
+                                className='new-info'
+                                type='genre'
+                                placeholder="genre"
+                                value={genre}
+                                onChange={event => setGenre(event.target.value)} />
+                            <input
+                                className='new-info'
+                                type='text'
+                                placeholder="release date (Please Use Format mm/dd/yyyy)"
+                                value={releaseDate}
+                                onChange={event => setReleaseDate(event.target.value)} />
+                            <input
+                                className='file-upload new-info'
+                                type='file'
+                                onChange={updateFile} />
+                        <button 
+                            type='submit'
+                            className='new-info'>
+                            Add Song
+                        </button>
+                    </form>
+            </div>
             <div className='info-parent'>  
                 <div className='songs-uploaded'>
                     <label className='profile-label'>Songs Uploaded By {sessionUser.username}</label>
@@ -196,46 +236,6 @@ export default function ProfilePage() {
                         </>
                     :null}
                 </div>
-            </div>
-            <div className='new-song-upload'>
-                <h1 className='page-title'>
-                    Upload A New Song
-                </h1>
-                    <form className='new-song-form' onSubmit={handleSubmit}>
-                            <input
-                                className='new-info'
-                                type='text'
-                                placeholder="title"
-                                value={title}
-                                onChange={event => setTitle(event.target.value)} />
-                            <input
-                                className='new-info'
-                                type='text'
-                                placeholder="album"
-                                value={albumId}
-                                onChange={event => setAlbumId(event.target.value)} />
-                            <input
-                                className='new-info'
-                                type='genre'
-                                placeholder="genre"
-                                value={genre}
-                                onChange={event => setGenre(event.target.value)} />
-                            <input
-                                className='new-info'
-                                type='text'
-                                placeholder="release date"
-                                value={releaseDate}
-                                onChange={event => setReleaseDate(event.target.value)} />
-                            <input
-                                className='file-upload new-info'
-                                type='file'
-                                onChange={updateFile} />
-                        <button 
-                            type='submit'
-                            className='new-info'>
-                            Add Song
-                        </button>
-                    </form>
             </div>
         </div>
     )
