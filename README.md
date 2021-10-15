@@ -21,3 +21,10 @@ For more info on:
 | Node.Js |   React   |
 | Express | Heroku(deployment) |
 | Sequelize |  
+
+## Next Steps
+
+Future implementations will include:
+    * Playlists with full CRUD capability, loop, repeat and shuffle options.
+    * Visual waveforms integrated into the media player.
+    * Updated CSS.
