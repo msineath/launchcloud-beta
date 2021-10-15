@@ -25,6 +25,6 @@ For more info on:
 ## Next Steps
 
 Future implementations will include:
-    * Playlists with full CRUD capability, loop, repeat and shuffle options.
-    * Visual waveforms integrated into the media player.
-    * Updated CSS.
+* Playlists with full CRUD capability, loop, repeat and shuffle options.
+* Visual waveforms integrated into the media player.
+* Updated CSS.
