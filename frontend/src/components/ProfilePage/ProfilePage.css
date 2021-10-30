@@ -48,12 +48,20 @@
 .file-upload {
     color: white;
     border: 1px solid white;
-    background-color: navy;
+    /* background-color: navy; */
 }
 
 .new-song-form {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
 
+::-webkit-file-upload-button {
+    background-color: navy;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    transform: scale(1.25);
 }
