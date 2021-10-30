@@ -60,16 +60,17 @@ export default function IndividualAlbumPage() {
 
     const addComment = event => {
         event.preventDefault();
-        if(commentText.length > 0) {
-            dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
+        if(commentText.length === 0) {
+            return window.alert('You must enter text to add a coment. Please Try again.')
         }
+        dispatch(addNewAlbumComment(Number(albumId), commentText, sessionUser.id));
         setCommentText('');
     };
 
     const editComment = event => {
         event.preventDefault();
         if(commentText.length === 0) {
-            return;
+            return window.alert('Please add text to the textarea above the edit comment button first, then click edit comment.');
         }
         dispatch(updateComment(event.target.value, commentText));
         setCommentText('');
