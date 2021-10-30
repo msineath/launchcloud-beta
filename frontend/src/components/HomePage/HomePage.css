@@ -56,3 +56,19 @@ button:hover {
     transform: scale(1.25);
     font-weight: bold;
 }
+
+a {
+    text-decoration: none;
+}
+
+a > label:hover {
+    cursor: pointer;
+}
+
+.icon:hover {
+    transform: scale(1.25);
+}
+
+.profile-cell:hover {
+    transform: scale(1.25);
+}

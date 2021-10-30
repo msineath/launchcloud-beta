@@ -46,25 +46,31 @@ export default function HomePage() {
             </h2>
             <div className='options'>
                 <div className='cell'>
-                    <label className='choice'>
-                        Musicians
-                    </label>
+                    <a href='/artists'>
+                        <label className='choice'>
+                            Musicians
+                        </label>
+                    </a>
                     <a href='/artists'>
                         <img className='icon' src={musician} alt='musicians' />
                     </a>
                 </div>
                 <div className='cell'>
-                    <label className='choice'>
-                        Songs
-                    </label>
+                    <a href='/songs'>
+                        <label className='choice'>
+                            Songs
+                        </label>
+                    </a>
                     <a href='/songs'>
                         <img className='icon' src={musicNote} alt='music-notes' />
                     </a>
                 </div>
                 <div className='cell'>
-                    <label className='choice'>
-                        Albums
-                    </label>
+                    <a href='/albums'>
+                        <label className='choice'>
+                            Albums
+                        </label>
+                    </a>
                     <a href='/albums'>
                         <img className='icon' src={recordImage} alt='record' />
                     </a>

@@ -37,7 +37,12 @@ a {
     font-size:1.2em;
     overflow-wrap: anywhere;
 }
+
 .artist-icon {
     height: 74%;
     width: 74%;
+}
+
+.cell:hover {
+    transform: scale(1.25);
 }
