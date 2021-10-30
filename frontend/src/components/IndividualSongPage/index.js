@@ -85,6 +85,9 @@ export default function IndividualSongPage() {
 
     const addComment = event => {
         event.preventDefault();
+        if(commentText.length < 1) {
+            return window.alert('You must enter text to add a coment. Please Try again.')
+        }
         dispatch(addNewSongComment(Number(songId), commentText, sessionUser.id));
         setCommentText('');
     };
@@ -92,7 +95,7 @@ export default function IndividualSongPage() {
     const editComment = event => {
         event.preventDefault();
         if(commentText.length === 0) {
-            return;
+            return window.alert('Please add text to the textarea above the edit comment button first, then click edit comment.');
         }
         dispatch(updateComment(event.target.value, commentText));
         setCommentText('');
