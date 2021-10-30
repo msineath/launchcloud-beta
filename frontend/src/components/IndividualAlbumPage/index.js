@@ -38,14 +38,15 @@ export default function IndividualAlbumPage() {
     const refinedCreditNames = [];
     for (let i = 0; i < allCreditNames.length; i++) {
         if(!refinedCreditNames.includes(allCreditNames[i])) {
-            refinedCreditNames.push(allCreditNames[i])
-        }
-    }
+            refinedCreditNames.push(allCreditNames[i]);
+        };
+    };
 
     const albumLikes = useSelector(state => state.albumLikes);
     const albumLikesArray = Object.values(albumLikes);
     const selectedAlbumLikes = albumLikesArray.filter(like => like.albumId === Number(albumId));
-    const sessionUserLiked = selectedAlbumLikes.find(like => like.userId === sessionUser?.id);
+    const totalLikes = selectedAlbumLikes.filter(like => like.liked === true).length;
+    const totalDisikes = selectedAlbumLikes.filter(like => like.disliked === true).length;
 
     const comments = useSelector(state => state.albumComments);
     const commentsArray = Object.values(comments);
@@ -100,6 +101,9 @@ export default function IndividualAlbumPage() {
                 <h1 className='album-name'>
                     {selectedAlbum[0]?.name}
                 </h1>
+                <h3 className='likability'>
+                    {`Likability score: ${(totalLikes - totalDisikes)}`}
+                </h3>
                 <div>
                     <button onClick={likeToggle}>like</button>
                     <button onClick={likeToggle}>dislike</button>
