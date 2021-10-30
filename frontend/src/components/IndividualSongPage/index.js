@@ -33,12 +33,17 @@ export default function IndividualSongPage() {
     const commentsOnSong = commentsArray.filter(comment => comment.songId === Number(songId));
     const [commentText, setCommentText] = useState('');
 
+    const songLikes = useSelector(state => state.songLikes)
+    const likesArray = Object.values(songLikes)
+    const filteredArray = likesArray.filter(like => like.songId === Number(songId))
+    const totalLikes = filteredArray.filter(like => like.liked === true).length
+    const totalDisikes = filteredArray.filter(like => like.disliked === true).length
 
     const [visible, setVisible] = useState(false);
     const [targetKey, setTargetKey] = useState(null);
     const [buttonText, setButtonText] = useState(null);
     const [areaText, setAreaText] = useState(null);
-
+    
     useEffect(() => {
         dispatch(getSongs());
         dispatch(getAlbums());
@@ -56,6 +61,8 @@ export default function IndividualSongPage() {
         const i = song?.releaseDate.indexOf('T');
         return song?.releaseDate.slice(0, i);
     })();
+
+    
 
     const creatorOptions = (buttonText, onClickFunction, newId) => {
         
@@ -110,6 +117,7 @@ export default function IndividualSongPage() {
         <div className='frame'>
             <div className='individual-song-header'>
                 <h1 className='song-title'>{song?.title}</h1>
+                <h3 className='likability'>{`Likability score: ${(totalLikes - totalDisikes)}`}</h3>
                 <div className='like-buttons'>
                     <button onClick={likeToggle}>like</button>
                     <button onClick={likeToggle}>dislike</button>
