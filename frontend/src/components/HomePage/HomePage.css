@@ -41,3 +41,34 @@
     justify-content: center;
     align-items: center; */
 }
+
+button {
+    border: 1px solid white;
+    background-color: navy;
+    color: white;
+}
+
+button > a {
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.25);
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+a > label:hover {
+    cursor: pointer;
+}
+
+.icon:hover {
+    transform: scale(1.25);
+}
+
+.profile-cell:hover {
+    transform: scale(1.25);
+}

@@ -39,19 +39,29 @@
     align-items: center;
 }
 
-.file-upload {
-    color: white;
-}
-
 .new-info {
     height: 50%;
     width: 32%;
-    MARGIN: 1%;
+    margin: 1%;
+}
+
+.file-upload {
+    color: white;
+    border: 1px solid white;
+    /* background-color: navy; */
 }
 
 .new-song-form {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
 
+::-webkit-file-upload-button {
+    background-color: navy;
+    color: white;
+}
+
+::-webkit-file-upload-button:hover {
+    transform: scale(1.25);
 }

@@ -40,3 +40,8 @@
 .label-2 {
     font-size: 1.2em;
 }
+
+.album-cell:hover,
+.song-cell:hover {
+    transform: scale(1.25);
+}
