@@ -11,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    margin-bottom: 1%;
+    margin-bottom: 5%;
 }
 
 .icons {
@@ -39,9 +39,11 @@
 .label-1,
 .label-2 {
     font-size: 1.2em;
+    margin-top: 5%;
+    margin-bottom: 7%;
 }
 
 .album-cell:hover,
 .song-cell:hover {
-    transform: scale(1.25);
+    transform: scale(1.2);
 }
