@@ -24,9 +24,7 @@ export default function SongsPage() {
             <h1 className='page-title'>
                 Songs Page
             </h1>
-            {/* <div className='songsDisplay'> */}
                 <div className='songs'>
-                    {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR SONG THAT IS A CLICKABLE LINK */}
                     {songsArr.map((song, i) => 
                         <div className='cell'>
                             <a href={`/songs/${song.id}`}>
@@ -39,8 +37,6 @@ export default function SongsPage() {
                         </div>
                     )}
                 </div>
-            {/* </div> */}
-            
         </div>
         )
 };

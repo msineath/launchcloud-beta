@@ -8,8 +8,6 @@ label {
 }
 
 .frame {
-    /* position: relative;
-    left: 30%; */
     margin: 13% auto;
     border: 1px solid white;
     width: 50%;
@@ -61,38 +59,4 @@ form {
     border: 1px solid white;
     width: 60%;
     margin: 10px auto;
-    /* padding-bottom: 3%; */
-    /* backdrop-filter: blur(10px); */
-    /* background-color: unset; */
 }
-
-/*
-body {
-    background-image: url('https://nexter.org/wp-content/uploads/2019/07/weird-stock-images-photos-funny-pic38.jpg');
-    background-size: cover;
-}
-
-form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position:absolute;
-    top: 20px;
-    left: 50px;
-}
-
-.loginFormDiv {
-    
-}
-
-.textDiv {
-    position: absolute;
-    right: 140px;
-    top: 300px;
-}
-
-h1 {
-    font-size: 50px;
-    color: white;
-    text-shadow: 1px 1px 2px cyan, 0 0 1em blue, 0 0 0.2em magenta;
-} */

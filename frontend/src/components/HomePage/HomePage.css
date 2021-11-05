@@ -32,14 +32,10 @@
 .icon {
     height:100%;
     width: 63%;
-    /* height: 100%; */
 }
 
 .options > a {
     width: 20%;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 }
 
 button {

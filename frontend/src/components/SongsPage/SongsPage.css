@@ -3,7 +3,6 @@
 }
 
 .songs {
-    /* border: 1px solid white; */
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -32,8 +31,6 @@ a {
 }
 
 .song-choice {
-    /* position: relative;
-    top: 45%; */
     font-size:1.2em;
     overflow-wrap: anywhere;
 }
