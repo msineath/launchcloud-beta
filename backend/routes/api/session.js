@@ -47,8 +47,9 @@ router.delete('/', (_req, res) => {
     return res.json({message: 'success'});
 });
 
-router.get('/demo', asyncHandler(async (req,res,next) => {
+router.get('/demo', asyncHandler(async (req, res, next) => {
     const user = await User.findByPk(1);
+    console.log('***********************', user)
     await setTokenCookie(res, user);
 
     return res.json({user});

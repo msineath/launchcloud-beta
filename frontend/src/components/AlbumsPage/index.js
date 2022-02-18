@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import recordImage from '../HomePage/record-image.png';
 import './AlbumsPage.css';
