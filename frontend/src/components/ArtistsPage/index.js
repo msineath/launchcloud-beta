@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { getArtists } from '../../store/artists';
 import musicians from '../HomePage/musicians.png';
 import './ArtistsPage.css';
@@ -31,13 +31,13 @@ export default function ArtistsPage() {
                         artistsArr?.map((artist, i) => 
                             <div
                                 className='cell'>
-                                <a href={`/artists/${artist.id}`}>
+                                <NavLink to={`/artists/${artist.id}`}>
                                     <img className='artist-icon' src={musicians} alt='musicians-image' />
                                     <label
                                         className='musician-choice'>
                                         {artist.name}
                                     </label>
-                                </a>
+                                </NavLink>
                             </div>
                         )
                     }

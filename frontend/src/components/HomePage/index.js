@@ -1,6 +1,6 @@
 import{useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Redirect, NavLink} from 'react-router-dom';
 import {getAlbums} from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
@@ -46,34 +46,34 @@ export default function HomePage() {
             </h2>
             <div className='options'>
                 <div className='cell'>
-                    <a href='/artists'>
+                    <NavLink to='/artists'>
                         <label className='choice'>
                             Musicians
                         </label>
-                    </a>
-                    <a href='/artists'>
+                    </NavLink>
+                    <NavLink to='/artists'>
                         <img className='icon' src={musician} alt='musicians' />
-                    </a>
+                    </NavLink>
                 </div>
                 <div className='cell'>
-                    <a href='/songs'>
+                    <NavLink to='/songs'>
                         <label className='choice'>
                             Songs
                         </label>
-                    </a>
-                    <a href='/songs'>
+                    </NavLink>
+                    <NavLink to='/songs'>
                         <img className='icon' src={musicNote} alt='music-notes' />
-                    </a>
+                    </NavLink>
                 </div>
                 <div className='cell'>
-                    <a href='/albums'>
+                    <NavLink to='/albums'>
                         <label className='choice'>
                             Albums
                         </label>
-                    </a>
-                    <a href='/albums'>
+                    </NavLink>
+                    <NavLink to='/albums'>
                         <img className='icon' src={recordImage} alt='record' />
-                    </a>
+                    </NavLink>
                 </div>
             </div>
         </div> 

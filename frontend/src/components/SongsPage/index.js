@@ -29,13 +29,13 @@ export default function SongsPage() {
                     {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR SONG THAT IS A CLICKABLE LINK */}
                     {songsArr.map((song, i) => 
                         <div className='cell'>
-                            <a href={`/songs/${song.id}`}>
+                            <NavLink to={`/songs/${song.id}`}>
                                 <img className='song-icon' src={musicNote} alt='music-notes' />
                                 <label
                                     className='song-choice'>
                                     {song.title}
                                 </label>
-                            </a>
+                            </NavLink>
                         </div>
                     )}
                 </div>
