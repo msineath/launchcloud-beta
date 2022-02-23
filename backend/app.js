@@ -11,6 +11,8 @@ const {ValidationError} = require('sequelize');
 
 const app = express();
 
+app.enable('trust proxy');
+
 const {environment} = require('./config');
 const isProduction = (environment === 'production');
 
@@ -25,6 +27,13 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(helmet({contentSecurityPolicy: false}));
+
+app.use(function(req, res, next) {
+    if (process.env.NODE_ENV !== 'development' && !request.secure) {
+       return response.redirect("https://" + request.headers.host + request.url);
+    }
+    next();
+})
 
 app.use(csurf({
     cookie: {
