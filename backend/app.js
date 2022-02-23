@@ -30,7 +30,7 @@ app.use(helmet({contentSecurityPolicy: false}));
 
 app.use(function(req, res, next) {
     if (process.env.NODE_ENV !== 'development' && !req.secure) {
-       return response.redirect("https://" + req.headers.host + req.url);
+       return res.redirect("https://" + req.headers.host + req.url);
     }
     next();
 })
