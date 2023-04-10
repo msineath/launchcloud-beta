@@ -35,14 +35,12 @@ export default function LoginFormPage() {
         <div className='frame'>
                 <h1 className='login-message'>You Must Be Logged In To View Content</h1>
             <div className='login-form-div'>
-                <form onSubmit={onSubmit}>
-                    <ul>
-                        {errors.map((error, i) => <li key={i}>{error}</li>)}
+                <form className='login-form' onSubmit={onSubmit}>
+                    <ul className='login-input-errors'>
+                        {errors.map((error, i) => <li className='login-error' key={i}>{error}</li>)}
                     </ul>
                     <div className='credentials-div'>
-                        <label>
-                            Enter Credentials
-                        </label>
+                        <label>Enter Credentials</label>
                         <input
                             type='text'
                             placeholder='Username or Email'
@@ -51,10 +49,8 @@ export default function LoginFormPage() {
                             required
                         />
                     </div>
-                    <div className='password-div'>
-                        <label>
-                            Enter Password
-                        </label>
+                    <div className='login-password-div'>
+                        <label className='password-label'>Enter Password</label>
                         <input
                             className='password-input'
                             type='password'
@@ -66,13 +62,13 @@ export default function LoginFormPage() {
                     </div>
                     <div className='login-btns'>
                         <button type='submit'>Login</button>
+                        <button onClick={demo}>Demo User</button>
                         <button><Link className='signup' to='/signup'>Signup</Link></button>
                     </div>
                 </form>
             </div>
-            <div className='demo-btn'>
-                <button onClick={demo}>Demo User</button>
-            </div>
+            {/* <div className='demo-btn'> */}
+            {/* </div> */}
         </div>
     );
 };
