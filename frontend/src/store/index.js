@@ -10,6 +10,7 @@ import albumLikesReducer from './albumLikes';
 import songLikesReducer from './songLikes';
 import albumCommentsReducer from './albumComments';
 import songCommentsReducer from './songComments';
+import logger from 'redux-logger';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
@@ -26,9 +27,9 @@ const rootReducer = combineReducers({
 
 let enhancer;
 
-if(process.env.NODE_ENV === 'production') enhancer = applyMiddleware(thunk);
+if(import.meta.env.PROD) enhancer = applyMiddleware(thunk);
 else {
-    const logger = require('redux-logger').default;
+    // const logger = require('redux-logger').default;
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
     enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 };

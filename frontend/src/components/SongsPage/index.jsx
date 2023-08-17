@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import { getSongs } from '../../store/songs';
 import './SongsPage.css';
 import musicNote from '../HomePage/music-notes.png';
@@ -16,7 +16,7 @@ export default function SongsPage() {
     }, [dispatch]);
 
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
 
     return (
@@ -29,13 +29,13 @@ export default function SongsPage() {
                     {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR SONG THAT IS A CLICKABLE LINK */}
                     {songsArr.map((song, i) => 
                         <div className='cell'>
-                            <a href={`/songs/${song.id}`}>
+                            <NavLink to={`/songs/${song.id}`}>
                                 <img className='song-icon' src={musicNote} alt='music-notes' />
                                 <label
                                     className='song-choice'>
                                     {song.title}
                                 </label>
-                            </a>
+                            </NavLink>
                         </div>
                     )}
                 </div>

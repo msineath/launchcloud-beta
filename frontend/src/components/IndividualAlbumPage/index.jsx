@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Navigate, NavLink } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
@@ -92,7 +92,7 @@ export default function IndividualAlbumPage() {
     }, [dispatch]);
 
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
 
     return (
@@ -120,13 +120,13 @@ export default function IndividualAlbumPage() {
                                 return(
                                     <div
                                         className='song-cell'>
-                                        <a href={`/songs/${song.id}`}>
+                                        <NavLink to={`/songs/${song.id}`}>
                                             <img className='song-icons' src={musicNotes} alt='song-image' />
                                             <label
                                                 className='song-choice'>
                                                 {song.title}
                                             </label>
-                                        </a>
+                                        </NavLink>
                                     </div>
                                 )
                             })}
@@ -185,7 +185,7 @@ export default function IndividualAlbumPage() {
                                 return(
                                     <div
                                         className='artist-cell'>
-                                        <a href={`/artists/${artist?.id}`}>
+                                        <NavLink to={`/artists/${artist?.id}`}>
                                             <img className='musician-icons'
                                             src={musicians}
                                             alt='musicians' />
@@ -193,7 +193,7 @@ export default function IndividualAlbumPage() {
                                                 className='musician-choice'>
                                                 {artist?.name}        
                                             </label>    
-                                        </a>
+                                        </NavLink>
                                         
                                     </div>
                                 )

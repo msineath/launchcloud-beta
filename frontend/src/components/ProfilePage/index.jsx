@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { useParams } from 'react-router';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useNavigate, Navigate, NavLink } from 'react-router-dom';
 import { addOneSong, getSongs } from '../../store/songs';
 import { getAlbums } from '../../store/albums';
 import { getSongLikes } from '../../store/songLikes';
@@ -16,7 +16,7 @@ export default function ProfilePage() {
     
     const dispatch = useDispatch();
     const {userId} = useParams();
-    const history = useHistory();
+    const navigate = useNavigate();
 
 
     const sessionUser = useSelector(state => state.session.user);
@@ -82,7 +82,7 @@ export default function ProfilePage() {
             setGenre("");
             setReleaseDate("");
             setAudioTrackUrl(null);
-            history.push(`/songs/${newestSong.id}`)
+            navigate(`/songs/${newestSong.id}`)
         }
     };
 
@@ -101,7 +101,7 @@ export default function ProfilePage() {
     };
 
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
 
     return(
@@ -152,13 +152,13 @@ export default function ProfilePage() {
                     <label className='profile-label'>Songs Uploaded By {sessionUser.username}</label>
                         {userUploaded.map(song => 
                             <div className='profile-cell'>
-                                <a href={`/songs/${song.id}`}>
+                                <NavLink to={`/songs/${song.id}`}>
                                     <img className='profile-icons music-note-icon' src={musicNotes} alt='music-notes' />
                                     <label
                                         className='song-choice'>
                                         {song.title}
                                     </label>
-                                </a>
+                                </NavLink>
                             </div>
                         )}
                 </div>
@@ -166,13 +166,13 @@ export default function ProfilePage() {
                     <label className='profile-label'>Albums {sessionUser.username} Likes</label>
                         {selectedAlbumLikeNames.map(album => 
                             <div className='profile-cell'>
-                                <a href={`/albums/${album.id}`}>
+                                <NavLink to={`/albums/${album.id}`}>
                                     <img className='profile-icons' src={record} alt='record-image' />
                                     <label
                                         className='album-choice'>
                                         {album.name}
                                     </label>
-                                </a>
+                                </NavLink>
                             </div>   
                         )}
                 </div>
@@ -180,13 +180,13 @@ export default function ProfilePage() {
                     <label className='profile-label'>Songs {sessionUser.username} Likes</label>
                         {selectedSongLikeNames.map(song => 
                             <div className='profile-cell'>
-                                <a href={`/songs/${song.id}`}>
+                                <NavLink to={`/songs/${song.id}`}>
                                     <img className='profile-icons' src={musicNotes} alt='music-notes' />
                                     <label
                                         className='song-choice'>
                                         {song.title}
                                     </label>
-                                </a>
+                                </NavLink>
                             </div>   
                         )}
                 </div>
@@ -200,13 +200,13 @@ export default function ProfilePage() {
                                 const selected = albumsArray.find(album => album.id === albumId);
                                 return(
                                     <div className='profile-cell'>
-                                        <a href={`/albums/${selected.id}`}>
+                                        <NavLink to={`/albums/${selected.id}`}>
                                             <img className='profile-icons' src={record} alt='record-image' />
                                             <label
                                                 className='album-choice'>
                                                 {selected.name}
                                             </label>
-                                        </a>
+                                        </NavLink>
                                     </div>
                                 )
                             })}
@@ -223,13 +223,13 @@ export default function ProfilePage() {
                                     const selected = songsArray.find(song => song.id === songId);
                                     return(
                                         <div className='profile-cell'>
-                                            <a href={`/songs/${selected.id}`}>
+                                            <NavLink to={`/songs/${selected.id}`}>
                                                 <img className='profile-icons' src={musicNotes} alt='music-notes' />
                                                 <label
                                                     className='song-choice'>
                                                     {selected.title}
                                                 </label>
-                                            </a>
+                                            </NavLink>
                                         </div>
                                     )
                                 })}

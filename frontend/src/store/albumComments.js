@@ -35,12 +35,12 @@ export const getAlbumComments = () => async dispatch => {
 
 export const addNewAlbumComment = (albumId, commentText, userId) => async dispatch => {
     const res = await csrfFetch(`/api/albumComments/add/${albumId}`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            commentText,
-            userId
-        })
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        commentText,
+        userId
+      })
     });
     if(res.ok) {
         const comment = await res.json();

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Navigate, NavLink } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import recordImage from '../HomePage/record-image.png';
 import './AlbumsPage.css';
@@ -17,7 +17,7 @@ export default function AlbumsPage() {
 
 
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
 
     return(
@@ -29,15 +29,15 @@ export default function AlbumsPage() {
                 {albums?
                     <>
                         {albumsArray.map((album, index) =>
-                        <div
+                        <div key={album.id}
                             className='cell'>
-                            <a href={`/albums/${album.id}`}>
+                            <NavLink to={`/albums/${album.id}`}>
                                 <img className='album-icon' src={recordImage} alt='record-image' />
                                 <label
                                     className='album-choice'>
                                     {album.name}
                                 </label>
-                            </a>
+                            </NavLink>
                         </div>)}
                     </>
                 :null}

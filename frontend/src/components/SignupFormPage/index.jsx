@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {signupThunk} from '../../store/session';
 import './SignupForm.css';
 
@@ -14,7 +14,7 @@ export default function SignupForm() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
-    if(sessionUser) return <Redirect to='/' />;
+    if(sessionUser) return <Navigate to='/' />;
 
     const onSubmit = event => {
         event.preventDefault();
