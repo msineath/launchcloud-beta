@@ -1,7 +1,7 @@
-import{useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {Navigate, NavLink} from 'react-router-dom';
-import {getAlbums} from '../../store/albums';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Navigate, NavLink } from 'react-router-dom';
+import { getAlbums } from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
@@ -17,65 +17,53 @@ import musicNote from '../../assets/music-notes.png';
 import musician from '../../assets/musicians.png';
 
 export default function HomePage() {
-    const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
 
-    useEffect(() => {
-        dispatch(getAlbums())
-        dispatch(getSongs())
-        dispatch(getArtists())
-        dispatch(getAlbumCredits())
-        dispatch(getSongCredits())
-        dispatch(getAlbumLikes())
-        dispatch(getSongLikes())
-        dispatch(getAlbumComments())
-        dispatch(getSongComments())
-    }, [dispatch]);
-    
-    if(!sessionUser) return (
-        <Navigate to='/login' />
-    );
+  useEffect(() => {
+    dispatch(getAlbums());
+    dispatch(getSongs());
+    dispatch(getArtists());
+    dispatch(getAlbumCredits());
+    dispatch(getSongCredits());
+    dispatch(getAlbumLikes());
+    dispatch(getSongLikes());
+    dispatch(getAlbumComments());
+    dispatch(getSongComments());
+  }, [dispatch]);
 
-    return (
-        <div>
-            <h1 className='home-welcome'>
-                Welcome, {sessionUser.username}!
-            </h1>
-            <h2 className='instruction'>
-                Browse Our Selection By Category
-            </h2>
-            <div className='options'>
-                <div className='cell'>
-                    <NavLink to='/artists'>
-                        <label className='choice'>
-                            Musicians
-                        </label>
-                    </NavLink>
-                    <NavLink to='/artists'>
-                        <img className='icon' src={musician} alt='musicians' />
-                    </NavLink>
-                </div>
-                <div className='cell'>
-                    <NavLink to='/songs'>
-                        <label className='choice'>
-                            Songs
-                        </label>
-                    </NavLink>
-                    <NavLink to='/songs'>
-                        <img className='icon' src={musicNote} alt='music-notes' />
-                    </NavLink>
-                </div>
-                <div className='cell'>
-                    <NavLink to='/albums'>
-                        <label className='choice'>
-                            Albums
-                        </label>
-                    </NavLink>
-                    <NavLink to='/albums'>
-                        <img className='icon' src={recordImage} alt='record' />
-                    </NavLink>
-                </div>
-            </div>
-        </div> 
-    )
-};
+  if (!sessionUser) return <Navigate to='/login' />;
+
+  return (
+    <div>
+      <h1 className='home-welcome'>Welcome, {sessionUser.username}!</h1>
+      <h2 className='instruction'>Browse Our Selection By Category</h2>
+      <div className='options'>
+        <div className='cell'>
+          <NavLink to='/artists'>
+            <label className='choice'>Musicians</label>
+          </NavLink>
+          <NavLink to='/artists'>
+            <img className='icon' src={musician} alt='musicians' />
+          </NavLink>
+        </div>
+        <div className='cell'>
+          <NavLink to='/songs'>
+            <label className='choice'>Songs</label>
+          </NavLink>
+          <NavLink to='/songs'>
+            <img className='icon' src={musicNote} alt='music-notes' />
+          </NavLink>
+        </div>
+        <div className='cell'>
+          <NavLink to='/albums'>
+            <label className='choice'>Albums</label>
+          </NavLink>
+          <NavLink to='/albums'>
+            <img className='icon' src={recordImage} alt='record' />
+          </NavLink>
+        </div>
+      </div>
+    </div>
+  );
+}

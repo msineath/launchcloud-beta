@@ -1,89 +1,89 @@
 .home-welcome {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 }
 
 .instruction {
-    color: white;
-    text-align: center;
-    font-size: 5.95vw;
+  color: white;
+  text-align: center;
+  font-size: 5.95vw;
 }
 
 .cell {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .options {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 6%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 6%;
 }
 
 .choice {
-    font-size: 3em;
-    margin-bottom: 5%;
+  font-size: 3em;
+  margin-bottom: 5%;
 }
 
 .icon {
-    height:20vw;
-    width: 20vw;
+  height: 20vw;
+  width: 20vw;
 }
 
 .options > a {
-    width: 20%;
-    /* display: flex;
+  width: 20%;
+  /* display: flex;
     justify-content: center;
     align-items: center; */
 }
 
 button {
-    border: 1px solid white;
-    background-color: navy;
-    color: white;
+  border: 1px solid white;
+  background-color: navy;
+  color: white;
 }
 
 button > a {
-    color: white;
+  color: white;
 }
 
 button:hover {
-    transform: scale(1.25);
-    font-weight: bold;
+  transform: scale(1.25);
+  font-weight: bold;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a > label:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .icon:hover {
-    transform: scale(1.25);
+  transform: scale(1.25);
 }
 
 .profile-cell:hover {
-    transform: scale(1.25);
+  transform: scale(1.25);
 }
 
 @media screen and (max-width: 846px) {
-    .options {
-        flex-direction: column;
-        align-items: center ;
-    }
+  .options {
+    flex-direction: column;
+    align-items: center;
+  }
 
+  .icon {
+    width: 18vw;
+    height: 18vw;
+  }
+  @media screen and (orientation: landscape) {
     .icon {
-        width: 18vw;
-        height: 18vw;
+      width: 13vw;
+      height: 13vw;
     }
-    @media  screen and (orientation: landscape) {
-        .icon {
-            width: 13vw;
-            height:13vw;
-        }        
-    }
+  }
 }

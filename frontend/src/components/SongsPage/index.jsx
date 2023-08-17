@@ -6,41 +6,30 @@ import './SongsPage.css';
 import musicNote from '../../assets/music-notes.png';
 
 export default function SongsPage() {
-    const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const songs = useSelector(state => state.songs);
-    const songsArr = Object.values(songs)
-    
-    useEffect (() => {
-        dispatch(getSongs())
-    }, [dispatch]);
+  const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+  const songs = useSelector((state) => state.songs);
+  const songsArr = Object.values(songs);
 
-    if(!sessionUser) return (
-        <Navigate to='/login' />
-    );
+  useEffect(() => {
+    dispatch(getSongs());
+  }, [dispatch]);
 
-    return (
-        <div className='frame'>
-            <h1 className='page-title'>
-                Songs Page
-            </h1>
-            {/* <div className='songsDisplay'> */}
-                <div className='songs'>
-                    {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR SONG THAT IS A CLICKABLE LINK */}
-                    {songsArr.map((song, i) => 
-                        <div className='cell'>
-                            <NavLink to={`/songs/${song.id}`}>
-                                <img className='song-icon' src={musicNote} alt='music-notes' />
-                                <label
-                                    className='song-choice'>
-                                    {song.title}
-                                </label>
-                            </NavLink>
-                        </div>
-                    )}
-                </div>
-            {/* </div> */}
-            
-        </div>
-        )
-};
+  if (!sessionUser) return <Navigate to='/login' />;
+
+  return (
+    <div className='frame'>
+      <h1 className='page-title'>Songs Page</h1>
+      <div className='songs'>
+        {songsArr.map((song) => (
+          <div className='cell' key={song.id}>
+            <NavLink to={`/songs/${song.id}`}>
+              <img className='song-icon' src={musicNote} alt='music-notes' />
+              <label className='song-choice'>{song.title}</label>
+            </NavLink>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

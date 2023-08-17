@@ -1,47 +1,47 @@
 .artist-parent-div {
-    border: 1px solid white;
-    display: flex;
-    width: 90%;
+  border: 1px solid white;
+  display: flex;
+  width: 90%;
 }
 
 .artist-albums,
 .artist-songs {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 1%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1%;
 }
 
 .icons {
-    height: 100%;
-    width: 100%;
-    margin-top: 1%;
-    margin-bottom: 1%;
+  height: 100%;
+  width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 .album-cell,
 .song-cell {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1%;
-    margin-bottom: 1%;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1%;
+  margin-bottom: 1%;
 }
 
 .album-choice,
 .song-choice {
-    text-align: center;
+  text-align: center;
 }
 
 .label-1,
 .label-2 {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 .album-cell:hover,
 .song-cell:hover {
-    transform: scale(1.25);
+  transform: scale(1.25);
 }

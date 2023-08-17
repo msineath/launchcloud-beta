@@ -1,139 +1,139 @@
 .individual-song-header {
-    width: 100%;
-    text-align: center;
-    border: 1px white solid;
+  width: 100%;
+  text-align: center;
+  border: 1px white solid;
 }
 
 .song-title {
-    color: white;
+  color: white;
 }
 
 .like-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
 }
 
 .song-data-parent {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    border: 1px white solid;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border: 1px white solid;
 }
 
 .individual-song-info,
 .song {
-    /* border: 1px white solid; */
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+  /* border: 1px white solid; */
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
-.individual-song-info{
-    padding-top: 2%;
-    padding-left: 9%;
+.individual-song-info {
+  padding-top: 2%;
+  padding-left: 9%;
 }
 
 .data-tag {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 .song {
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .list-of-artists {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .artists-name {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .artists-name {
-    color:white;
+  color: white;
 }
 
 .artists-name:hover {
-    color:lime;
+  color: lime;
 }
 
 .name-of-album {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #delete-btn {
-    width: 25%;
-    margin-top: 5%;
+  width: 25%;
+  margin-top: 5%;
 }
 
-#album-link{
-    display: unset;
-    color: white;
+#album-link {
+  display: unset;
+  color: white;
 }
 
 #album-link:hover {
-    color: lime;
+  color: lime;
 }
 
 .genre-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .release-date-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .edit-song-data {
-    display: flex;
-    width: 100%;
-    margin-bottom: 5%;
+  display: flex;
+  width: 100%;
+  margin-bottom: 5%;
 }
 
 .song-comments {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .song-comment-box {
-    display: flex;
+  display: flex;
 }
 
 .song-comment-textarea {
-    width: 100%;
+  width: 100%;
 }
 
 .comment-for-song {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
 }
 
 .comment {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
 }
 
 .all-song-comments {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    /* padding-left: 30%; */
-    margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* padding-left: 30%; */
+  margin-top: 3%;
 }
 
 .likability {
-    color: white;
+  color: white;
 }
