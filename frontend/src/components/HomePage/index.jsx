@@ -12,9 +12,9 @@ import { getAlbumComments } from '../../store/albumComments';
 import { getSongComments } from '../../store/songComments';
 
 import './HomePage.css';
-import recordImage from './record-image.png';
-import musicNote from './music-notes.png';
-import musician from './musicians.png';
+import recordImage from '../../assets/record-image.png';
+import musicNote from '../../assets/music-notes.png';
+import musician from '../../assets/musicians.png';
 
 export default function HomePage() {
     const dispatch = useDispatch();

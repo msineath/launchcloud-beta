@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 import { getArtists } from '../../store/artists';
-import musicians from '../HomePage/musicians.png';
+import musicians from '../../assets/musicians.png';
 import './ArtistsPage.css';
 
 export default function ArtistsPage() {

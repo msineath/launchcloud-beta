@@ -6,8 +6,8 @@ import { getArtists } from '../../store/artists';
 import { getSongs } from '../../store/songs';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getSongCredits } from '../../store/songCredits';
-import recordImage from '../HomePage/record-image.png';
-import musicNotes from '../HomePage/record-image.png';
+import recordImage from '../../assets/record-image.png';
+import musicNotes from '../../assets/music-notes.png';
 import './IndividualArtist.css'
 
 export default function IndividualArtistPage() {

@@ -8,8 +8,8 @@ import { getSongLikes } from '../../store/songLikes';
 import { getAlbumLikes } from '../../store/albumLikes';
 import { getAlbumComments } from '../../store/albumComments';
 import { getSongComments } from '../../store/songComments';
-import musicNotes from '../HomePage/music-notes.png'
-import record from '../HomePage/record-image.png'
+import musicNotes from '../../assets/music-notes.png'
+import record from '../../assets/record-image.png'
 import './ProfilePage.css';
 
 export default function ProfilePage() {

@@ -7,8 +7,8 @@ import { getArtists } from '../../store/artists';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getAlbumLikes, AlbumLikeCreateUpdate } from '../../store/albumLikes';
 import { getAlbumComments, addNewAlbumComment, updateComment, removeComment } from '../../store/albumComments';
-import musicNotes from '../HomePage/music-notes.png';
-import musicians from '../HomePage/musicians.png';
+import musicNotes from '../../assets/music-notes.png';
+import musicians from '../../assets/musicians.png';
 import './IndividualAlbumPage.css';
 
 export default function IndividualAlbumPage() {

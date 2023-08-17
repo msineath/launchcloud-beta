@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, NavLink } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
-import recordImage from '../HomePage/record-image.png';
+import recordImage from '../../assets/record-image.png';
 import './AlbumsPage.css';
 
 export default function AlbumsPage() {

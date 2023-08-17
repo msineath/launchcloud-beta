@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Navigate } from 'react-router-dom';
 import { getSongs } from '../../store/songs';
 import './SongsPage.css';
-import musicNote from '../HomePage/music-notes.png';
+import musicNote from '../../assets/music-notes.png';
 
 export default function SongsPage() {
     const dispatch = useDispatch();

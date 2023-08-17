@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
 import {loginThunk, demoUserLogin} from '../../store/session';
 import './LoginForm.css';
-import backgroundImage from './background-image.jpg'
+import backgroundImage from '../../assets/background-image.jpg'
 
 export default function LoginFormPage() {
     
