@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Navigate, NavLink } from 'react-router-dom';
 import { getAlbums } from '../../store/albums';
 import { getArtists } from '../../store/artists';
 import { getSongs } from '../../store/songs';
 import { getAlbumCredits } from '../../store/albumCredits';
 import { getSongCredits } from '../../store/songCredits';
-import recordImage from '../HomePage/record-image.png';
-import musicNotes from '../HomePage/record-image.png';
+import recordImage from '../../assets/record-image.png';
+import musicNotes from '../../assets/music-notes.png';
 import './IndividualArtist.css'
 
 export default function IndividualArtistPage() {
@@ -51,7 +51,7 @@ export default function IndividualArtistPage() {
     }, [dispatch]);
 
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
 
     return (
@@ -66,13 +66,13 @@ export default function IndividualArtistPage() {
                             return(
                                 <div
                                 className='album-cell'>
-                                    <a href={`/albums/${album.id}`}>
+                                    <NavLink to={`/albums/${album.id}`}>
                                         <img className='icons' src={recordImage} alt='record-image' />
                                         <label
                                             className='album-choice'>
                                             {album.name}
                                         </label>
-                                    </a>
+                                    </NavLink>
                                 </div>)}             
                             )
                         }
@@ -85,13 +85,13 @@ export default function IndividualArtistPage() {
                             return(
                                 <div
                                 className='song-cell'>
-                                    <a href={`/songs/${song.id}`}>
+                                    <NavLink to={`/songs/${song.id}`}>
                                         <img className='icons' src={musicNotes} alt='music-notes' />
                                         <label
                                             className='song-choice'>
                                             {song.title}
                                         </label>
-                                    </a>
+                                    </NavLink>
                                 </div>
                             )
                         })}

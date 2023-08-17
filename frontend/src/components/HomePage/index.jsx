@@ -1,6 +1,6 @@
 import{useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+import {Navigate, NavLink} from 'react-router-dom';
 import {getAlbums} from '../../store/albums';
 import { getSongs } from '../../store/songs';
 import { getArtists } from '../../store/artists';
@@ -12,9 +12,9 @@ import { getAlbumComments } from '../../store/albumComments';
 import { getSongComments } from '../../store/songComments';
 
 import './HomePage.css';
-import recordImage from './record-image.png';
-import musicNote from './music-notes.png';
-import musician from './musicians.png';
+import recordImage from '../../assets/record-image.png';
+import musicNote from '../../assets/music-notes.png';
+import musician from '../../assets/musicians.png';
 
 export default function HomePage() {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function HomePage() {
     }, [dispatch]);
     
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
 
     return (
@@ -46,34 +46,34 @@ export default function HomePage() {
             </h2>
             <div className='options'>
                 <div className='cell'>
-                    <a href='/artists'>
+                    <NavLink to='/artists'>
                         <label className='choice'>
                             Musicians
                         </label>
-                    </a>
-                    <a href='/artists'>
+                    </NavLink>
+                    <NavLink to='/artists'>
                         <img className='icon' src={musician} alt='musicians' />
-                    </a>
+                    </NavLink>
                 </div>
                 <div className='cell'>
-                    <a href='/songs'>
+                    <NavLink to='/songs'>
                         <label className='choice'>
                             Songs
                         </label>
-                    </a>
-                    <a href='/songs'>
+                    </NavLink>
+                    <NavLink to='/songs'>
                         <img className='icon' src={musicNote} alt='music-notes' />
-                    </a>
+                    </NavLink>
                 </div>
                 <div className='cell'>
-                    <a href='/albums'>
+                    <NavLink to='/albums'>
                         <label className='choice'>
                             Albums
                         </label>
-                    </a>
-                    <a href='/albums'>
+                    </NavLink>
+                    <NavLink to='/albums'>
                         <img className='icon' src={recordImage} alt='record' />
-                    </a>
+                    </NavLink>
                 </div>
             </div>
         </div> 

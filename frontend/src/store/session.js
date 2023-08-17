@@ -58,6 +58,7 @@ export const signupThunk = user => async (dispatch) => {
 export const restoreThunk = async dispatch => {
     const res = await csrfFetch('/api/session');
     const readableRes = await res.json();
+    console.log(readableRes);
     dispatch(loginUser(readableRes.user));
     return res;
 }

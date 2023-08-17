@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link, useHistory, Redirect } from 'react-router-dom';
+import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
 import { getSongs, removeSong, updateOneSong } from '../../store/songs';
 import { getArtists } from '../../store/artists';
 import { getAlbums } from '../../store/albums';
@@ -11,7 +11,7 @@ import { getSongComments, addNewSongComment, updateComment, removeComment } from
 
 export default function IndividualSongPage() {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     const {songId} = useParams();
     
     const sessionUser = useSelector((state => state.session.user));
@@ -54,7 +54,7 @@ export default function IndividualSongPage() {
     }, [dispatch])
 
     if(!sessionUser) return (
-        <Redirect to='/login' />
+        <Navigate to='/login' />
     );
     
     const date = (function () {
@@ -78,7 +78,7 @@ export default function IndividualSongPage() {
     const deleteFromDb = event => {
         event.preventDefault();
         dispatch(removeSong(Number(songId)));
-        history.push('/songs');
+        navigate('/songs');
     };
 
     const updateSongData = () => {

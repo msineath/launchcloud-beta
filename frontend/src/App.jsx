@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {restoreThunk} from './store/session';
@@ -26,38 +26,20 @@ function App() {
     <>
     <Navigation loggedIn={loggedIn} />
     {loggedIn && (
-      <Switch>
-        <Route path='/' exact>
-          <HomePage />
-        </Route>
-        <Route path='/login' exact>
-          <LoginFormPage />
-        </Route>
-        <Route path='/signup' exact>
-          <SignupPage />
-        </Route>
-        <Route path='/albums' exact>
-          <AlbumsPage />
-        </Route>
-        <Route path='/songs' exact>
-          <SongsPage />
-        </Route>
-        <Route path='/artists' exact>
-          <ArtistsPage />
-        </Route>
-        <Route path='/albums/:albumId' exact>
-          <IndividualAlbumPage />
-        </Route>
-        <Route path='/songs/:songId' exact>
-          <IndividualSongPage />
-        </Route>
-        <Route path='/artists/:artistId' exact>
-          <IndividualArtistPage />
-        </Route>
-        <Route path='/profile/:userId' exact>
-          <ProfilePage />
-        </Route>
-      </Switch>
+      <>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LoginFormPage />} />
+          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/albums' element={<AlbumsPage />} />
+          <Route path='/albums/:albumId' element={<IndividualAlbumPage />} />
+          <Route path='/songs' element={<SongsPage />} />
+          <Route path='/songs/:songId' element={<IndividualSongPage />} />
+          <Route path='/artists' element={<ArtistsPage />} />
+          <Route path='/artists/:artistId' element={<IndividualArtistPage />} />
+          <Route path='/profile/:userId' element={<ProfilePage />} />
+        </Routes>
+      </>
     )}
     </>
   ) 
