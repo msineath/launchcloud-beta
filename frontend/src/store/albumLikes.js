@@ -3,13 +3,15 @@ import { csrfFetch } from './csrf';
 const LOAD_ALBUM_LIKES = 'albumCredits/LOAD_ALBUM_LIKES';
 const UPDATE_ALBUM_LIKES = 'albumCredits/UPDATE_ALBUM_CREDITS';
 
-const loadAlbumLikes = (likes) => {
-  return { type: LOAD_ALBUM_LIKES, payload: likes };
-};
+const loadAlbumLikes = (likes) => ({
+  type: LOAD_ALBUM_LIKES,
+  payload: likes,
+});
 
-const updateAlbumLikes = (like) => {
-  return { type: UPDATE_ALBUM_LIKES, payload: like };
-};
+const updateAlbumLikes = (like) => ({
+  type: UPDATE_ALBUM_LIKES,
+  payload: like,
+});
 
 export const getAlbumLikes = () => async (dispatch) => {
   const res = await csrfFetch('/api/albumLikes');
@@ -29,7 +31,6 @@ export const AlbumLikeCreateUpdate =
         targetKey,
       }),
     });
-
     if (res.ok) {
       const like = await res.json();
       dispatch(updateAlbumLikes(like));

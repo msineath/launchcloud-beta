@@ -158,25 +158,23 @@ export default function IndividualSongPage() {
           <div className='list-of-artists'>
             <label className='data-tag'>Artist(s):</label>
             <label>
-              {allCreditNames.map((credit, index) => {
-                return (
-                  // <label key={`song-credit.${index}`}>
-                  <Link to={`/artists/${credit?.id}`} className='artists-name'>
-                    {credit?.name}
-                  </Link>
-                  // </label>
-                );
-              })}
+              {allCreditNames.map((credit) => (
+                <Link
+                  to={`/artists/${credit?.id}`}
+                  className='artists-name'
+                  key={credit.id}
+                >
+                  {credit?.name}
+                </Link>
+              ))}
             </label>
           </div>
           <div className='name-of-album'>
             <label className='data-tag'>Album:</label>
             <label>
-              {
-                <Link to={`/albums/${song?.albumId}`} id='album-link'>
-                  {albums[song?.albumId]?.name}
-                </Link>
-              }
+              <Link to={`/albums/${song?.albumId}`} id='album-link'>
+                {albums[song?.albumId]?.name}
+              </Link>
               {creatorOptions(
                 'Edit',
                 (e) => {
@@ -223,7 +221,7 @@ export default function IndividualSongPage() {
               hidden={!visible}
               placeholder='Update Info Here'
               onChange={(e) => setAreaText(e.target.value)}
-            ></textarea>
+            />
             <button id={targetKey} hidden={!visible} onClick={updateSongData}>
               {buttonText}
             </button>
@@ -248,30 +246,28 @@ export default function IndividualSongPage() {
             placeholder='Add Your Comment Here, Then Click Add or Edit'
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
-          ></textarea>
+          />
           <button type='submit'>Add A Comment</button>
         </form>
         {commentsOnSong ? (
           <div className='all-song-comments'>
-            {commentsOnSong.map((comment, index) => {
-              return (
-                <div className='comment-for-song'>
-                  <li key={`comment.${index}`} className='comment'>
-                    {comment.comment}
-                    {sessionUser?.id === comment.userId ? (
-                      <div className='song-comment-btns'>
-                        <button value={comment.id} onClick={editComment}>
-                          Edit Comment
-                        </button>
-                        <button value={comment.id} onClick={commentDelete}>
-                          Delete Comment
-                        </button>
-                      </div>
-                    ) : null}
-                  </li>
-                </div>
-              );
-            })}
+            {commentsOnSong.map((comment) => (
+              <div className='comment-for-song' key={comment.id}>
+                <li className='comment'>
+                  {comment.comment}
+                  {sessionUser?.id === comment.userId ? (
+                    <div className='song-comment-btns'>
+                      <button value={comment.id} onClick={editComment}>
+                        Edit Comment
+                      </button>
+                      <button value={comment.id} onClick={commentDelete}>
+                        Delete Comment
+                      </button>
+                    </div>
+                  ) : null}
+                </li>
+              </div>
+            ))}
           </div>
         ) : null}
       </div>

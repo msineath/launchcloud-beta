@@ -5,21 +5,25 @@ const ADD_SONG_COMMENT = 'songComments/ADD_SONG_COMMENTS';
 const EDIT_SONG_COMMENT = 'songComments/EDIT_SONG_COMMENT';
 const DELETE_SONG_COMMENT = 'songComments/DELETE_SONG_COMMENT';
 
-const loadSongComments = (comments) => {
-  return { type: LOAD_SONG_COMMENTS, payload: comments };
-};
+const loadSongComments = (comments) => ({
+  type: LOAD_SONG_COMMENTS,
+  payload: comments,
+});
 
-const addSongComment = (comment) => {
-  return { type: ADD_SONG_COMMENT, payload: comment };
-};
+const addSongComment = (comment) => ({
+  type: ADD_SONG_COMMENT,
+  payload: comment,
+});
 
-const editSongComment = (comment) => {
-  return { type: EDIT_SONG_COMMENT, payload: comment };
-};
+const editSongComment = (comment) => ({
+  type: EDIT_SONG_COMMENT,
+  payload: comment,
+});
 
-const deleteSongComment = (comment) => {
-  return { type: DELETE_SONG_COMMENT, payload: comment };
-};
+const deleteSongComment = (comment) => ({
+  type: DELETE_SONG_COMMENT,
+  payload: comment,
+});
 
 export const getSongComments = () => async (dispatch) => {
   const res = await csrfFetch('/api/songComments');
@@ -53,7 +57,6 @@ export const updateComment = (id, commentText) => async (dispatch) => {
       commentText,
     }),
   });
-
   if (res.ok) {
     const comment = await res.json();
     dispatch(editSongComment(comment[1][0]));

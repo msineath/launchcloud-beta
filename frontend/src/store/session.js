@@ -2,13 +2,14 @@ import { csrfFetch } from './csrf';
 const LOGIN_USER = '/session/login';
 const LOGOUT_USER = '/session/logout';
 
-const loginUser = (user) => {
-  return { type: LOGIN_USER, payload: user };
-};
+const loginUser = (user) => ({
+  type: LOGIN_USER,
+  payload: user,
+});
 
-const logoutUser = (user) => {
-  return { type: LOGOUT_USER };
-};
+const logoutUser = () => ({
+  type: LOGOUT_USER,
+});
 
 export const demoUserLogin = () => async (dispatch) => {
   const res = await csrfFetch('/api/session/demo');
@@ -19,25 +20,20 @@ export const demoUserLogin = () => async (dispatch) => {
 
 export const loginThunk = (user) => async (dispatch) => {
   const { credential, password } = user;
-
   const res = await csrfFetch('/api/session', {
     method: 'POST',
     body: JSON.stringify({ credential, password }),
   });
-
   const readableRes = await res.json();
-
   dispatch(loginUser(readableRes.user));
   return res;
 };
 
-export const logoutThunk = (user) => async (dispatch) => {
+export const logoutThunk = () => async (dispatch) => {
   const res = await csrfFetch('/api/session', {
     method: 'DELETE',
   });
-
   dispatch(logoutUser());
-
   return res;
 };
 
@@ -50,14 +46,12 @@ export const signupThunk = (user) => async (dispatch) => {
 
   const readableRes = await res.json();
   await dispatch(loginUser(readableRes.user));
-
   return res;
 };
 
 export const restoreThunk = async (dispatch) => {
   const res = await csrfFetch('/api/session');
   const readableRes = await res.json();
-  console.log(readableRes);
   dispatch(loginUser(readableRes.user));
   return res;
 };

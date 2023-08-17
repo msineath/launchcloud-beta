@@ -2,9 +2,10 @@ import { csrfFetch } from './csrf';
 
 const LOAD_SONG_CREDITS = 'songCredits/LOAD_SONG_CREDITS';
 
-const loadSongCredits = (credits) => {
-  return { type: LOAD_SONG_CREDITS, payload: credits };
-};
+const loadSongCredits = (credits) => ({
+  type: LOAD_SONG_CREDITS,
+  payload: credits,
+});
 
 export const getSongCredits = () => async (dispatch) => {
   const res = await csrfFetch('/api/songCredits');

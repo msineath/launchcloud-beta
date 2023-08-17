@@ -61,33 +61,29 @@ export default function IndividualArtistPage() {
 
   return (
     <div className='frame'>
-      <h1 className='page-title'> {artist?.name}'s Page</h1>
+      <h1 className='page-title'> {artist?.name}&apos;s Page</h1>
       <div className='artist-parent-div'>
         <div className='artist-albums'>
-          <label className='label-1'>{artist?.name}'s albums:</label>
-          {refinedArtistAlbums.map((album, index) => {
-            return (
-              <div className='album-cell'>
-                <NavLink to={`/albums/${album.id}`}>
-                  <img className='icons' src={recordImage} alt='record-image' />
-                  <label className='album-choice'>{album.name}</label>
-                </NavLink>
-              </div>
-            );
-          })}
+          <label className='label-1'>{artist?.name}&apos;s albums:</label>
+          {refinedArtistAlbums.map((album) => (
+            <div key={album.id} className='album-cell'>
+              <NavLink to={`/albums/${album.id}`}>
+                <img className='icons' src={recordImage} alt='record-image' />
+                <label className='album-choice'>{album.name}</label>
+              </NavLink>
+            </div>
+          ))}
         </div>
         <div className='artist-songs'>
           <label className='label-2'>songs featuring {artist?.name}</label>
-          {artistSongs.map((song, index) => {
-            return (
-              <div className='song-cell'>
-                <NavLink to={`/songs/${song.id}`}>
-                  <img className='icons' src={musicNotes} alt='music-notes' />
-                  <label className='song-choice'>{song.title}</label>
-                </NavLink>
-              </div>
-            );
-          })}
+          {artistSongs.map((song) => (
+            <div key={song.id} className='song-cell'>
+              <NavLink to={`/songs/${song.id}`}>
+                <img className='icons' src={musicNotes} alt='music-notes' />
+                <label className='song-choice'>{song.title}</label>
+              </NavLink>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ export default function ArtistsPage() {
     <div className='frame'>
       <h1 className='page-title'>Artists Page</h1>
       <div className='artists'>
-        {artistsArr?.map((artist, i) => (
+        {artistsArr?.map((artist) => (
           <div key={artist.id} className='cell'>
             <NavLink to={`/artists/${artist.id}`}>
               <img

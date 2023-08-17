@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logoutThunk } from '../../store/session';
 import './Navigation.css';
 
-export default function Navigation(loggedIn) {
+export default function Navigation(/* loggedIn */) {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.session.user);
 

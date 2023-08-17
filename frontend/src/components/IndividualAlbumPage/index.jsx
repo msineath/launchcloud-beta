@@ -30,9 +30,9 @@ export default function IndividualAlbumPage() {
 
   const songs = useSelector((state) => state.songs);
   const songsArray = Object.values(songs);
-  const songsOnAlbum = songsArray.filter((song) => {
-    return song.albumId === Number(albumId);
-  });
+  const songsOnAlbum = songsArray.filter(
+    (song) => song.albumId === Number(albumId),
+  );
 
   const artists = useSelector((state) => state.artists);
   const artistsArray = Object.values(artists);
@@ -120,9 +120,9 @@ export default function IndividualAlbumPage() {
     <div className='frame' id='album-section'>
       <div className='title-heading'>
         <h1 className='album-name'>{selectedAlbum[0]?.name}</h1>
-        <h3 className='likability'>
-          {`Likability score: ${totalLikes - totalDisikes}`}
-        </h3>
+        <h3 className='likability'>{`Likability score: ${
+          totalLikes - totalDisikes
+        }`}</h3>
         <div>
           <button onClick={likeToggle}>like</button>
           <button onClick={likeToggle}>dislike</button>
@@ -133,20 +133,18 @@ export default function IndividualAlbumPage() {
           <div className='tracklist'>
             <label className='album-info-label'>Tracklist:</label>
             <div className='song-display'>
-              {songsOnAlbum.map((song, index) => {
-                return (
-                  <div className='song-cell'>
-                    <NavLink to={`/songs/${song.id}`}>
-                      <img
-                        className='song-icons'
-                        src={musicNotes}
-                        alt='song-image'
-                      />
-                      <label className='song-choice'>{song.title}</label>
-                    </NavLink>
-                  </div>
-                );
-              })}
+              {songsOnAlbum.map((song) => (
+                <div key={song.id} className='song-cell'>
+                  <NavLink to={`/songs/${song.id}`}>
+                    <img
+                      className='song-icons'
+                      src={musicNotes}
+                      alt='song-image'
+                    />
+                    <label className='song-choice'>{song.title}</label>
+                  </NavLink>
+                </div>
+              ))}
             </div>
           </div>
         ) : null}
@@ -160,28 +158,26 @@ export default function IndividualAlbumPage() {
               placeholder='Add Your Comment Here, Then Click Add or Edit'
               value={commentText}
               onChange={(event) => setCommentText(event.target.value)}
-            ></textarea>
+            />
             <button type='submit'>Add A Comment</button>
           </form>
           {commentsOnAlbum ? (
             <ul className='comments-list'>
-              {commentsOnAlbum.map((comment, index) => {
-                return (
-                  <li className='comment' key={`comment.${index}`}>
-                    {comment.comment}
-                    {sessionUser.id === comment.userId ? (
-                      <div className='edit-delete'>
-                        <button value={comment.id} onClick={editComment}>
-                          Edit Comment
-                        </button>
-                        <button value={comment.id} onClick={commentDelete}>
-                          Delete Comment
-                        </button>
-                      </div>
-                    ) : null}
-                  </li>
-                );
-              })}
+              {commentsOnAlbum.map((comment, index) => (
+                <li className='comment' key={`comment.${index}`}>
+                  {comment.comment}
+                  {sessionUser.id === comment.userId ? (
+                    <div className='edit-delete'>
+                      <button value={comment.id} onClick={editComment}>
+                        Edit Comment
+                      </button>
+                      <button value={comment.id} onClick={commentDelete}>
+                        Delete Comment
+                      </button>
+                    </div>
+                  ) : null}
+                </li>
+              ))}
             </ul>
           ) : null}
         </div>
@@ -189,20 +185,18 @@ export default function IndividualAlbumPage() {
           <div className='album-artists'>
             <label className='artists-info-label'>Artists On Album:</label>
             <div className='artists-display'>
-              {refinedCreditNames?.map((artist, index) => {
-                return (
-                  <div className='artist-cell'>
-                    <NavLink to={`/artists/${artist?.id}`}>
-                      <img
-                        className='musician-icons'
-                        src={musicians}
-                        alt='musicians'
-                      />
-                      <label className='musician-choice'>{artist?.name}</label>
-                    </NavLink>
-                  </div>
-                );
-              })}
+              {refinedCreditNames?.map((artist) => (
+                <div key={artist.id} className='artist-cell'>
+                  <NavLink to={`/artists/${artist?.id}`}>
+                    <img
+                      className='musician-icons'
+                      src={musicians}
+                      alt='musicians'
+                    />
+                    <label className='musician-choice'>{artist?.name}</label>
+                  </NavLink>
+                </div>
+              ))}
             </div>
           </div>
         ) : null}

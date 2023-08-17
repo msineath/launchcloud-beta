@@ -2,13 +2,13 @@ import { csrfFetch } from './csrf';
 
 const LOAD_ARTISTS = 'artists/LOAD_ARTISTS';
 
-const loadArtists = (artists) => {
-  return { type: LOAD_ARTISTS, payload: artists };
-};
+const loadArtists = (artists) => ({
+  type: LOAD_ARTISTS,
+  payload: artists,
+});
 
 export const getArtists = () => async (dispatch) => {
   const res = await csrfFetch('/api/artists');
-
   if (res.ok) {
     const list = await res.json();
     dispatch(loadArtists(list));

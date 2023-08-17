@@ -2,16 +2,15 @@ import { csrfFetch } from './csrf';
 
 const LOAD_ALBUMS = 'albums/LOAD_ALBUMS';
 
-const loadAlbums = (albums) => {
-  return { type: LOAD_ALBUMS, payload: albums };
-};
+const loadAlbums = (albums) => ({
+  type: LOAD_ALBUMS,
+  payload: albums,
+});
 
 export const getAlbums = () => async (dispatch) => {
   const res = await csrfFetch('/api/albums');
-
   if (res.ok) {
     const list = await res.json();
-
     dispatch(loadAlbums(list));
   }
 };

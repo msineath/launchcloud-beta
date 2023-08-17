@@ -5,25 +5,28 @@ const ADD_SONG = 'songs/ADD_SONG';
 const DELETE_SONG = 'songs/DELETE_SONG';
 const UPDATE_SONG = 'songs/UPDATE_SONG';
 
-const loadSongs = (songs) => {
-  return { type: LOAD_SONGS, payload: songs };
-};
+const loadSongs = (songs) => ({
+  type: LOAD_SONGS,
+  payload: songs,
+});
 
-const addSong = (song) => {
-  return { type: ADD_SONG, payload: song };
-};
+const addSong = (song) => ({
+  type: ADD_SONG,
+  payload: song,
+});
 
-const deleteSong = (songId) => {
-  return { type: DELETE_SONG, payload: songId };
-};
+const deleteSong = (songId) => ({
+  type: DELETE_SONG,
+  payload: songId,
+});
 
-const updateSong = (song) => {
-  return { type: UPDATE_SONG, payload: song };
-};
+const updateSong = (song) => ({
+  type: UPDATE_SONG,
+  payload: song,
+});
 
 export const getSongs = () => async (dispatch) => {
   const res = await csrfFetch('/api/songs');
-
   if (res.ok) {
     const list = await res.json();
     dispatch(loadSongs(list));
@@ -40,7 +43,6 @@ export const addOneSong = (songData) => async (dispatch) => {
   formData.append('genre', genre);
   formData.append('releaseDate', releaseDate);
   formData.append('audioTrackUrl', audioTrackUrl);
-
   const res = await csrfFetch('/api/songs/add', {
     method: 'POST',
     headers: { 'Content-Type': 'multipart/form-data' },

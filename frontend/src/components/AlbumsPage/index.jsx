@@ -23,7 +23,7 @@ export default function AlbumsPage() {
       <div className='albums'>
         {albums ? (
           <>
-            {albumsArray.map((album, index) => (
+            {albumsArray.map((album) => (
               <div key={album.id} className='cell'>
                 <NavLink to={`/albums/${album.id}`}>
                   <img

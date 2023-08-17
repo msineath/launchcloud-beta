@@ -20,11 +20,9 @@ export default function SongsPage() {
   return (
     <div className='frame'>
       <h1 className='page-title'>Songs Page</h1>
-      {/* <div className='songsDisplay'> */}
       <div className='songs'>
-        {/* TODO: CHANGE LIST ITEMS TO DISPLAY BLOCK DIV FOR SONG THAT IS A CLICKABLE LINK */}
-        {songsArr.map((song, i) => (
-          <div className='cell'>
+        {songsArr.map((song) => (
+          <div className='cell' key={song.id}>
             <NavLink to={`/songs/${song.id}`}>
               <img className='song-icon' src={musicNote} alt='music-notes' />
               <label className='song-choice'>{song.title}</label>
@@ -32,7 +30,6 @@ export default function SongsPage() {
           </div>
         ))}
       </div>
-      {/* </div> */}
     </div>
   );
 }

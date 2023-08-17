@@ -3,13 +3,15 @@ import { csrfFetch } from './csrf';
 const LOAD_SONG_LIKES = 'songCredits/LOAD_SONG_LIKES';
 const UPDATE_SONG_LIKES = 'songCredits/UPDATE_SONG_CREDITS';
 
-const loadSongLikes = (likes) => {
-  return { type: LOAD_SONG_LIKES, payload: likes };
-};
+const loadSongLikes = (likes) => ({
+  type: LOAD_SONG_LIKES,
+  payload: likes,
+});
 
-const updateSongLikes = (like) => {
-  return { type: UPDATE_SONG_LIKES, payload: like };
-};
+const updateSongLikes = (like) => ({
+  type: UPDATE_SONG_LIKES,
+  payload: like,
+});
 
 export const getSongLikes = () => async (dispatch) => {
   const res = await csrfFetch('/api/songLikes');

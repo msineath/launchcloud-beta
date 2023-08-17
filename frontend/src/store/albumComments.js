@@ -5,21 +5,25 @@ const ADD_ALBUM_COMMENT = 'albumComments/ADD_ALBUM_COMMENTS';
 const EDIT_ALBUM_COMMENT = 'albumComments/EDIT_ALBUM_COMMENT';
 const DELETE_ALBUM_COMMENT = 'albumComments/DELETE_ALBUM_COMMENT';
 
-const loadAlbumComments = (comments) => {
-  return { type: LOAD_ALBUM_COMMENTS, payload: comments };
-};
+const loadAlbumComments = (comments) => ({
+  type: LOAD_ALBUM_COMMENTS,
+  payload: comments,
+});
 
-const addAlbumComment = (comment) => {
-  return { type: ADD_ALBUM_COMMENT, payload: comment };
-};
+const addAlbumComment = (comment) => ({
+  type: ADD_ALBUM_COMMENT,
+  payload: comment,
+});
 
-const editAlbumComment = (comment) => {
-  return { type: EDIT_ALBUM_COMMENT, payload: comment };
-};
+const editAlbumComment = (comment) => ({
+  type: EDIT_ALBUM_COMMENT,
+  payload: comment,
+});
 
-const deleteAlbumComment = (comment) => {
-  return { type: DELETE_ALBUM_COMMENT, payload: comment };
-};
+const deleteAlbumComment = (comment) => ({
+  type: DELETE_ALBUM_COMMENT,
+  payload: comment,
+});
 
 export const getAlbumComments = () => async (dispatch) => {
   const res = await csrfFetch('/api/albumComments');
@@ -53,7 +57,6 @@ export const updateComment = (id, commentText) => async (dispatch) => {
       commentText,
     }),
   });
-
   if (res.ok) {
     const comment = await res.json();
     dispatch(editAlbumComment(comment[1][0]));
@@ -64,7 +67,6 @@ export const removeComment = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/albumComments/delete/${id}`, {
     method: 'DELETE',
   });
-
   if (res.ok) {
     const comment = await res.json();
     dispatch(deleteAlbumComment(comment));

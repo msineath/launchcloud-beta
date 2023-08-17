@@ -79,6 +79,7 @@ export default function ProfilePage() {
   const [genre, setGenre] = useState('');
   const [releaseDate, setReleaseDate] = useState('');
   const [audioTrackUrl, setAudioTrackUrl] = useState(null);
+  // TODO: update error handling
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
@@ -125,7 +126,7 @@ export default function ProfilePage() {
 
   return (
     <div className='frame'>
-      <h1 className='page-title'>{sessionUser.username}'s Profile</h1>
+      <h1 className='page-title'>{sessionUser.username}&apos;s Profile</h1>
       <div className='new-song-upload'>
         <h1 className='page-title'>Upload A New Song</h1>
         <form className='new-song-form' onSubmit={handleSubmit}>
@@ -173,7 +174,7 @@ export default function ProfilePage() {
             Songs Uploaded By {sessionUser.username}
           </label>
           {userUploaded.map((song) => (
-            <div className='profile-cell'>
+            <div className='profile-cell' key={song.id}>
               <NavLink to={`/songs/${song.id}`}>
                 <img
                   className='profile-icons music-note-icon'
@@ -190,14 +191,14 @@ export default function ProfilePage() {
             Albums {sessionUser.username} Likes
           </label>
           {selectedAlbumLikeNames.map((album) => (
-            <div className='profile-cell'>
+            <div className='profile-cell' key={album.id}>
               <NavLink to={`/albums/${album.id}`}>
                 <img
                   className='profile-icons'
                   src={record}
                   alt='record-image'
                 />
-                <label className='album-choice'>{album.name}</label>
+                <label className='album-choice'> {album.name}</label>
               </NavLink>
             </div>
           ))}
@@ -207,7 +208,7 @@ export default function ProfilePage() {
             Songs {sessionUser.username} Likes
           </label>
           {selectedSongLikeNames.map((song) => (
-            <div className='profile-cell'>
+            <div className='profile-cell' key={song.id}>
               <NavLink to={`/songs/${song.id}`}>
                 <img
                   className='profile-icons'
@@ -230,7 +231,7 @@ export default function ProfilePage() {
                   (album) => album.id === albumId,
                 );
                 return (
-                  <div className='profile-cell'>
+                  <div className='profile-cell' key={albumId}>
                     <NavLink to={`/albums/${selected.id}`}>
                       <img
                         className='profile-icons'
@@ -254,7 +255,7 @@ export default function ProfilePage() {
               {refinedSongComments.map((songId) => {
                 const selected = songsArray.find((song) => song.id === songId);
                 return (
-                  <div className='profile-cell'>
+                  <div className='profile-cell' key={songId}>
                     <NavLink to={`/songs/${selected.id}`}>
                       <img
                         className='profile-icons'

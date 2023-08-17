@@ -1,16 +1,15 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch /* useSelector */ } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginThunk, demoUserLogin } from '../../store/session';
 import './LoginForm.css';
-import backgroundImage from '../../assets/background-image.jpg';
 
 export default function LoginFormPage() {
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector(state => state.session.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -73,8 +72,6 @@ export default function LoginFormPage() {
           </div>
         </form>
       </div>
-      {/* <div className='demo-btn'> */}
-      {/* </div> */}
     </div>
   );
 }
