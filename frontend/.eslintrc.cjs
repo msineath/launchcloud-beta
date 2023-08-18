@@ -34,6 +34,6 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    'prettier/prettier': 0
+    'prettier/prettier': 0,
   },
 };

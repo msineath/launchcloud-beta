@@ -1,9 +1,10 @@
-import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutThunk } from '../../store/session';
-import './Navigation.css';
+import NavButton from './NavButton';
+// import './Navigation.css';
+import { navClickableStyle, navContainerStyle } from '../../library/tailwindMulticlasses';
 
-export default function Navigation(/* loggedIn */) {
+export default function Navigation() {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.session.user);
 
@@ -14,37 +15,25 @@ export default function Navigation(/* loggedIn */) {
 
   return (
     <>
-      <ul className='nav-links'>
-        <NavLink to='/' className='nav-link'>
-          Home
-        </NavLink>
+      <div className={navContainerStyle}>
         {loggedInUser ? (
           <>
-            <NavLink to='/artists' className='nav-link'>
-              Artists
-            </NavLink>
-            <NavLink to='/albums' className='nav-link'>
-              Albums
-            </NavLink>
-            <NavLink to='/songs' className='nav-link'>
-              Songs
-            </NavLink>
-            <NavLink to={`/profile/${loggedInUser.id}`} className='nav-link'>
-              Profile
-            </NavLink>
-            <button onClick={logout}>Logout</button>
+            <NavButton linkPath='/' text='Home' />
+            <NavButton linkPath='/artists' text='Artists' />
+            <NavButton linkPath='/albums' text='Albums' />
+            <NavButton linkPath='/songs' text='Songs' />
+            <NavButton linkPath={`/profile/${loggedInUser.id}`} text='Profile' />
+            <button onClick={logout} className={navClickableStyle('danger')}>
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <NavLink to='/login' className='nav-link'>
-              Login
-            </NavLink>
-            <NavLink to='/signup' className='nav-link'>
-              Create an Account
-            </NavLink>
+            <NavButton linkPath='/login' text='Login' />
+            <NavButton linkPath='/signup' text='Create an Account' />
           </>
         )}
-      </ul>
+      </div>
     </>
   );
 }
