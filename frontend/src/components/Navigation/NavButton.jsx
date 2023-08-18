@@ -6,12 +6,11 @@ import { navClickableStyle } from '../../library/tailwindMulticlasses';
 const NavButton = ({ linkPath, text, handler, color }) => {
   const navigate = useNavigate();
 
-  const navClickHandler = () => {
-    linkPath ? navigate(linkPath) : handler;
-  };
+  const navClickHandler = (event) =>
+    linkPath ? navigate(linkPath) : handler(event);
 
   return (
-    <TERipple rippleColor='light'>
+    <TERipple rippleColor='light' rippleUnbound rippleRadius={70}>
       <button onClick={navClickHandler} className={navClickableStyle(color)}>
         {text}
       </button>
@@ -29,7 +28,7 @@ NavButton.propTypes = {
 NavButton.defaultProps = {
   linkPath: '',
   handler: () => {},
-  color: 'primary'
+  color: 'primary',
 };
 
 export default NavButton;

@@ -1,8 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { logoutThunk } from '../../store/session';
 import NavButton from './NavButton';
-// import './Navigation.css';
-import { navClickableStyle, navContainerStyle } from '../../library/tailwindMulticlasses';
+import { navContainerStyle } from '../../library/tailwindMulticlasses';
 
 export default function Navigation() {
   const dispatch = useDispatch();
@@ -22,10 +21,11 @@ export default function Navigation() {
             <NavButton linkPath='/artists' text='Artists' />
             <NavButton linkPath='/albums' text='Albums' />
             <NavButton linkPath='/songs' text='Songs' />
-            <NavButton linkPath={`/profile/${loggedInUser.id}`} text='Profile' />
-            <button onClick={logout} className={navClickableStyle('danger')}>
-              Logout
-            </button>
+            <NavButton
+              linkPath={`/profile/${loggedInUser.id}`}
+              text='Profile'
+            />
+            <NavButton handler={logout} text='Logout' color='danger' />
           </>
         ) : (
           <>
